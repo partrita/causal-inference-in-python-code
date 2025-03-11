@@ -1,0 +1,28 @@
+[project]
+name = "causal-inference-in-python-code"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "cvxpy>=1.6.3",
+    "cycler>=0.12.1",
+    "fklearn>=4.0.1",
+    "graphviz>=0.20.3",
+    "matplotlib>=3.10.1",
+    "numpy>=1.26.4",
+    "pandas>=2.2.3",
+    "scikit-learn>=1.6.1",
+    "scipy>=1.15.2",
+    "seaborn>=0.13.2",
+    "statsmodels>=0.14.4",
+    "toolz>=0.12.1",
+]
+
+[dependency-groups]
+dev = [
+    "jupyterlab>=4.3.5",
+]
+
+[tool.ruff.lint]
+ignore = ["E731", "F403", "F841", "E741", "F811", "E402"]
