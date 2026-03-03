@@ -11,6 +11,13 @@ book:
   title: "실무로 통하는 인과추론 with 파이썬"
   author: "가짜연구소 인과추론팀"
   date: "2026-03-03"
+  site-url: "https://partrita.github.io/causal-inference-in-python-code/"
+  repo-url: "https://github.com/partrita/causal-inference-in-python-code"
+  repo-branch: main
+  sidebar:
+    style: "docked"
+    search: true
+    collapse-level: 2
   chapters:
     - index.qmd
     - notebook/Part1_CausalInference.ipynb
@@ -32,5 +39,5 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-    number-section: false
+    number-sections: false
 
