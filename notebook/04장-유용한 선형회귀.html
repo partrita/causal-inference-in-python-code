@@ -1,0 +1,3254 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; 4장 - 유용한 선형회귀 – 실무로 통하는 인과추론 with 파이썬</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebook/05장-성향점수.html" rel="next">
+<link href="../notebook/03장-그래프 인과모델.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-803ae4f7a8810f475153517dc3c4ebae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/04장-유용한 선형회귀.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">실무로 통하는 인과추론 with 파이썬</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">책 소개</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">11장 - 불응과 도구변수</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#선형회귀의-필요성" id="toc-선형회귀의-필요성" class="nav-link active" data-scroll-target="#선형회귀의-필요성"><span class="header-section-number">7.1</span> 4.1 선형회귀의 필요성</a>
+  <ul class="collapse">
+  <li><a href="#모델이-필요한-이유" id="toc-모델이-필요한-이유" class="nav-link" data-scroll-target="#모델이-필요한-이유"><span class="header-section-number">7.1.1</span> 4.1.1 모델이 필요한 이유</a></li>
+  <li><a href="#ab-테스트와-회귀분석" id="toc-ab-테스트와-회귀분석" class="nav-link" data-scroll-target="#ab-테스트와-회귀분석"><span class="header-section-number">7.1.2</span> 4.1.2 A/B 테스트와 회귀분석</a></li>
+  <li><a href="#회귀분석을-통한-보정" id="toc-회귀분석을-통한-보정" class="nav-link" data-scroll-target="#회귀분석을-통한-보정"><span class="header-section-number">7.1.3</span> 4.1.3 회귀분석을 통한 보정</a></li>
+  </ul></li>
+  <li><a href="#회귀분석-이론" id="toc-회귀분석-이론" class="nav-link" data-scroll-target="#회귀분석-이론"><span class="header-section-number">7.2</span> 4.2 회귀분석 이론</a>
+  <ul class="collapse">
+  <li><a href="#단순선형회귀" id="toc-단순선형회귀" class="nav-link" data-scroll-target="#단순선형회귀"><span class="header-section-number">7.2.1</span> 4.2.1 단순선형회귀</a></li>
+  <li><a href="#다중선형회귀" id="toc-다중선형회귀" class="nav-link" data-scroll-target="#다중선형회귀"><span class="header-section-number">7.2.2</span> 4.2.2 다중선형회귀</a></li>
+  </ul></li>
+  <li><a href="#프리슈-워-로벨-정리와-직교화" id="toc-프리슈-워-로벨-정리와-직교화" class="nav-link" data-scroll-target="#프리슈-워-로벨-정리와-직교화"><span class="header-section-number">7.3</span> 4.3 프리슈-워-로벨 정리와 직교화</a>
+  <ul class="collapse">
+  <li><a href="#편향-제거-단계" id="toc-편향-제거-단계" class="nav-link" data-scroll-target="#편향-제거-단계"><span class="header-section-number">7.3.1</span> 4.3.1 편향 제거 단계</a></li>
+  <li><a href="#잡음-제거-단계" id="toc-잡음-제거-단계" class="nav-link" data-scroll-target="#잡음-제거-단계"><span class="header-section-number">7.3.2</span> 4.3.2 잡음 제거 단계</a></li>
+  <li><a href="#회귀-추정량의-표준오차" id="toc-회귀-추정량의-표준오차" class="nav-link" data-scroll-target="#회귀-추정량의-표준오차"><span class="header-section-number">7.3.3</span> 4.3.3 회귀 추정량의 표준오차</a></li>
+  <li><a href="#최종-결과-모델" id="toc-최종-결과-모델" class="nav-link" data-scroll-target="#최종-결과-모델"><span class="header-section-number">7.3.4</span> 4.3.4 최종 결과 모델</a></li>
+  <li><a href="#fwl-정리-요약" id="toc-fwl-정리-요약" class="nav-link" data-scroll-target="#fwl-정리-요약"><span class="header-section-number">7.3.5</span> 4.3.5 FWL 정리 요약</a></li>
+  </ul></li>
+  <li><a href="#결과-모델으로서의-회귀분석" id="toc-결과-모델으로서의-회귀분석" class="nav-link" data-scroll-target="#결과-모델으로서의-회귀분석"><span class="header-section-number">7.4</span> 4.4 결과 모델으로서의 회귀분석</a></li>
+  <li><a href="#양수성과-외삽" id="toc-양수성과-외삽" class="nav-link" data-scroll-target="#양수성과-외삽"><span class="header-section-number">7.5</span> 4.5 양수성과 외삽</a></li>
+  <li><a href="#선형회귀에서의-비선형성" id="toc-선형회귀에서의-비선형성" class="nav-link" data-scroll-target="#선형회귀에서의-비선형성"><span class="header-section-number">7.6</span> 4.6 선형회귀에서의 비선형성</a>
+  <ul class="collapse">
+  <li><a href="#처치-선형화" id="toc-처치-선형화" class="nav-link" data-scroll-target="#처치-선형화"><span class="header-section-number">7.6.1</span> 4.6.1 처치 선형화</a></li>
+  <li><a href="#비선형-fwl과-편향-제거" id="toc-비선형-fwl과-편향-제거" class="nav-link" data-scroll-target="#비선형-fwl과-편향-제거"><span class="header-section-number">7.6.2</span> 4.6.2 비선형 FWL과 편향 제거</a></li>
+  </ul></li>
+  <li><a href="#더미변수를-활용한-회귀분석" id="toc-더미변수를-활용한-회귀분석" class="nav-link" data-scroll-target="#더미변수를-활용한-회귀분석"><span class="header-section-number">7.7</span> 4.7 더미변수를 활용한 회귀분석</a>
+  <ul class="collapse">
+  <li><a href="#조건부-무작위-실험" id="toc-조건부-무작위-실험" class="nav-link" data-scroll-target="#조건부-무작위-실험"><span class="header-section-number">7.7.1</span> 4.7.1 조건부 무작위 실험</a></li>
+  <li><a href="#더미변수" id="toc-더미변수" class="nav-link" data-scroll-target="#더미변수"><span class="header-section-number">7.7.2</span> 4.7.2 더미변수</a></li>
+  <li><a href="#포화회귀모델" id="toc-포화회귀모델" class="nav-link" data-scroll-target="#포화회귀모델"><span class="header-section-number">7.7.3</span> 4.7.3 포화회귀모델</a></li>
+  <li><a href="#분산의-가중평균과-회귀분석" id="toc-분산의-가중평균과-회귀분석" class="nav-link" data-scroll-target="#분산의-가중평균과-회귀분석"><span class="header-section-number">7.7.4</span> 4.7.4 분산의 가중평균과 회귀분석</a></li>
+  <li><a href="#평균-제거와-고정효과" id="toc-평균-제거와-고정효과" class="nav-link" data-scroll-target="#평균-제거와-고정효과"><span class="header-section-number">7.7.5</span> 4.7.5 평균 제거와 고정효과</a></li>
+  </ul></li>
+  <li><a href="#누락-변수-편향" id="toc-누락-변수-편향" class="nav-link" data-scroll-target="#누락-변수-편향"><span class="header-section-number">7.8</span> 4.8 누락 변수 편향</a></li>
+  <li><a href="#중립-통제변수" id="toc-중립-통제변수" class="nav-link" data-scroll-target="#중립-통제변수"><span class="header-section-number">7.9</span> 4.9 중립 통제변수</a>
+  <ul class="collapse">
+  <li><a href="#잡음-유발-통제변수" id="toc-잡음-유발-통제변수" class="nav-link" data-scroll-target="#잡음-유발-통제변수"><span class="header-section-number">7.9.1</span> 4.9.1 잡음 유발 통제변수</a></li>
+  <li><a href="#특성-선택-편향-분산-트레이드오프" id="toc-특성-선택-편향-분산-트레이드오프" class="nav-link" data-scroll-target="#특성-선택-편향-분산-트레이드오프"><span class="header-section-number">7.9.2</span> 4.9.2 특성 선택: 편향-분산 트레이드오프</a></li>
+  </ul></li>
+  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약"><span class="header-section-number">7.10</span> 4.10 요약</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="선형회귀의-필요성" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="선형회귀의-필요성"><span class="header-section-number">7.1</span> 4.1 선형회귀의 필요성</h2>
+<section id="모델이-필요한-이유" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="모델이-필요한-이유"><span class="header-section-number">7.1.1</span> 4.1.1 모델이 필요한 이유</h3>
+<div id="cell-1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:47.845199Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:45.813625Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz <span class="im">as</span> gr</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> style</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>style.use(<span class="st">"ggplot"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cycler <span class="im">import</span> cycler</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>default_cycler <span class="op">=</span> cycler(color<span class="op">=</span>[<span class="st">"0.3"</span>, <span class="st">"0.5"</span>, <span class="st">"0.7"</span>, <span class="st">"0.5"</span>])</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> [<span class="st">"0.3"</span>, <span class="st">"0.5"</span>, <span class="st">"0.7"</span>, <span class="st">"0.9"</span>]</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>linestyle <span class="op">=</span> [<span class="st">"-"</span>, <span class="st">"--"</span>, <span class="st">":"</span>, <span class="st">"-."</span>]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>marker <span class="op">=</span> [<span class="st">"o"</span>, <span class="st">"v"</span>, <span class="st">"d"</span>, <span class="st">"p"</span>]</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, prop_cycle<span class="op">=</span>default_cycler)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>gr.set_default_format(<span class="st">"png"</span>)<span class="op">;</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:48.081517Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:47.854728Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>g_risk <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>g_risk.edge(<span class="st">"Risk"</span>, <span class="st">"X"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>g_risk.edge(<span class="st">"X"</span>, <span class="st">"Credit Limit"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>g_risk.edge(<span class="st">"X"</span>, <span class="st">"Default"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>g_risk.edge(<span class="st">"Credit Limit"</span>, <span class="st">"Default"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>g_risk</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-3-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ab-테스트와-회귀분석" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="ab-테스트와-회귀분석"><span class="header-section-number">7.1.2</span> 4.1.2 A/B 테스트와 회귀분석</h3>
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:48.104171Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:48.090446Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"../data/rec_ab_test.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">recommender</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">tenure</th>
+<th data-quarto-table-cell-role="th">watch_time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>challenger</td>
+<td>15</td>
+<td>1</td>
+<td>2.39</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>challenger</td>
+<td>27</td>
+<td>1</td>
+<td>2.32</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>benchmark</td>
+<td>17</td>
+<td>0</td>
+<td>2.74</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>benchmark</td>
+<td>34</td>
+<td>1</td>
+<td>1.92</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>benchmark</td>
+<td>14</td>
+<td>1</td>
+<td>2.47</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:48.135005Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:48.120084Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> smf.ols(<span class="st">"watch_time ~ C(recommender)"</span>, data<span class="op">=</span>data).fit()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>result.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>2.0491</td>
+<td>0.058</td>
+<td>35.367</td>
+<td>0.000</td>
+<td>1.935</td>
+<td>2.163</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(recommender)[T.challenger]</th>
+<td>0.1427</td>
+<td>0.095</td>
+<td>1.501</td>
+<td>0.134</td>
+<td>-0.044</td>
+<td>0.330</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:48.154510Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:48.149312Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(data.groupby(<span class="st">"recommender"</span>)[<span class="st">"watch_time"</span>].mean())</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>recommender
+benchmark     2.049064
+challenger    2.191750
+Name: watch_time, dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="회귀분석을-통한-보정" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="회귀분석을-통한-보정"><span class="header-section-number">7.1.3</span> 4.1.3 회귀분석을 통한 보정</h3>
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:48.919026Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:48.871583Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>risk_data <span class="op">=</span> pd.read_csv(<span class="st">"../data/risk_data.csv"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>risk_data.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">wage</th>
+<th data-quarto-table-cell-role="th">educ</th>
+<th data-quarto-table-cell-role="th">exper</th>
+<th data-quarto-table-cell-role="th">married</th>
+<th data-quarto-table-cell-role="th">credit_score1</th>
+<th data-quarto-table-cell-role="th">credit_score2</th>
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<th data-quarto-table-cell-role="th">default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>950.0</td>
+<td>11</td>
+<td>16</td>
+<td>1</td>
+<td>500.0</td>
+<td>518.0</td>
+<td>3200.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>780.0</td>
+<td>11</td>
+<td>7</td>
+<td>1</td>
+<td>414.0</td>
+<td>429.0</td>
+<td>1700.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1230.0</td>
+<td>14</td>
+<td>9</td>
+<td>1</td>
+<td>586.0</td>
+<td>571.0</td>
+<td>4200.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1040.0</td>
+<td>15</td>
+<td>8</td>
+<td>1</td>
+<td>379.0</td>
+<td>411.0</td>
+<td>1500.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>1000.0</td>
+<td>16</td>
+<td>1</td>
+<td>1</td>
+<td>379.0</td>
+<td>518.0</td>
+<td>1800.0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:49.366423Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:49.322580Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"default ~ credit_limit"</span>, data<span class="op">=</span>risk_data).fit()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.2192</td>
+<td>0.004</td>
+<td>59.715</td>
+<td>0.000</td>
+<td>0.212</td>
+<td>0.226</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>-2.402e-05</td>
+<td>1.16e-06</td>
+<td>-20.689</td>
+<td>0.000</td>
+<td>-2.63e-05</td>
+<td>-2.17e-05</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:50.530208Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:50.301495Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    risk_data.assign(size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"credit_limit"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    .agg({<span class="st">"default"</span>: <span class="st">"mean"</span>, <span class="st">"size"</span>: <span class="bu">sum</span>})</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    .assign(prediction<span class="op">=</span><span class="kw">lambda</span> d: model.predict(d))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>plt_df, x<span class="op">=</span><span class="st">"credit_limit"</span>, y<span class="op">=</span><span class="st">"default"</span>, size<span class="op">=</span><span class="st">"size"</span>, sizes<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">100</span>))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plt.plot(plt_df[<span class="st">"credit_limit"</span>], plt_df[<span class="st">"prediction"</span>], color<span class="op">=</span><span class="st">"C1"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Default Rate by Credit Limit"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>Text(0.5, 1.0, 'Default Rate by Credit Limit')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-9-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:10:01.007172Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:10:00.986084Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>risk_data.groupby([<span class="st">"credit_score1"</span>, <span class="st">"credit_score2"</span>]).size().head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>credit_score1  credit_score2
+34.0           339.0            1
+               500.0            1
+52.0           518.0            1
+69.0           214.0            1
+               357.0            1
+dtype: int64</code></pre>
+</div>
+</div>
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:10:01.442912Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:10:01.381953Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="st">"default ~ credit_limit + wage+credit_score1+credit_score2"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(formula, data<span class="op">=</span>risk_data).fit()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.4037</td>
+<td>0.009</td>
+<td>46.939</td>
+<td>0.000</td>
+<td>0.387</td>
+<td>0.421</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>3.063e-06</td>
+<td>1.54e-06</td>
+<td>1.987</td>
+<td>0.047</td>
+<td>4.16e-08</td>
+<td>6.08e-06</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">wage</th>
+<td>-8.822e-05</td>
+<td>6.07e-06</td>
+<td>-14.541</td>
+<td>0.000</td>
+<td>-0.000</td>
+<td>-7.63e-05</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_score1</th>
+<td>-4.175e-05</td>
+<td>1.83e-05</td>
+<td>-2.278</td>
+<td>0.023</td>
+<td>-7.77e-05</td>
+<td>-5.82e-06</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">credit_score2</th>
+<td>-0.0003</td>
+<td>1.52e-05</td>
+<td>-20.055</td>
+<td>0.000</td>
+<td>-0.000</td>
+<td>-0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="회귀분석-이론" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="회귀분석-이론"><span class="header-section-number">7.2</span> 4.2 회귀분석 이론</h2>
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:45.659057Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.650525Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X_cols <span class="op">=</span> [<span class="st">"credit_limit"</span>, <span class="st">"wage"</span>, <span class="st">"credit_score1"</span>, <span class="st">"credit_score2"</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> risk_data[X_cols].assign(intercep<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> risk_data[<span class="st">"default"</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> regress(y, X):</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.linalg.inv(X.T.dot(X)).dot(X.T.dot(y))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> regress(y, X)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>beta</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>array([ 3.06252773e-06, -8.82159125e-05, -4.17472814e-05, -3.03928359e-04,
+        4.03661277e-01])</code></pre>
+</div>
+</div>
+<section id="단순선형회귀" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="단순선형회귀"><span class="header-section-number">7.2.1</span> 4.2.1 단순선형회귀</h3>
+</section>
+<section id="다중선형회귀" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="다중선형회귀"><span class="header-section-number">7.2.2</span> 4.2.2 다중선형회귀</h3>
+</section>
+</section>
+<section id="프리슈-워-로벨-정리와-직교화" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="프리슈-워-로벨-정리와-직교화"><span class="header-section-number">7.3</span> 4.3 프리슈-워-로벨 정리와 직교화</h2>
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:45.707252Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.660874Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="st">"default ~ credit_limit + wage+credit_score1+credit_score2"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(formula, data<span class="op">=</span>risk_data).fit()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.4037</td>
+<td>0.009</td>
+<td>46.939</td>
+<td>0.000</td>
+<td>0.387</td>
+<td>0.421</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>3.063e-06</td>
+<td>1.54e-06</td>
+<td>1.987</td>
+<td>0.047</td>
+<td>4.16e-08</td>
+<td>6.08e-06</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">wage</th>
+<td>-8.822e-05</td>
+<td>6.07e-06</td>
+<td>-14.541</td>
+<td>0.000</td>
+<td>-0.000</td>
+<td>-7.63e-05</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_score1</th>
+<td>-4.175e-05</td>
+<td>1.83e-05</td>
+<td>-2.278</td>
+<td>0.023</td>
+<td>-7.77e-05</td>
+<td>-5.82e-06</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">credit_score2</th>
+<td>-0.0003</td>
+<td>1.52e-05</td>
+<td>-20.055</td>
+<td>0.000</td>
+<td>-0.000</td>
+<td>-0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="편향-제거-단계" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="편향-제거-단계"><span class="header-section-number">7.3.1</span> 4.3.1 편향 제거 단계</h3>
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:45.848780Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.709053Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    risk_data.assign(size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"credit_limit"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    .agg({<span class="st">"default"</span>: <span class="st">"mean"</span>, <span class="st">"size"</span>: <span class="bu">sum</span>})</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>plt_df, x<span class="op">=</span><span class="st">"credit_limit"</span>, y<span class="op">=</span><span class="st">"default"</span>, size<span class="op">=</span><span class="st">"size"</span>, sizes<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">100</span>))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Default Rate by Credit Limit"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>Text(0.5, 1.0, 'Default Rate by Credit Limit')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-14-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:45.889451Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.854239Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>debiasing_model <span class="op">=</span> smf.ols(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"credit_limit ~ wage + credit_score1  + credit_score2"</span>, data<span class="op">=</span>risk_data</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>risk_data_deb <span class="op">=</span> risk_data.assign(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for visualization, avg(T) is added to the residuals</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    credit_limit_res<span class="op">=</span>(debiasing_model.resid <span class="op">+</span> risk_data[<span class="st">"credit_limit"</span>].mean())</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:45.914990Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.890837Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model_w_deb_data <span class="op">=</span> smf.ols(<span class="st">"default ~ credit_limit_res"</span>, data<span class="op">=</span>risk_data_deb).fit()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>model_w_deb_data.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.1421</td>
+<td>0.005</td>
+<td>30.001</td>
+<td>0.000</td>
+<td>0.133</td>
+<td>0.151</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit_res</th>
+<td>3.063e-06</td>
+<td>1.56e-06</td>
+<td>1.957</td>
+<td>0.050</td>
+<td>-4.29e-09</td>
+<td>6.13e-06</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.056997Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.916989Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    risk_data_deb.assign(size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    .assign(credit_limit_res<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"credit_limit_res"</span>].<span class="bu">round</span>(<span class="op">-</span><span class="dv">2</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"credit_limit_res"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    .agg({<span class="st">"default"</span>: <span class="st">"mean"</span>, <span class="st">"size"</span>: <span class="bu">sum</span>})</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"size&gt;30"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plt_df, x<span class="op">=</span><span class="st">"credit_limit_res"</span>, y<span class="op">=</span><span class="st">"default"</span>, size<span class="op">=</span><span class="st">"size"</span>, sizes<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Default Rate by Debiased Credit Limit"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>Text(0.5, 1.0, 'Default Rate by Debiased Credit Limit')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-17-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="잡음-제거-단계" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="잡음-제거-단계"><span class="header-section-number">7.3.2</span> 4.3.2 잡음 제거 단계</h3>
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.096204Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.058746Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>denoising_model <span class="op">=</span> smf.ols(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default ~ wage + credit_score1  + credit_score2"</span>, data<span class="op">=</span>risk_data_deb</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>risk_data_denoise <span class="op">=</span> risk_data_deb.assign(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    default_res<span class="op">=</span>denoising_model.resid <span class="op">+</span> risk_data_deb[<span class="st">"default"</span>].mean()</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="회귀-추정량의-표준오차" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="회귀-추정량의-표준오차"><span class="header-section-number">7.3.3</span> 4.3.3 회귀 추정량의 표준오차</h3>
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.158157Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.097819Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>model_se <span class="op">=</span> smf.ols(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default ~ wage + credit_score1  + credit_score2"</span>, data<span class="op">=</span>risk_data</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SE regression:"</span>, model_se.bse[<span class="st">"wage"</span>])</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>model_wage_aux <span class="op">=</span> smf.ols(<span class="st">"wage ~ credit_score1 + credit_score2"</span>, data<span class="op">=</span>risk_data).fit()</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># subtract the degrees of freedom - 4 model parameters - from N.</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>se_formula <span class="op">=</span> np.std(model_se.resid) <span class="op">/</span> (</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    np.std(model_wage_aux.resid) <span class="op">*</span> np.sqrt(<span class="bu">len</span>(risk_data) <span class="op">-</span> <span class="dv">4</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SE formula:   "</span>, se_formula)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SE regression: 5.364242347548197e-06
+SE formula:    5.364242347548201e-06</code></pre>
+</div>
+</div>
+</section>
+<section id="최종-결과-모델" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="최종-결과-모델"><span class="header-section-number">7.3.4</span> 4.3.4 최종 결과 모델</h3>
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.184760Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.159719Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model_w_orthogonal <span class="op">=</span> smf.ols(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default_res ~ credit_limit_res"</span>, data<span class="op">=</span>risk_data_denoise</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>model_w_orthogonal.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.1421</td>
+<td>0.005</td>
+<td>30.458</td>
+<td>0.000</td>
+<td>0.133</td>
+<td>0.151</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit_res</th>
+<td>3.063e-06</td>
+<td>1.54e-06</td>
+<td>1.987</td>
+<td>0.047</td>
+<td>4.17e-08</td>
+<td>6.08e-06</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.331214Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.186387Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    risk_data_denoise.assign(size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    .assign(credit_limit_res<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"credit_limit_res"</span>].<span class="bu">round</span>(<span class="op">-</span><span class="dv">2</span>))</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"credit_limit_res"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    .agg({<span class="st">"default_res"</span>: <span class="st">"mean"</span>, <span class="st">"size"</span>: <span class="bu">sum</span>})</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"size&gt;30"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    .assign(prediction<span class="op">=</span><span class="kw">lambda</span> d: model_w_orthogonal.predict(d))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plt_df, x<span class="op">=</span><span class="st">"credit_limit_res"</span>, y<span class="op">=</span><span class="st">"default_res"</span>, size<span class="op">=</span><span class="st">"size"</span>, sizes<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>plt.plot(plt_df[<span class="st">"credit_limit_res"</span>], plt_df[<span class="st">"prediction"</span>], c<span class="op">=</span><span class="st">"C1"</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Denoised Default Rate by Debiased Credit Limit"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>Text(0.5, 1.0, 'Denoised Default Rate by Debiased Credit Limit')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-21-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fwl-정리-요약" class="level3" data-number="7.3.5">
+<h3 data-number="7.3.5" class="anchored" data-anchor-id="fwl-정리-요약"><span class="header-section-number">7.3.5</span> 4.3.5 FWL 정리 요약</h3>
+</section>
+</section>
+<section id="결과-모델으로서의-회귀분석" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="결과-모델으로서의-회귀분석"><span class="header-section-number">7.4</span> 4.4 결과 모델으로서의 회귀분석</h2>
+</section>
+<section id="양수성과-외삽" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="양수성과-외삽"><span class="header-section-number">7.5</span> 4.5 양수성과 외삽</h2>
+<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.671640Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.333383Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, n)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.random.normal(x, <span class="fl">0.2</span>, n) <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> x</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> x</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.normal((<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> y0 <span class="op">+</span> t <span class="op">*</span> y1, <span class="fl">0.2</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>df_no_pos <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(x<span class="op">=</span>x, t<span class="op">=</span>t.astype(<span class="bu">int</span>), y<span class="op">=</span>y))</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df_no_pos, x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>, hue<span class="op">=</span><span class="st">"t"</span>, ax<span class="op">=</span>ax1, label<span class="op">=</span><span class="st">"treatment"</span>)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>m0 <span class="op">=</span> smf.ols(<span class="st">"y~x"</span>, data<span class="op">=</span>df_no_pos.query(<span class="st">"t==0"</span>)).fit()</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>m1 <span class="op">=</span> smf.ols(<span class="st">"y~x"</span>, data<span class="op">=</span>df_no_pos.query(<span class="st">"t==1"</span>)).fit()</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_no_pos.assign(pred<span class="op">=</span>m0.predict(df_no_pos)),</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"pred"</span>,</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C0"</span>,</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax1,</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_no_pos.assign(pred<span class="op">=</span>m1.predict(df_no_pos)),</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"pred"</span>,</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C1"</span>,</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax1,</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"Dataset 1"</span>)</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, n)</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, <span class="fl">0.5</span>, size<span class="op">=</span>n)</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> x <span class="op">*</span> (x <span class="op">&lt;</span> <span class="dv">0</span>) <span class="op">+</span> (x <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">*</span> <span class="dv">0</span></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> x</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.normal((<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> y0 <span class="op">+</span> t <span class="op">*</span> y1, <span class="fl">0.2</span>)</span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>df_pos <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(x<span class="op">=</span>x, t<span class="op">=</span>t.astype(<span class="bu">int</span>), y<span class="op">=</span>y))</span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df_pos, x<span class="op">=</span><span class="st">"x"</span>, hue<span class="op">=</span><span class="st">"t"</span>, y<span class="op">=</span><span class="st">"y"</span>, ax<span class="op">=</span>ax2, label<span class="op">=</span><span class="st">"treatment"</span>)</span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_no_pos.assign(pred<span class="op">=</span>m0.predict(df_pos)), x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"pred"</span>, color<span class="op">=</span><span class="st">"C0"</span>, ax<span class="op">=</span>ax2</span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_no_pos.assign(pred<span class="op">=</span>m1.predict(df_pos)), x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"pred"</span>, color<span class="op">=</span><span class="st">"C1"</span>, ax<span class="op">=</span>ax2</span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Dataset 2"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>Text(0.5, 1.0, 'Dataset 2')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-22-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="선형회귀에서의-비선형성" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="선형회귀에서의-비선형성"><span class="header-section-number">7.6</span> 4.6 선형회귀에서의 비선형성</h2>
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.700699Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.672696Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>spend_data <span class="op">=</span> pd.read_csv(<span class="st">"../data/spend_data.csv"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>spend_data.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">wage</th>
+<th data-quarto-table-cell-role="th">educ</th>
+<th data-quarto-table-cell-role="th">exper</th>
+<th data-quarto-table-cell-role="th">married</th>
+<th data-quarto-table-cell-role="th">credit_score1</th>
+<th data-quarto-table-cell-role="th">credit_score2</th>
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<th data-quarto-table-cell-role="th">spend</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>950.0</td>
+<td>11</td>
+<td>16</td>
+<td>1</td>
+<td>500.0</td>
+<td>518.0</td>
+<td>3200.0</td>
+<td>3848</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>780.0</td>
+<td>11</td>
+<td>7</td>
+<td>1</td>
+<td>414.0</td>
+<td>429.0</td>
+<td>1700.0</td>
+<td>3144</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1230.0</td>
+<td>14</td>
+<td>9</td>
+<td>1</td>
+<td>586.0</td>
+<td>571.0</td>
+<td>4200.0</td>
+<td>4486</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1040.0</td>
+<td>15</td>
+<td>8</td>
+<td>1</td>
+<td>379.0</td>
+<td>411.0</td>
+<td>1500.0</td>
+<td>3327</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>1000.0</td>
+<td>16</td>
+<td>1</td>
+<td>1</td>
+<td>379.0</td>
+<td>518.0</td>
+<td>1800.0</td>
+<td>3508</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.929708Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.702166Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>g_risk <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>g_risk.edge(<span class="st">"Wage"</span>, <span class="st">"Credit Limit"</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>g_risk.edge(<span class="st">"Wage"</span>, <span class="st">"Spend"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>g_risk.edge(<span class="st">"Credit Limit"</span>, <span class="st">"Spend"</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>g_risk</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-24-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.164910Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.931465Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    spend_data.assign(wage_group<span class="op">=</span><span class="kw">lambda</span> d: pd.IntervalIndex(pd.qcut(d[<span class="st">"wage"</span>], <span class="dv">5</span>)).mid)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"wage_group"</span>, <span class="st">"credit_limit"</span>])[[<span class="st">"spend"</span>]]</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plt_df, x<span class="op">=</span><span class="st">"credit_limit"</span>, y<span class="op">=</span><span class="st">"spend"</span>, hue<span class="op">=</span><span class="st">"wage_group"</span>, palette<span class="op">=</span><span class="st">"gray"</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="처치-선형화" class="level3" data-number="7.6.1">
+<h3 data-number="7.6.1" class="anchored" data-anchor-id="처치-선형화"><span class="header-section-number">7.6.1</span> 4.6.1 처치 선형화</h3>
+<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.389071Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.166140Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    spend_data</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># apply the sqrt function to the treatment</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    .assign(credit_limit_sqrt<span class="op">=</span>np.sqrt(spend_data[<span class="st">"credit_limit"</span>]))</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create 5 wage binds for better vizualization</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    .assign(wage_group<span class="op">=</span>pd.IntervalIndex(pd.qcut(spend_data[<span class="st">"wage"</span>], <span class="dv">5</span>)).mid)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"wage_group"</span>, <span class="st">"credit_limit_sqrt"</span>])[[<span class="st">"spend"</span>]]</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plt_df, x<span class="op">=</span><span class="st">"credit_limit_sqrt"</span>, y<span class="op">=</span><span class="st">"spend"</span>, palette<span class="op">=</span><span class="st">"gray"</span>, hue<span class="op">=</span><span class="st">"wage_group"</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.415659Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.390568Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model_spend <span class="op">=</span> smf.ols(<span class="st">"spend ~ np.sqrt(credit_limit)"</span>, data<span class="op">=</span>spend_data).fit()</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>model_spend.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>493.0044</td>
+<td>6.501</td>
+<td>75.832</td>
+<td>0.000</td>
+<td>480.262</td>
+<td>505.747</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">np.sqrt(credit_limit)</th>
+<td>63.2525</td>
+<td>0.122</td>
+<td>519.268</td>
+<td>0.000</td>
+<td>63.014</td>
+<td>63.491</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.607362Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.417283Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    spend_data.assign(wage_group<span class="op">=</span><span class="kw">lambda</span> d: pd.IntervalIndex(pd.qcut(d[<span class="st">"wage"</span>], <span class="dv">5</span>)).mid)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"wage_group"</span>, <span class="st">"credit_limit"</span>])[[<span class="st">"spend"</span>]]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(plt_df[<span class="st">"credit_limit"</span>].<span class="bu">min</span>(), plt_df[<span class="st">"credit_limit"</span>].<span class="bu">max</span>())</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    x,</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    model_spend.params[<span class="dv">0</span>] <span class="op">+</span> model_spend.params[<span class="dv">1</span>] <span class="op">*</span> np.sqrt(x),</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C1"</span>,</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"prediction"</span>,</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plt_df, x<span class="op">=</span><span class="st">"credit_limit"</span>, y<span class="op">=</span><span class="st">"spend"</span>, palette<span class="op">=</span><span class="st">"gray"</span>, hue<span class="op">=</span><span class="st">"wage_group"</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-28-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.640660Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.608683Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model_spend <span class="op">=</span> smf.ols(<span class="st">"spend ~ np.sqrt(credit_limit)+wage"</span>, data<span class="op">=</span>spend_data).fit()</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>model_spend.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>383.5002</td>
+<td>2.746</td>
+<td>139.662</td>
+<td>0.000</td>
+<td>378.118</td>
+<td>388.882</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">np.sqrt(credit_limit)</th>
+<td>43.8504</td>
+<td>0.065</td>
+<td>672.633</td>
+<td>0.000</td>
+<td>43.723</td>
+<td>43.978</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">wage</th>
+<td>1.0459</td>
+<td>0.002</td>
+<td>481.875</td>
+<td>0.000</td>
+<td>1.042</td>
+<td>1.050</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="비선형-fwl과-편향-제거" class="level3" data-number="7.6.2">
+<h3 data-number="7.6.2" class="anchored" data-anchor-id="비선형-fwl과-편향-제거"><span class="header-section-number">7.6.2</span> 4.6.2 비선형 FWL과 편향 제거</h3>
+<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.701043Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.642293Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>debias_spend_model <span class="op">=</span> smf.ols(<span class="st">"np.sqrt(credit_limit) ~ wage"</span>, data<span class="op">=</span>spend_data).fit()</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>denoise_spend_model <span class="op">=</span> smf.ols(<span class="st">"spend ~ wage"</span>, data<span class="op">=</span>spend_data).fit()</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>credit_limit_sqrt_deb <span class="op">=</span> (</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    debias_spend_model.resid <span class="op">+</span> np.sqrt(spend_data[<span class="st">"credit_limit"</span>]).mean()</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>spend_den <span class="op">=</span> denoise_spend_model.resid <span class="op">+</span> spend_data[<span class="st">"spend"</span>].mean()</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>spend_data_deb <span class="op">=</span> spend_data.assign(</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    credit_limit_sqrt_deb<span class="op">=</span>credit_limit_sqrt_deb, spend_den<span class="op">=</span>spend_den</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>final_model <span class="op">=</span> smf.ols(<span class="st">"spend_den ~ credit_limit_sqrt_deb"</span>, data<span class="op">=</span>spend_data_deb).fit()</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>final_model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>1493.6990</td>
+<td>3.435</td>
+<td>434.818</td>
+<td>0.000</td>
+<td>1486.966</td>
+<td>1500.432</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit_sqrt_deb</th>
+<td>43.8504</td>
+<td>0.065</td>
+<td>672.640</td>
+<td>0.000</td>
+<td>43.723</td>
+<td>43.978</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.927359Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.703091Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    spend_data.assign(wage_group<span class="op">=</span><span class="kw">lambda</span> d: pd.IntervalIndex(pd.qcut(d[<span class="st">"wage"</span>], <span class="dv">5</span>)).mid)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"wage_group"</span>, <span class="st">"credit_limit"</span>])[[<span class="st">"spend"</span>]]</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(plt_df[<span class="st">"credit_limit"</span>].<span class="bu">min</span>(), plt_df[<span class="st">"credit_limit"</span>].<span class="bu">max</span>())</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    x,</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    (final_model.params[<span class="dv">0</span>] <span class="op">+</span> final_model.params[<span class="dv">1</span>] <span class="op">*</span> np.sqrt(x)),</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C1"</span>,</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"prediction"</span>,</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plt_df, x<span class="op">=</span><span class="st">"credit_limit"</span>, y<span class="op">=</span><span class="st">"spend"</span>, palette<span class="op">=</span><span class="st">"gray"</span>, hue<span class="op">=</span><span class="st">"wage_group"</span></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-31-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="더미변수를-활용한-회귀분석" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="더미변수를-활용한-회귀분석"><span class="header-section-number">7.7</span> 4.7 더미변수를 활용한 회귀분석</h2>
+<section id="조건부-무작위-실험" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="조건부-무작위-실험"><span class="header-section-number">7.7.1</span> 4.7.1 조건부 무작위 실험</h3>
+<div id="cell-48" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.942790Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.928761Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>risk_data_rnd <span class="op">=</span> pd.read_csv(<span class="st">"../data/risk_data_rnd.csv"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>risk_data_rnd.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">wage</th>
+<th data-quarto-table-cell-role="th">educ</th>
+<th data-quarto-table-cell-role="th">exper</th>
+<th data-quarto-table-cell-role="th">married</th>
+<th data-quarto-table-cell-role="th">credit_score1</th>
+<th data-quarto-table-cell-role="th">credit_score2</th>
+<th data-quarto-table-cell-role="th">credit_score1_buckets</th>
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<th data-quarto-table-cell-role="th">default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>890.0</td>
+<td>11</td>
+<td>16</td>
+<td>1</td>
+<td>490.0</td>
+<td>500.0</td>
+<td>400</td>
+<td>5400.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>670.0</td>
+<td>11</td>
+<td>7</td>
+<td>1</td>
+<td>196.0</td>
+<td>481.0</td>
+<td>200</td>
+<td>3800.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1220.0</td>
+<td>14</td>
+<td>9</td>
+<td>1</td>
+<td>392.0</td>
+<td>611.0</td>
+<td>400</td>
+<td>5800.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1210.0</td>
+<td>15</td>
+<td>8</td>
+<td>1</td>
+<td>627.0</td>
+<td>519.0</td>
+<td>600</td>
+<td>6500.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>900.0</td>
+<td>16</td>
+<td>1</td>
+<td>1</td>
+<td>275.0</td>
+<td>519.0</td>
+<td>200</td>
+<td>2100.0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.330665Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.944140Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>risk_data_rnd,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"credit_limit"</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"credit_score1_buckets"</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    kde<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"gray"</span>,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Conditional random experiment"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<pre><code>Text(0.5, 1.0, 'Conditional random experiment')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-33-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="더미변수" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="더미변수"><span class="header-section-number">7.7.2</span> 4.7.2 더미변수</h3>
+<div id="cell-51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.342917Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.331844Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"default ~ credit_limit"</span>, data<span class="op">=</span>risk_data_rnd).fit()</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.1369</td>
+<td>0.009</td>
+<td>15.081</td>
+<td>0.000</td>
+<td>0.119</td>
+<td>0.155</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>-9.344e-06</td>
+<td>1.85e-06</td>
+<td>-5.048</td>
+<td>0.000</td>
+<td>-1.3e-05</td>
+<td>-5.72e-06</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-52" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.346791Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.344650Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">"display.max_columns"</span>, <span class="dv">9</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-53" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.358062Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.348218Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>risk_data_dummies <span class="op">=</span> risk_data_rnd.join(</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    pd.get_dummies(risk_data_rnd[<span class="st">"credit_score1_buckets"</span>], prefix<span class="op">=</span><span class="st">"sb"</span>, drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>risk_data_dummies.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">wage</th>
+<th data-quarto-table-cell-role="th">educ</th>
+<th data-quarto-table-cell-role="th">exper</th>
+<th data-quarto-table-cell-role="th">married</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">sb_400</th>
+<th data-quarto-table-cell-role="th">sb_600</th>
+<th data-quarto-table-cell-role="th">sb_800</th>
+<th data-quarto-table-cell-role="th">sb_1000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>890.0</td>
+<td>11</td>
+<td>16</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>670.0</td>
+<td>11</td>
+<td>7</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1220.0</td>
+<td>14</td>
+<td>9</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1210.0</td>
+<td>15</td>
+<td>8</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>900.0</td>
+<td>16</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 14 columns</p>
+</div>
+</div>
+</div>
+<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.381603Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.359512Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default ~ credit_limit + sb_200+sb_400+sb_600+sb_800+sb_1000"</span>,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>risk_data_dummies,</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.2253</td>
+<td>0.056</td>
+<td>4.000</td>
+<td>0.000</td>
+<td>0.115</td>
+<td>0.336</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>4.652e-06</td>
+<td>2.02e-06</td>
+<td>2.305</td>
+<td>0.021</td>
+<td>6.97e-07</td>
+<td>8.61e-06</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">sb_200</th>
+<td>-0.0559</td>
+<td>0.057</td>
+<td>-0.981</td>
+<td>0.327</td>
+<td>-0.168</td>
+<td>0.056</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">sb_400</th>
+<td>-0.1442</td>
+<td>0.057</td>
+<td>-2.538</td>
+<td>0.011</td>
+<td>-0.256</td>
+<td>-0.033</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">sb_600</th>
+<td>-0.2148</td>
+<td>0.057</td>
+<td>-3.756</td>
+<td>0.000</td>
+<td>-0.327</td>
+<td>-0.103</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">sb_800</th>
+<td>-0.2489</td>
+<td>0.060</td>
+<td>-4.181</td>
+<td>0.000</td>
+<td>-0.366</td>
+<td>-0.132</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">sb_1000</th>
+<td>-0.2541</td>
+<td>0.094</td>
+<td>-2.715</td>
+<td>0.007</td>
+<td>-0.438</td>
+<td>-0.071</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.430041Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.383003Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default ~ credit_limit + C(credit_score1_buckets)"</span>, data<span class="op">=</span>risk_data_rnd</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.2253</td>
+<td>0.056</td>
+<td>4.000</td>
+<td>0.000</td>
+<td>0.115</td>
+<td>0.336</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.200]</th>
+<td>-0.0559</td>
+<td>0.057</td>
+<td>-0.981</td>
+<td>0.327</td>
+<td>-0.168</td>
+<td>0.056</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.400]</th>
+<td>-0.1442</td>
+<td>0.057</td>
+<td>-2.538</td>
+<td>0.011</td>
+<td>-0.256</td>
+<td>-0.033</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.600]</th>
+<td>-0.2148</td>
+<td>0.057</td>
+<td>-3.756</td>
+<td>0.000</td>
+<td>-0.327</td>
+<td>-0.103</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.800]</th>
+<td>-0.2489</td>
+<td>0.060</td>
+<td>-4.181</td>
+<td>0.000</td>
+<td>-0.366</td>
+<td>-0.132</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.1000]</th>
+<td>-0.2541</td>
+<td>0.094</td>
+<td>-2.715</td>
+<td>0.007</td>
+<td>-0.438</td>
+<td>-0.071</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>4.652e-06</td>
+<td>2.02e-06</td>
+<td>2.305</td>
+<td>0.021</td>
+<td>6.97e-07</td>
+<td>8.61e-06</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-56" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.554890Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.431682Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    risk_data_rnd.assign(risk_prediction<span class="op">=</span>model.fittedvalues)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"credit_limit"</span>, <span class="st">"credit_score1_buckets"</span>])[<span class="st">"risk_prediction"</span>]</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plt_df,</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"credit_limit"</span>,</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"risk_prediction"</span>,</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"credit_score1_buckets"</span>,</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"gray"</span>,</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Fitted values by group"</span>)</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"center left"</span>, bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-39-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="포화회귀모델" class="level3" data-number="7.7.3">
+<h3 data-number="7.7.3" class="anchored" data-anchor-id="포화회귀모델"><span class="header-section-number">7.7.3</span> 4.7.3 포화회귀모델</h3>
+<div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.578768Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.556705Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> regress(df, t, y):</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> smf.ols(<span class="ss">f"</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">~</span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">"</span>, data<span class="op">=</span>df).fit().params[t]</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>effect_by_group <span class="op">=</span> risk_data_rnd.groupby(<span class="st">"credit_score1_buckets"</span>).<span class="bu">apply</span>(</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    regress, y<span class="op">=</span><span class="st">"default"</span>, t<span class="op">=</span><span class="st">"credit_limit"</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>effect_by_group</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>credit_score1_buckets
+0      -0.000071
+200     0.000007
+400     0.000005
+600     0.000003
+800     0.000002
+1000    0.000000
+dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-59" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.584830Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.580087Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>group_size <span class="op">=</span> risk_data_rnd.groupby(<span class="st">"credit_score1_buckets"</span>).size()</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>ate <span class="op">=</span> (effect_by_group <span class="op">*</span> group_size).<span class="bu">sum</span>() <span class="op">/</span> group_size.<span class="bu">sum</span>()</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>ate</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>4.490445628748722e-06</code></pre>
+</div>
+</div>
+<div id="cell-60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.696265Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.641114Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default ~ credit_limit * C(credit_score1_buckets)"</span>, data<span class="op">=</span>risk_data_rnd</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.3137</td>
+<td>0.077</td>
+<td>4.086</td>
+<td>0.000</td>
+<td>0.163</td>
+<td>0.464</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.200]</th>
+<td>-0.1521</td>
+<td>0.079</td>
+<td>-1.926</td>
+<td>0.054</td>
+<td>-0.307</td>
+<td>0.003</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.400]</th>
+<td>-0.2339</td>
+<td>0.078</td>
+<td>-3.005</td>
+<td>0.003</td>
+<td>-0.386</td>
+<td>-0.081</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.600]</th>
+<td>-0.2957</td>
+<td>0.080</td>
+<td>-3.690</td>
+<td>0.000</td>
+<td>-0.453</td>
+<td>-0.139</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.800]</th>
+<td>-0.3227</td>
+<td>0.111</td>
+<td>-2.919</td>
+<td>0.004</td>
+<td>-0.539</td>
+<td>-0.106</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.1000]</th>
+<td>-0.3137</td>
+<td>0.428</td>
+<td>-0.733</td>
+<td>0.464</td>
+<td>-1.153</td>
+<td>0.525</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>-7.072e-05</td>
+<td>4.45e-05</td>
+<td>-1.588</td>
+<td>0.112</td>
+<td>-0.000</td>
+<td>1.66e-05</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit:C(credit_score1_buckets)[T.200]</th>
+<td>7.769e-05</td>
+<td>4.48e-05</td>
+<td>1.734</td>
+<td>0.083</td>
+<td>-1.01e-05</td>
+<td>0.000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">credit_limit:C(credit_score1_buckets)[T.400]</th>
+<td>7.565e-05</td>
+<td>4.46e-05</td>
+<td>1.696</td>
+<td>0.090</td>
+<td>-1.18e-05</td>
+<td>0.000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit:C(credit_score1_buckets)[T.600]</th>
+<td>7.398e-05</td>
+<td>4.47e-05</td>
+<td>1.655</td>
+<td>0.098</td>
+<td>-1.37e-05</td>
+<td>0.000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">credit_limit:C(credit_score1_buckets)[T.800]</th>
+<td>7.286e-05</td>
+<td>4.65e-05</td>
+<td>1.567</td>
+<td>0.117</td>
+<td>-1.83e-05</td>
+<td>0.000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit:C(credit_score1_buckets)[T.1000]</th>
+<td>7.072e-05</td>
+<td>8.05e-05</td>
+<td>0.878</td>
+<td>0.380</td>
+<td>-8.71e-05</td>
+<td>0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-61" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.702228Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.697590Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    model.params[model.params.index.<span class="bu">str</span>.contains(<span class="st">"credit_limit:"</span>)]</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> model.params[<span class="st">"credit_limit"</span>]</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">9</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>credit_limit:C(credit_score1_buckets)[T.200]     0.000007
+credit_limit:C(credit_score1_buckets)[T.400]     0.000005
+credit_limit:C(credit_score1_buckets)[T.600]     0.000003
+credit_limit:C(credit_score1_buckets)[T.800]     0.000002
+credit_limit:C(credit_score1_buckets)[T.1000]    0.000000
+dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-62" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.828411Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.703481Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    risk_data_rnd.assign(risk_prediction<span class="op">=</span>model.fittedvalues)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"credit_limit"</span>, <span class="st">"credit_score1_buckets"</span>])[<span class="st">"risk_prediction"</span>]</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plt_df,</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"credit_limit"</span>,</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"risk_prediction"</span>,</span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"credit_score1_buckets"</span>,</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"gray"</span>,</span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Fitted values by group"</span>)</span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"center left"</span>, bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-44-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="분산의-가중평균과-회귀분석" class="level3" data-number="7.7.4">
+<h3 data-number="7.7.4" class="anchored" data-anchor-id="분산의-가중평균과-회귀분석"><span class="header-section-number">7.7.4</span> 4.7.4 분산의 가중평균과 회귀분석</h3>
+<div id="cell-64" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.837985Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.830057Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># std(t)=1</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>        t<span class="op">=</span>t1,</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="dv">1</span> <span class="op">*</span> t1,  <span class="co"># ATE of 1</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>        g<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a><span class="co"># std(t)=2</span></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">2</span>, size<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>        t<span class="op">=</span>t2,</span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="dv">2</span> <span class="op">*</span> t2,  <span class="co"># ATE of 2</span></span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>        g<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([df1, df2])</span>
+<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">y</th>
+<th data-quarto-table-cell-role="th">g</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>-1.085631</td>
+<td>-1.085631</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0.997345</td>
+<td>0.997345</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0.282978</td>
+<td>0.282978</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>-1.506295</td>
+<td>-1.506295</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>-0.578600</td>
+<td>-0.578600</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-65" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.850911Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.839720Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>effect_by_group <span class="op">=</span> df.groupby(<span class="st">"g"</span>).<span class="bu">apply</span>(regress, y<span class="op">=</span><span class="st">"y"</span>, t<span class="op">=</span><span class="st">"t"</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>ate <span class="op">=</span> (effect_by_group <span class="op">*</span> df.groupby(<span class="st">"g"</span>).size()).<span class="bu">sum</span>() <span class="op">/</span> df.groupby(<span class="st">"g"</span>).size().<span class="bu">sum</span>()</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>ate</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre><code>1.333333333333333</code></pre>
+</div>
+</div>
+<div id="cell-66" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.865544Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.852685Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"y ~ t + C(g)"</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>model.params</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre><code>Intercept    0.024758
+C(g)[T.2]    0.019860
+t            1.625775
+dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="평균-제거와-고정효과" class="level3" data-number="7.7.5">
+<h3 data-number="7.7.5" class="anchored" data-anchor-id="평균-제거와-고정효과"><span class="header-section-number">7.7.5</span> 4.7.5 평균 제거와 고정효과</h3>
+<div id="cell-68" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.912734Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.867121Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>model_deb <span class="op">=</span> smf.ols(<span class="st">"credit_limit ~ C(credit_score1_buckets)"</span>, data<span class="op">=</span>risk_data_rnd).fit()</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>model_deb.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>1173.0769</td>
+<td>278.994</td>
+<td>4.205</td>
+<td>0.000</td>
+<td>626.193</td>
+<td>1719.961</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.200]</th>
+<td>2195.4337</td>
+<td>281.554</td>
+<td>7.798</td>
+<td>0.000</td>
+<td>1643.530</td>
+<td>2747.337</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.400]</th>
+<td>3402.3796</td>
+<td>279.642</td>
+<td>12.167</td>
+<td>0.000</td>
+<td>2854.224</td>
+<td>3950.535</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.600]</th>
+<td>4191.3235</td>
+<td>280.345</td>
+<td>14.951</td>
+<td>0.000</td>
+<td>3641.790</td>
+<td>4740.857</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.800]</th>
+<td>4639.5105</td>
+<td>291.400</td>
+<td>15.921</td>
+<td>0.000</td>
+<td>4068.309</td>
+<td>5210.712</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.1000]</th>
+<td>5006.9231</td>
+<td>461.255</td>
+<td>10.855</td>
+<td>0.000</td>
+<td>4102.771</td>
+<td>5911.076</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-69" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.918850Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.914449Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>risk_data_rnd.groupby(<span class="st">"credit_score1_buckets"</span>)[<span class="st">"credit_limit"</span>].mean()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="48">
+<pre><code>credit_score1_buckets
+0       1173.076923
+200     3368.510638
+400     4575.456498
+600     5364.400448
+800     5812.587413
+1000    6180.000000
+Name: credit_limit, dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-70" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.924170Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.920104Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>risk_data_fe <span class="op">=</span> risk_data_rnd.assign(</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>    credit_limit_avg<span class="op">=</span><span class="kw">lambda</span> d: d.groupby(<span class="st">"credit_score1_buckets"</span>)[</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"credit_limit"</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    ].transform(<span class="st">"mean"</span>)</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-71" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.938351Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.925781Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"default ~ I(credit_limit-credit_limit_avg)"</span>, data<span class="op">=</span>risk_data_fe).fit()</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.0935</td>
+<td>0.003</td>
+<td>32.121</td>
+<td>0.000</td>
+<td>0.088</td>
+<td>0.099</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">I(credit_limit - credit_limit_avg)</th>
+<td>4.652e-06</td>
+<td>2.05e-06</td>
+<td>2.273</td>
+<td>0.023</td>
+<td>6.4e-07</td>
+<td>8.66e-06</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-72" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.954283Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.939976Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"default ~ credit_limit + credit_limit_avg"</span>, data<span class="op">=</span>risk_data_fe).fit()</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.4325</td>
+<td>0.020</td>
+<td>21.418</td>
+<td>0.000</td>
+<td>0.393</td>
+<td>0.472</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>4.652e-06</td>
+<td>2.02e-06</td>
+<td>2.305</td>
+<td>0.021</td>
+<td>6.96e-07</td>
+<td>8.61e-06</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">credit_limit_avg</th>
+<td>-7.763e-05</td>
+<td>4.75e-06</td>
+<td>-16.334</td>
+<td>0.000</td>
+<td>-8.69e-05</td>
+<td>-6.83e-05</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="누락-변수-편향" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="누락-변수-편향"><span class="header-section-number">7.8</span> 4.8 누락 변수 편향</h2>
+<div id="cell-74" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.131659Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.955782Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Lines"</span>, <span class="st">"Default"</span>)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"Wage"</span>, <span class="st">"Default"</span>),)</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Wage"</span>, <span class="st">"Lines"</span>)</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-53-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-75" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.158827Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.133769Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>short_model <span class="op">=</span> smf.ols(<span class="st">"default ~ credit_limit"</span>, data<span class="op">=</span>risk_data).fit()</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>short_model.params[<span class="st">"credit_limit"</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<pre><code>-2.401961992596885e-05</code></pre>
+</div>
+</div>
+<div id="cell-76" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.217992Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.163681Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>long_model <span class="op">=</span> smf.ols(<span class="st">"default ~ credit_limit + wage"</span>, data<span class="op">=</span>risk_data).fit()</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>omitted_model <span class="op">=</span> smf.ols(<span class="st">"wage ~ credit_limit"</span>, data<span class="op">=</span>risk_data).fit()</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>    long_model.params[<span class="st">"credit_limit"</span>]</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> long_model.params[<span class="st">"wage"</span>] <span class="op">*</span> omitted_model.params[<span class="st">"credit_limit"</span>]</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="54">
+<pre><code>-2.4019619925968762e-05</code></pre>
+</div>
+</div>
+</section>
+<section id="중립-통제변수" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="중립-통제변수"><span class="header-section-number">7.9</span> 4.9 중립 통제변수</h2>
+<div id="cell-78" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.384088Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.219727Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"credit_score1_buckets"</span>, <span class="st">"Default"</span>),)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"credit_score1_buckets"</span>, <span class="st">"Lines"</span>),)</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"credit_score2"</span>, <span class="st">"Default"</span>),)</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Lines"</span>, <span class="st">"Default"</span>)</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="55">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-56-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-79" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.440161Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.386357Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="st">"default~credit_limit+C(credit_score1_buckets)+credit_score2"</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(formula, data<span class="op">=</span>risk_data_rnd).fit()</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="56">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.5576</td>
+<td>0.055</td>
+<td>10.132</td>
+<td>0.000</td>
+<td>0.450</td>
+<td>0.665</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.200]</th>
+<td>-0.0387</td>
+<td>0.055</td>
+<td>-0.710</td>
+<td>0.478</td>
+<td>-0.146</td>
+<td>0.068</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.400]</th>
+<td>-0.1032</td>
+<td>0.054</td>
+<td>-1.898</td>
+<td>0.058</td>
+<td>-0.210</td>
+<td>0.003</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.600]</th>
+<td>-0.1410</td>
+<td>0.055</td>
+<td>-2.574</td>
+<td>0.010</td>
+<td>-0.248</td>
+<td>-0.034</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.800]</th>
+<td>-0.1161</td>
+<td>0.057</td>
+<td>-2.031</td>
+<td>0.042</td>
+<td>-0.228</td>
+<td>-0.004</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.1000]</th>
+<td>-0.0430</td>
+<td>0.090</td>
+<td>-0.479</td>
+<td>0.632</td>
+<td>-0.219</td>
+<td>0.133</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">credit_limit</th>
+<td>4.928e-06</td>
+<td>1.93e-06</td>
+<td>2.551</td>
+<td>0.011</td>
+<td>1.14e-06</td>
+<td>8.71e-06</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">credit_score2</th>
+<td>-0.0007</td>
+<td>2.34e-05</td>
+<td>-30.225</td>
+<td>0.000</td>
+<td>-0.001</td>
+<td>-0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="잡음-유발-통제변수" class="level3" data-number="7.9.1">
+<h3 data-number="7.9.1" class="anchored" data-anchor-id="잡음-유발-통제변수"><span class="header-section-number">7.9.1</span> 4.9.1 잡음 유발 통제변수</h3>
+<div id="cell-81" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.600381Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.442100Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"credit_score1_buckets"</span>, <span class="st">"Lines"</span>),)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"U"</span>, <span class="st">"Spend"</span>),)</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Lines"</span>, <span class="st">"Spend"</span>)</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="57">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-58-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-82" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.615600Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.602050Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>spend_data_rnd <span class="op">=</span> pd.read_csv(<span class="st">"data/spend_data_rnd.csv"</span>)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"spend ~ np.sqrt(credit_limit)"</span>, data<span class="op">=</span>spend_data_rnd).fit()</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>2153.2154</td>
+<td>218.600</td>
+<td>9.850</td>
+<td>0.000</td>
+<td>1723.723</td>
+<td>2582.708</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">np.sqrt(credit_limit)</th>
+<td>16.2915</td>
+<td>2.988</td>
+<td>5.452</td>
+<td>0.000</td>
+<td>10.420</td>
+<td>22.163</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-83" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.629959Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.617433Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spend~np.sqrt(credit_limit)+C(credit_score1_buckets)"</span>, data<span class="op">=</span>spend_data_rnd</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>2367.4867</td>
+<td>556.273</td>
+<td>4.256</td>
+<td>0.000</td>
+<td>1274.528</td>
+<td>3460.446</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.200]</th>
+<td>-144.7921</td>
+<td>591.613</td>
+<td>-0.245</td>
+<td>0.807</td>
+<td>-1307.185</td>
+<td>1017.601</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.400]</th>
+<td>-118.3923</td>
+<td>565.364</td>
+<td>-0.209</td>
+<td>0.834</td>
+<td>-1229.211</td>
+<td>992.427</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.600]</th>
+<td>-111.5738</td>
+<td>570.471</td>
+<td>-0.196</td>
+<td>0.845</td>
+<td>-1232.429</td>
+<td>1009.281</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.800]</th>
+<td>-89.7366</td>
+<td>574.645</td>
+<td>-0.156</td>
+<td>0.876</td>
+<td>-1218.791</td>
+<td>1039.318</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C(credit_score1_buckets)[T.1000]</th>
+<td>363.8990</td>
+<td>608.014</td>
+<td>0.599</td>
+<td>0.550</td>
+<td>-830.720</td>
+<td>1558.518</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">np.sqrt(credit_limit)</th>
+<td>14.5953</td>
+<td>3.523</td>
+<td>4.142</td>
+<td>0.000</td>
+<td>7.673</td>
+<td>21.518</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="특성-선택-편향-분산-트레이드오프" class="level3" data-number="7.9.2">
+<h3 data-number="7.9.2" class="anchored" data-anchor-id="특성-선택-편향-분산-트레이드오프"><span class="header-section-number">7.9.2</span> 4.9.2 특성 선택: 편향-분산 트레이드오프</h3>
+<div id="cell-85" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.835553Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.631596Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"X1"</span>, <span class="st">"T"</span>, penwidth<span class="op">=</span><span class="st">"5"</span>),)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"X2"</span>, <span class="st">"T"</span>, penwidth<span class="op">=</span><span class="st">"3"</span>),)</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"X3"</span>, <span class="st">"T"</span>, penwidth<span class="op">=</span><span class="st">"1"</span>),)</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"X1"</span>, <span class="st">"Y"</span>, penwidth<span class="op">=</span><span class="st">"1"</span>),)</span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"X2"</span>, <span class="st">"Y"</span>, penwidth<span class="op">=</span><span class="st">"3"</span>),)</span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"X3"</span>, <span class="st">"Y"</span>, penwidth<span class="op">=</span><span class="st">"5"</span>),)</span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a>(g.edge(<span class="st">"T"</span>, <span class="st">"Y"</span>),)</span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="60">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-61-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-86" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.852980Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.837739Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>(x1, x2, x3) <span class="op">=</span> (np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, n) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>))</span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.random.normal(<span class="dv">10</span> <span class="op">*</span> x1 <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> x2 <span class="op">+</span> x3)</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ate = 0.05</span></span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.normal(<span class="fl">0.05</span> <span class="op">*</span> t <span class="op">+</span> x1 <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> x2 <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> x3, <span class="dv">5</span>)</span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(y<span class="op">=</span>y, t<span class="op">=</span>t, x1<span class="op">=</span>x1, x2<span class="op">=</span>x2, x3<span class="op">=</span>x3))</span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>smf.ols(<span class="st">"y~t+x1+x2+x3"</span>, data<span class="op">=</span>df).fit().summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.2707</td>
+<td>0.527</td>
+<td>0.514</td>
+<td>0.608</td>
+<td>-0.775</td>
+<td>1.316</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">t</th>
+<td>0.8664</td>
+<td>0.607</td>
+<td>1.427</td>
+<td>0.157</td>
+<td>-0.339</td>
+<td>2.072</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">x1</th>
+<td>-7.0628</td>
+<td>6.038</td>
+<td>-1.170</td>
+<td>0.245</td>
+<td>-19.049</td>
+<td>4.923</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">x2</th>
+<td>0.0143</td>
+<td>3.128</td>
+<td>0.005</td>
+<td>0.996</td>
+<td>-6.195</td>
+<td>6.224</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">x3</th>
+<td>9.6292</td>
+<td>0.887</td>
+<td>10.861</td>
+<td>0.000</td>
+<td>7.869</td>
+<td>11.389</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-87" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.864735Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.854195Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>smf.ols(<span class="st">"y~t+x2+x3"</span>, data<span class="op">=</span>df).fit().summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="62">
+<table class="simpletable caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td></td>
+<th data-quarto-table-cell-role="th">coef</th>
+<th data-quarto-table-cell-role="th">std err</th>
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">P&gt;|t|</th>
+<th data-quarto-table-cell-role="th">[0.025</th>
+<th data-quarto-table-cell-role="th">0.975]</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Intercept</th>
+<td>0.1889</td>
+<td>0.523</td>
+<td>0.361</td>
+<td>0.719</td>
+<td>-0.849</td>
+<td>1.227</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">t</th>
+<td>0.1585</td>
+<td>0.046</td>
+<td>3.410</td>
+<td>0.001</td>
+<td>0.066</td>
+<td>0.251</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">x2</th>
+<td>3.6095</td>
+<td>0.582</td>
+<td>6.197</td>
+<td>0.000</td>
+<td>2.453</td>
+<td>4.766</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">x3</th>
+<td>10.4549</td>
+<td>0.537</td>
+<td>19.453</td>
+<td>0.000</td>
+<td>9.388</td>
+<td>11.522</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="요약" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="요약"><span class="header-section-number">7.10</span> 4.10 요약</h2>
+<div id="cell-89" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:50.050118Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.865957Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz <span class="im">as</span> gr</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(<span class="bu">format</span><span class="op">=</span><span class="st">"png"</span>)</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Parent's Income"</span>, <span class="st">"Private"</span>)</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"SAT"</span>, <span class="st">"Private"</span>)</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Ambition"</span>, <span class="st">"Private"</span>)</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"..."</span>, <span class="st">"Private"</span>)</span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Parent's Income"</span>, <span class="st">"Income"</span>)</span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"SAT"</span>, <span class="st">"Income"</span>)</span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Ambition"</span>, <span class="st">"Income"</span>)</span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"..."</span>, <span class="st">"Income"</span>)</span>
+<span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a>g.edge(<span class="st">"Private"</span>, <span class="st">"Income"</span>)</span>
+<span id="cb81-16"><a href="#cb81-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-17"><a href="#cb81-17" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
+<div>
+<figure class="figure">
+<p><img src="04장-유용한 선형회귀_files/figure-html/cell-64-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../notebook/03장-그래프 인과모델.html" class="pagination-link" aria-label="3장 - 그래프 인과모델">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notebook/05장-성향점수.html" class="pagination-link" aria-label="5징 - 성향점수">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

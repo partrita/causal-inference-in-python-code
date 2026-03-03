@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="가짜연구소 인과추론팀">
+
+<title>실무로 통하는 인과추론 with 파이썬</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./notebook/Part1_CausalInference.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-803ae4f7a8810f475153517dc3c4ebae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">책 소개</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">실무로 통하는 인과추론 with 파이썬</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">책 소개</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">11장 - 불응과 도구변수</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#책-소개" id="toc-책-소개" class="nav-link active" data-scroll-target="#책-소개"><span class="header-section-number">1</span> 책 소개</a></li>
+  <li><a href="#역자-소개" id="toc-역자-소개" class="nav-link" data-scroll-target="#역자-소개"><span class="header-section-number">2</span> 역자 소개</a>
+  <ul class="collapse">
+  <li><a href="#신진수" id="toc-신진수" class="nav-link" data-scroll-target="#신진수"><span class="header-section-number">2.1</span> 신진수</a></li>
+  <li><a href="#가짜연구소-인과추론팀" id="toc-가짜연구소-인과추론팀" class="nav-link" data-scroll-target="#가짜연구소-인과추론팀"><span class="header-section-number">2.2</span> 가짜연구소 인과추론팀</a></li>
+  </ul></li>
+  <li><a href="#감수자-소개" id="toc-감수자-소개" class="nav-link" data-scroll-target="#감수자-소개"><span class="header-section-number">3</span> 감수자 소개</a>
+  <ul class="collapse">
+  <li><a href="#박지용" id="toc-박지용" class="nav-link" data-scroll-target="#박지용"><span class="header-section-number">3.1</span> 박지용</a></li>
+  </ul></li>
+  <li><a href="#챕터별-자료" id="toc-챕터별-자료" class="nav-link" data-scroll-target="#챕터별-자료"><span class="header-section-number">4</span> 챕터별 자료</a>
+  <ul class="collapse">
+  <li><a href="#번역서-온보딩을-위한-강의-블로그" id="toc-번역서-온보딩을-위한-강의-블로그" class="nav-link" data-scroll-target="#번역서-온보딩을-위한-강의-블로그"><span class="header-section-number">4.1</span> 번역서 온보딩을 위한 강의 &amp; 블로그</a></li>
+  <li><a href="#참고-도서" id="toc-참고-도서" class="nav-link" data-scroll-target="#참고-도서"><span class="header-section-number">4.2</span> 참고 도서</a></li>
+  <li><a href="#책-논문-및-자료-모음" id="toc-책-논문-및-자료-모음" class="nav-link" data-scroll-target="#책-논문-및-자료-모음"><span class="header-section-number">4.3</span> 책 논문 및 자료 모음</a>
+  <ul class="collapse">
+  <li><a href="#장-인과추론-소개" id="toc-장-인과추론-소개" class="nav-link" data-scroll-target="#장-인과추론-소개"><span class="header-section-number">4.3.1</span> 1장-인과추론 소개</a></li>
+  <li><a href="#장-무작위-실험-및-기초-통계-리뷰" id="toc-장-무작위-실험-및-기초-통계-리뷰" class="nav-link" data-scroll-target="#장-무작위-실험-및-기초-통계-리뷰"><span class="header-section-number">4.3.2</span> 2장-무작위 실험 및 기초 통계 리뷰</a></li>
+  <li><a href="#장-그래프-인과모델" id="toc-장-그래프-인과모델" class="nav-link" data-scroll-target="#장-그래프-인과모델"><span class="header-section-number">4.3.3</span> 3장-그래프 인과모델</a></li>
+  <li><a href="#장-유용한-선형회귀" id="toc-장-유용한-선형회귀" class="nav-link" data-scroll-target="#장-유용한-선형회귀"><span class="header-section-number">4.3.4</span> 4장-유용한 선형회귀</a></li>
+  <li><a href="#장-성향점수" id="toc-장-성향점수" class="nav-link" data-scroll-target="#장-성향점수"><span class="header-section-number">4.3.5</span> 5장-성향점수</a></li>
+  <li><a href="#장-이질적-처치효과" id="toc-장-이질적-처치효과" class="nav-link" data-scroll-target="#장-이질적-처치효과"><span class="header-section-number">4.3.6</span> 6장-이질적 처치효과</a></li>
+  <li><a href="#장-메타러너" id="toc-장-메타러너" class="nav-link" data-scroll-target="#장-메타러너"><span class="header-section-number">4.3.7</span> 7장-메타러너</a></li>
+  <li><a href="#장-이중차분법" id="toc-장-이중차분법" class="nav-link" data-scroll-target="#장-이중차분법"><span class="header-section-number">4.3.8</span> 8장-이중차분법</a></li>
+  <li><a href="#장-통제집단합성법" id="toc-장-통제집단합성법" class="nav-link" data-scroll-target="#장-통제집단합성법"><span class="header-section-number">4.3.9</span> 9장-통제집단합성법</a></li>
+  <li><a href="#장-스위치백-실험" id="toc-장-스위치백-실험" class="nav-link" data-scroll-target="#장-스위치백-실험"><span class="header-section-number">4.3.10</span> 10장-스위치백 실험</a></li>
+  <li><a href="#장-도구변수" id="toc-장-도구변수" class="nav-link" data-scroll-target="#장-도구변수"><span class="header-section-number">4.3.11</span> 11장-도구변수</a></li>
+  <li><a href="#장-더-배울-내용" id="toc-장-더-배울-내용" class="nav-link" data-scroll-target="#장-더-배울-내용"><span class="header-section-number">4.3.12</span> 12장-더 배울 내용</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#참고할-링크" id="toc-참고할-링크" class="nav-link" data-scroll-target="#참고할-링크"><span class="header-section-number">5</span> 참고할 링크</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">실무로 통하는 인과추론 with 파이썬</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">저자</div>
+    <div class="quarto-title-meta-contents">
+             <p>가짜연구소 인과추론팀 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">공개</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026년 3월 3일</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>이 저장소는 한빛출판사에서 출간한 한국어판 “실무로 통하는 인과추론 with 파이썬”에서 참조하는 각종 자료 및 소스 코드와 예제 데이터를 담고 있습니다. 이 책은 다음 서점에서 절찬리에 판매중입니다(<a href="https://product.kyobobook.co.kr/detail/S000212577153">교보문고</a>, <a href="https://www.yes24.com/Product/Goods/125196916">예스24</a>, <a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=335177841">알라딘</a>, <a href="https://www.hanbit.co.kr/store/books/look.php?p_code=B6208936856">한빛미디어</a>)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./data/book_cover.jpg" class="img-fluid figure-img"></p>
+<figcaption>img</figcaption>
+</figure>
+</div>
+<section id="책-소개" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 책 소개</h1>
+<p>독자 여러분은 “상관관계는 인과관계가 아니다”라는 말을 많이 들어보셨죠? 이 책은 상관관계가 왜 인과관계와 다른지 그리고 데이터 과학자의 시각에서 인과추론의 기초부터 심화에 이르기까지의 내용을 다양한 실무 사례를 바탕으로 설명합니다. 나아가 인과추론 방법론에 그치지 않고 실무에서의 데이터 분석가 또는 데이터 과학자가 고민하는 수준의 실험 결과의 신뢰성 및 추론 부분까지 다루고 있습니다. 여러분이 인과추론을 처음 접하셨다면, 내용을 바탕으로 파이썬 실습 위주로 진행해볼 수 있습니다. 그리고 여러분이 데이터 분석가/과학자라면 사례를 중심으로 여러분의 도메인에 접목시켜 이론과 사례를 함께 학습할 수 있습니다.</p>
+<p>주요 내용은 다음과 같습니다.</p>
+<ul>
+<li>인과추론의 기본 개념과 활용법 익히기</li>
+<li>인과추론과 편향의 관계 이해하기</li>
+<li>인과추론으로 비즈니스 문제 해결하기</li>
+<li>인과추론으로 고객을 시간에 따라 관찰하기</li>
+<li>인과효과가 실험 대상마다 다를 수 있는 이유 학습하기</li>
+</ul>
+</section>
+<section id="역자-소개" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 역자 소개</h1>
+<section id="신진수" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="신진수"><span class="header-section-number">2.1</span> <a href="https://www.linkedin.com/in/jinsoo-shin-436060162/">신진수</a></h2>
+<p>네오플을 거쳐 크래프톤의 데이터 분석가로 일하고 있습니다. 게임 업계에서 쌓은 커리어를 기반으로 &lt;던전앤파이터&gt;, &lt;뉴스테이트 모바일&gt;, &lt;배틀그라운드 모바일&gt; 등 다양한 장르의 게임에서 데이터 분석과 실험을 통해 유저 경험을 개선하는 데 기여했습니다. 비영리 데이터 사이언스 커뮤니티인 가짜연구소에서 인과추론팀을 운영 중입니다. 마테우스 파쿠레의 웹북 <a href="https://github.com/CausalInferenceLab/Causal-Inference-with-Python">「Causal Inference for The Brave and True」</a>를 한국어로 번역하는 작업을 주도했습니다 (<a href="https://jinsooshin.tistory.com/">블로그</a> / <a href="https://github.com/jsshin2022">Github</a>)</p>
+</section>
+<section id="가짜연구소-인과추론팀" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="가짜연구소-인과추론팀"><span class="header-section-number">2.2</span> <a href="https://pseudo-lab.com/6bbf03d9f11d4af687c0f03c6db39b1b">가짜연구소 인과추론팀</a></h2>
+<p>가짜연구소 인과추론팀은 2022년부터 데이터를 통한 문제해결력을 높이고자 인과추론을 함께 학습하고 있습니다. 한국어 자료가 많지 않은 인과추론을 많은 분이 쉽게 접하실 수 있도록 기여하고자 하는 마음으로, 가짜연구소에서 인과추론 이야기와 실험 및 조직문화에 대한 이야기를 이어나가고 있습니다. 이 책의 번역 작업에는 인과추론팀 김소희, 김성수, 김상돈, 김준영, 남궁민상, 박시온, 최은희, 정호재, 홍성철이 함께 참여했습니다.</p>
+</section>
+</section>
+<section id="감수자-소개" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 감수자 소개</h1>
+<section id="박지용" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="박지용"><span class="header-section-number">3.1</span> <a href="https://jiyong-park.github.io/">박지용</a></h2>
+<p>미국 조지아대학교 테리 경영대학(Terry College of Business)에서 경영정보시스템 조교수로 일하고 있다. 디지털기술의 사회적, 환경적 영향에 대한 실증연구를 해오며 인과추론 방법론을 통해 사회현상과 기업활동에서의 원인과 결과를 분석하는 일들을 수행하고 있다. 인과추론의 저변을 확대하기 위해 매년 여름 <korea summer="" workshop="" on="" causal="" inference=""> 를 조직해왔고, 유튜브 채널 &lt;<a href="https://www.youtube.com/@causaldatascience">인과추론의 데이터과학</a>&gt;을 운영중이다.</korea></p>
+</section>
+</section>
+<section id="챕터별-자료" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 챕터별 자료</h1>
+<section id="번역서-온보딩을-위한-강의-블로그" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="번역서-온보딩을-위한-강의-블로그"><span class="header-section-number">4.1</span> 번역서 온보딩을 위한 강의 &amp; 블로그</h2>
+<blockquote class="blockquote">
+<ul>
+<li><a href="https://www.youtube.com/@causaldatascience">인과추론의 데이터과학 Youtube</a></li>
+<li><a href="https://causalinferencelab.github.io/">가짜연구소 인과추론팀 블로그</a></li>
+<li><a href="https://jinsooshin.tistory.com/">역자 블로그</a></li>
+</ul>
+</blockquote>
+</section>
+<section id="참고-도서" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="참고-도서"><span class="header-section-number">4.2</span> 참고 도서</h2>
+<blockquote class="blockquote">
+<ul>
+<li>Causal Inference for the Brave and True (<a href="https://github.com/matheusfacure/python-causality-handbook">원서</a> / <a href="https://github.com/CausalInferenceLab/Causal-Inference-with-Python">번역서</a>)</li>
+<li><a href="https://web.stanford.edu/~swager/stats361.pdf">Causal Inference Stanford STATS 361 강의 노트</a></li>
+<li><a href="https://www.amazon.com/Causal-Inference-Statistics-Biomedical-Sciences/dp/0521885884">Causal Inference for Statistics, Social, and Biomedical Sciences</a></li>
+<li><a href="https://www.hsph.harvard.edu/miguel-hernan/wp-content/uploads/sites/1268/2024/01/hernanrobins_WhatIf_2jan24.pdf">Causal Inference:What If</a></li>
+<li><a href="https://www.scunning.com/mixtape.html">Causal Inference:The Mixtape</a></li>
+</ul>
+</blockquote>
+</section>
+<section id="책-논문-및-자료-모음" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="책-논문-및-자료-모음"><span class="header-section-number">4.3</span> 책 논문 및 자료 모음</h2>
+<section id="장-인과추론-소개" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="장-인과추론-소개"><span class="header-section-number">4.3.1</span> 1장-인과추론 소개</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1.6 인과효과 식별하기</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/1912.09104">Causal Inference and Data Fusion in Econometrics</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-무작위-실험-및-기초-통계-리뷰" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="장-무작위-실험-및-기초-통계-리뷰"><span class="header-section-number">4.3.2</span> 2장-무작위 실험 및 기초 통계 리뷰</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2.2 A/B 테스트 사례</td>
+<td style="text-align: left;">시뮬레이션 데이터와 실제 데이터 비교</td>
+<td style="text-align: left;"><a href="https://www.aeaweb.org/articles?id=10.1257/aer.p20161057">A Randomized Assessment of Online Learning</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2.4 가장 위험한 수식</td>
+<td style="text-align: left;">하워드 웨이너의 유명한 글</td>
+<td style="text-align: left;"><a href="https://www.americanscientist.org/article/the-most-dangerous-equation">The Most Dangerous Equation</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2.5 추정값의 표준오차</td>
+<td style="text-align: left;">MIT의 통계학 입문 강좌</td>
+<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=VPZD_aij8H0&amp;list=PLUl4u3cNGP60uVBMaoNERc6knT_MgPKS0">Introduction to statistics</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2.6 신뢰구간</td>
+<td style="text-align: left;">실제 사례: 코로나19 백신의 효과</td>
+<td style="text-align: left;"><a href="https://www.nejm.org/doi/full/10.1056/nejmoa2035389">Efficacy and Safety of the mRNA-1273 SARS-CoV-2 Vaccine</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2.8 p 값</td>
+<td style="text-align: left;">실제 사례: 대면 강의 vs.&nbsp;온라인 강의</td>
+<td style="text-align: left;"><a href="https://www.journals.uchicago.edu/doi/10.1086/669930">Is It Live or Is It Internet? Experimental Estimates of the Effects of Online Instruction on Student Learning</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2.10 표본 크기 계산</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://drive.google.com/file/d/1oK2HpKKXeQLX6gQeQpfEaCGZtNr2kR76/view">A/B Testing Intuition Busters: Common Misunderstandings in Online Controlled Experiments</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-그래프-인과모델" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="장-그래프-인과모델"><span class="header-section-number">4.3.3</span> 3장-그래프 인과모델</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">3.7.2 랜덤화 재해석</td>
+<td style="text-align: left;">민감도 분석과 부분 식별</td>
+<td style="text-align: left;"><a href="https://academic.oup.com/jrsssb/article/82/1/39/7056023">Making Sense of Sensitivity: Extending Omitted Variable Bias</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3.8.1 충돌부를 조건부 설정</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://www.dagitty.net/">DAGitty</a>, <a href="https://journals.sagepub.com/doi/epub/10.1177/00491241221099552">A Crash Course in Good and Bad Controls</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-유용한-선형회귀" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="장-유용한-선형회귀"><span class="header-section-number">4.3.4</span> 4장-유용한 선형회귀</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">4.1 선형회귀의 필요성</td>
+<td style="text-align: left;">OLS 연구</td>
+<td style="text-align: left;"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445">Difference-in-differences with variation in treatment timing</a>, <a href="https://direct.mit.edu/rest/article/104/3/501/97692/Interpreting-OLS-Estimands-When-Treatment-Effects">Interpreting Ols Estimands When Treatment Effects are Heterogeneous: Smaller Groups</a>, <a href="https://arxiv.org/abs/2106.05024">Contamination Bias in Linear Regressions</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4.7.5 평균 제거와 고정효과</td>
+<td style="text-align: left;">패널데이터를 사용한 인과추론 논문</td>
+<td style="text-align: left;"><a href="https://www.jstor.org/stable/1913646">On the Pooling of Time Series and Cross Section Data</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4.9 중립 통제변수</td>
+<td style="text-align: left;">잡음 제거 기법</td>
+<td style="text-align: left;"><a href="http://robotics.stanford.edu/~ronnyk/2013-02CUPEDImprovingSensitivityOfControlledExperiments.pdf">Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-성향점수" class="level3" data-number="4.3.5">
+<h3 data-number="4.3.5" class="anchored" data-anchor-id="장-성향점수"><span class="header-section-number">4.3.5</span> 5장-성향점수</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">5.1 관리자 교육의 효과</td>
+<td style="text-align: left;">민감도 분석과 부분 식별</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/1902.07409">Estimating Treatment Effects with Causal Forests: An Application</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5.3.3 성향점수 매칭</td>
+<td style="text-align: left;">민감도 분석과 부분 식별</td>
+<td style="text-align: left;"><a href="https://gking.harvard.edu/publications/why-Propensity-Scores-Should-Not-Be-Used-Formatching">Why Propensity Scores Should Not Be Used for Matching</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5.3.5 역확률 가중치의 분산</td>
+<td style="text-align: left;">실제 사례: 인과적 콘텍스트 밴딧</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/1003.0146">A Contextual-Bandit Approach to Personalized News Article Recommendation</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5.5 이중 강건 추정</td>
+<td style="text-align: left;">이중 강건 추정량 주석</td>
+<td style="text-align: left;"><a href="https://www.law.berkeley.edu/files/AIPW(1).pdf">An Introduction to the Augmented Inverse Propensity Weighted Estimator</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5.5.2 결과 모델링이 쉬운 경우</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://arxiv.org/pdf/0804.2965.pdf">Comment: Performance of Double-Robust Estimators When “Inverse Probability” Weights Are Highly Variable</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5.6 연속형 처치에서의 일반화 성향점수</td>
+<td style="text-align: left;">연속형 처치</td>
+<td style="text-align: left;"><a href="https://www.proquest.com/openview/888e50198b2563222f8e2030e5a8c9e7/1?pq-origsite=gscholar&amp;cbl=18750">Causal inference with a continuous treatment and outcome: Alternative estimators for parametric dose-response functions with applications</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-이질적-처치효과" class="level3" data-number="4.3.6">
+<h3 data-number="4.3.6" class="anchored" data-anchor-id="장-이질적-처치효과"><span class="header-section-number">4.3.6</span> 6장-이질적 처치효과</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">6.7 누적 이득 곡선</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://github.com/nubank/fklearn">Nubank fklearn</a>, <a href="https://proceedings.mlr.press/v67/gutierrez17a/gutierrez17a.pdf">Causal inference and uplift modeling a review of the literature</a>, <a href="https://arxiv.org/abs/2211.01939">Empirical Analysis of Model Selection for Heterogeneous Causal Effect Estimation</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6.8 목표 변환</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/2007.05188">Intelligent Credit Limit Management in Consumer Loans Based on Causal Inference</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6.9.2 이진 결과</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://jmlr.org/papers/v23/19-480.html">Causal Classification: Treatment Effect Estimation vs.&nbsp;Outcome Prediction</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-메타러너" class="level3" data-number="4.3.7">
+<h3 data-number="4.3.7" class="anchored" data-anchor-id="장-메타러너"><span class="header-section-number">4.3.7</span> 7장-메타러너</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">7.1 이산형 처치 메타러너</td>
+<td style="text-align: left;">인과추론 라이브러리</td>
+<td style="text-align: left;"><a href="https://econml.azurewebsites.net/">EconML 공식문서</a>, <a href="https://causalml.readthedocs.io/en/latest/about.html">CausalML 공식문서</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7.1.1 T 러너</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://www.pnas.org/doi/full/10.1073/pnas.1804597116">Metalearners for estimating heterogeneous treatment effects using machine learning</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7.2.1 S 러너</td>
+<td style="text-align: left;">S 러너의 편향</td>
+<td style="text-align: left;"><a href="https://www.aeaweb.org/articles?id=10.1257/aer.p20171038">Double/Debiased/Neyman Machine Learning of Treatment Effects</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7.2.2 이중/편향 제거 머신러닝</td>
+<td style="text-align: left;">트리 기반 및 신경망 러너</td>
+<td style="text-align: left;"><a href="https://proceedings.mlr.press/v130/curth21a/curth21a.pdf">Nonparametric Estimation of Heterogeneous Treatment Effects:From Theory to Learning Algorithms</a>, <a href="https://proceedings.mlr.press/v48/johansson16.pdf">Learning Representations for Counterfactual Inference</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-이중차분법" class="level3" data-number="4.3.8">
+<h3 data-number="4.3.8" class="anchored" data-anchor-id="장-이중차분법"><span class="header-section-number">4.3.8</span> 8장-이중차분법</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">8.2 표준 이중차분법</td>
+<td style="text-align: left;">실제 사례: 최저임금과 고용</td>
+<td style="text-align: left;"><a href="https://davidcard.berkeley.edu/papers/njmin-aer.pdf">Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8.2.5 추론</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://academic.oup.com/qje/article/138/1/1/6750017">When Should You Adjust Standard Errors for Clustering?</a>, <a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1920957">An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8.3 식별 가정</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://cowles.yale.edu/sites/default/files/2022-11/2010.04814.pdf">When Is Parallel Trends Sensitive to Functional Form?</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8.3.2 비기대 가정과 SUTVA</td>
+<td style="text-align: left;">공간적 파급 효과</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/2105.03737">Difference-in-Differences Estimation with Spatial Spillovers</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8.3.5 피드백 없음</td>
+<td style="text-align: left;">순차적 무시 가능성</td>
+<td style="text-align: left;"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3979613">Causal Inference with Time-Series Cross-Sectional Data: A Reflection</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8.3.6 이월 효과와 시차종속변수 없음</td>
+<td style="text-align: left;">순차적 무시 가능성</td>
+<td style="text-align: left;"><a href="https://imai.fas.harvard.edu/research/files/FEmatch.pdf">When Should We Use Unit Fixed Effects Regression Models for Causal Inference with Longitudinal Data?</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8.6.3 최종 결과</td>
+<td style="text-align: left;">이중 강건 이중차분법</td>
+<td style="text-align: left;"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0304407620301901">Doubly robust difference-in-differences estimators</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8.7 처치의 시차 도입</td>
+<td style="text-align: left;">이중 강건 이중차분법</td>
+<td style="text-align: left;"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445">Difference-in-differences with variation in treatment timing</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8.7 처치의 시차 도입</td>
+<td style="text-align: left;">실제 사례: 개발도상국의 고등교육과 성장</td>
+<td style="text-align: left;"><a href="https://sites.google.com/view/khoavu-umn/job-market-paper">Higher Education Expansion, Labor Market, and Firm Productivity in Vietnam</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8.7.1 시간에 따른 이질적 효과</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://www.sciencedirect.com/science/article/abs/pii/S030440762030378X">Estimating dynamic treatment effects in event studies with heterogeneous treatment effects</a>, <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3906345">Two-Way Fixed Effects, the Two-Way Mundlak Regression, and Difference-in-Differences Estimators</a>, <a href="https://www.sciencedirect.com/science/article/abs/pii/S0304407620303948">Difference-in-Differences with multiple time periods</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-통제집단합성법" class="level3" data-number="4.3.9">
+<h3 data-number="4.3.9" class="anchored" data-anchor-id="장-통제집단합성법"><span class="header-section-number">4.3.9</span> 9장-통제집단합성법</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">9.4 표준 통제집단합성법</td>
+<td style="text-align: left;">통제집단합성법에 대한 가정</td>
+<td style="text-align: left;"><a href="https://www.aeaweb.org/articles?id=10.1257/jel.20191450">Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9.7 추론</td>
+<td style="text-align: left;">더 알아보기</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/1712.09089">An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9.8.4 통제집단합성법과 이중차분법</td>
+<td style="text-align: left;">원본 합성 이중차분법</td>
+<td style="text-align: left;"><a href="https://www.aeaweb.org/articles?id=10.1257/aer.20190159">Synthetic Difference-in-Differences</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9.9 요약</td>
+<td style="text-align: left;">일반화 통제집단합성법</td>
+<td style="text-align: left;"><a href="https://www.cambridge.org/core/journals/political-analysis/article/generalized-synthetic-control-method-causal-inference-with-interactive-fixed-effects-models/B63A8BD7C239DD4141C67DA10CD0E4F3">Generalized Synthetic Control Method: Causal Inference with Interactive Fixed Effects Models</a>, <a href="https://www.cambridge.org/core/journals/political-analysis/article/bayesian-alternative-to-synthetic-control-for-comparative-case-studies/C23BD67E4BBBB8C88ADAEAE169696A45">A Bayesian Alternative to Synthetic Control for Comparative Case Studies</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9.9 요약</td>
+<td style="text-align: left;">실제 사례: causalimpact 라이브러리</td>
+<td style="text-align: left;"><a href="https://github.com/google/CausalImpact?tab=readme-ov-file">CausalImpact Github</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-스위치백-실험" class="level3" data-number="4.3.10">
+<h3 data-number="4.3.10" class="anchored" data-anchor-id="장-스위치백-실험"><span class="header-section-number">4.3.10</span> 10장-스위치백 실험</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">10.2.2 무작위 탐색</td>
+<td style="text-align: left;">최적화</td>
+<td style="text-align: left;"><a href="https://economics.mit.edu/sites/default/files/2023-02/synthetic%20experiments.pdf">Synthetic Controls for Experimental Design</a>, <a href="https://mackinstitute.wharton.upenn.edu/wp-content/uploads/2020/03/Wernerfelt-Nils-Doudchenko-Nick-Gilinson-David-and-Taylor-Sean_Designing-Experiments-with-Synthetic-Controls.pdf">Designing Experiments with Synthetic Controls</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10.2.2 무작위 탐색</td>
+<td style="text-align: left;">다른 실험 목표</td>
+<td style="text-align: left;"><a href="https://proceedings.neurips.cc/paper/2021/hash/48d23e87eb98cc2227b5a8c33fa00680-Abstract.html">Synthetic Design: An Optimization Approach to Experimental Design with Synthetic Controls</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10.3.5 강건한 분산</td>
+<td style="text-align: left;">더 적은 가정으로 m 찾기</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/2009.00148">Design and Analysis of Switchback Experiments</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-도구변수" class="level3" data-number="4.3.11">
+<h3 data-number="4.3.11" class="anchored" data-anchor-id="장-도구변수"><span class="header-section-number">4.3.11</span> 11장-도구변수</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">11.9.4 밀도 불연속 테스트</td>
+<td style="text-align: left;">최적화</td>
+<td style="text-align: left;"><a href="https://eml.berkeley.edu/~jmccrary/mccrary2006_DCdensity.pdf">Manipulation of the Running Variable in the Regression Discontinuity Design: A Density Test</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">11.10 요약</td>
+<td style="text-align: left;">최적화</td>
+<td style="text-align: left;"><a href="https://www.jstor.org/stable/2937954">Does Compulsory School Attendance Affect Schooling and Earnings?</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="장-더-배울-내용" class="level3" data-number="4.3.12">
+<h3 data-number="4.3.12" class="anchored" data-anchor-id="장-더-배울-내용"><span class="header-section-number">4.3.12</span> 12장-더 배울 내용</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">챕터</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">자료 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">12.1 인과관계 발견</td>
+<td style="text-align: left;">인과관계 발견</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/1903.02278">Causal Discovery Toolbox: Uncover causal relationships in Python</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12.3 인과적 강화학습</td>
+<td style="text-align: left;">콘텍스트 밴딧</td>
+<td style="text-align: left;"><a href="https://arxiv.org/abs/2211.12004">Contextual Bandits in a Survey Experiment on Charitable Giving: Within-Experiment Outcomes versus Policy Learning</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12.3 인과적 강화학습</td>
+<td style="text-align: left;">미국 경제학회 웹캐스트</td>
+<td style="text-align: left;"><a href="https://www.aeaweb.org/conference/cont-ed/2022-webcasts">2022 Continuing Education Webcasts</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12.4 인과 예측</td>
+<td style="text-align: left;">미국 경제학회 웹캐스트</td>
+<td style="text-align: left;"><a href="https://www.aeaweb.org/conference/cont-ed/2019-webcasts">2019 AEA Continuing Education Webcasts</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12.5 도메인 적응</td>
+<td style="text-align: left;">Concept Drift</td>
+<td style="text-align: left;"><a href="https://ieeexplore.ieee.org/document/8496795">Learning under Concept Drift: A Review</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="참고할-링크" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 참고할 링크</h1>
+<ul>
+<li>https://github.com/CausalInferenceLab/causal-inference-with-causalML</li>
+<li>https://github.com/CausalInferenceLab/causal-inference-lecture/tree/main/Lecture%20Notes</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./notebook/Part1_CausalInference.html" class="pagination-link" aria-label="1장 - 인과추론 소개">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
