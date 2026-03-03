@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; 4장 - 유용한 선형회귀 – 실무로 통하는 인과추론 with 파이썬</title>
+<title>4장 - 유용한 선형회귀 – 실무로 통하는 인과추론 with 파이썬</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-803ae4f7a8810f475153517dc3c4ebae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-90c14ce40e219e6b75daf91fb96820a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/04장-유용한 선형회귀.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/04장-유용한 선형회귀.html"><span class="chapter-title">4장 - 유용한 선형회귀</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -133,10 +133,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">실무로 통하는 인과추론 with 파이썬</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/partrita/causal-inference-in-python-code" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -148,86 +151,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">책 소개</span></span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">실무로 통하는 인과추론 with 파이썬</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 1</span></span></a>
+  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 1</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></span></a>
+  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span></a>
+  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3장 - 그래프 인과모델</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></span></a>
+  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">4장 - 유용한 선형회귀</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span></a>
+  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5징 - 성향점수</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></span></a>
+  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6장 - 이질적 처치효과</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span></a>
+  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7장 - 메타러너</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></span></a>
+  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8장 - 이중차분법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></span></a>
+  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9장 - 통제집단합성법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span></a>
+  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">11장 - 불응과 도구변수</span></span></a>
+  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11장 - 불응과 도구변수</span></a>
   </div>
 </li>
     </ul>
@@ -240,47 +229,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#선형회귀의-필요성" id="toc-선형회귀의-필요성" class="nav-link active" data-scroll-target="#선형회귀의-필요성"><span class="header-section-number">7.1</span> 4.1 선형회귀의 필요성</a>
+  <li><a href="#선형회귀의-필요성" id="toc-선형회귀의-필요성" class="nav-link active" data-scroll-target="#선형회귀의-필요성">4.1 선형회귀의 필요성</a>
   <ul class="collapse">
-  <li><a href="#모델이-필요한-이유" id="toc-모델이-필요한-이유" class="nav-link" data-scroll-target="#모델이-필요한-이유"><span class="header-section-number">7.1.1</span> 4.1.1 모델이 필요한 이유</a></li>
-  <li><a href="#ab-테스트와-회귀분석" id="toc-ab-테스트와-회귀분석" class="nav-link" data-scroll-target="#ab-테스트와-회귀분석"><span class="header-section-number">7.1.2</span> 4.1.2 A/B 테스트와 회귀분석</a></li>
-  <li><a href="#회귀분석을-통한-보정" id="toc-회귀분석을-통한-보정" class="nav-link" data-scroll-target="#회귀분석을-통한-보정"><span class="header-section-number">7.1.3</span> 4.1.3 회귀분석을 통한 보정</a></li>
+  <li><a href="#모델이-필요한-이유" id="toc-모델이-필요한-이유" class="nav-link" data-scroll-target="#모델이-필요한-이유">4.1.1 모델이 필요한 이유</a></li>
+  <li><a href="#ab-테스트와-회귀분석" id="toc-ab-테스트와-회귀분석" class="nav-link" data-scroll-target="#ab-테스트와-회귀분석">4.1.2 A/B 테스트와 회귀분석</a></li>
+  <li><a href="#회귀분석을-통한-보정" id="toc-회귀분석을-통한-보정" class="nav-link" data-scroll-target="#회귀분석을-통한-보정">4.1.3 회귀분석을 통한 보정</a></li>
   </ul></li>
-  <li><a href="#회귀분석-이론" id="toc-회귀분석-이론" class="nav-link" data-scroll-target="#회귀분석-이론"><span class="header-section-number">7.2</span> 4.2 회귀분석 이론</a>
+  <li><a href="#회귀분석-이론" id="toc-회귀분석-이론" class="nav-link" data-scroll-target="#회귀분석-이론">4.2 회귀분석 이론</a>
   <ul class="collapse">
-  <li><a href="#단순선형회귀" id="toc-단순선형회귀" class="nav-link" data-scroll-target="#단순선형회귀"><span class="header-section-number">7.2.1</span> 4.2.1 단순선형회귀</a></li>
-  <li><a href="#다중선형회귀" id="toc-다중선형회귀" class="nav-link" data-scroll-target="#다중선형회귀"><span class="header-section-number">7.2.2</span> 4.2.2 다중선형회귀</a></li>
+  <li><a href="#단순선형회귀" id="toc-단순선형회귀" class="nav-link" data-scroll-target="#단순선형회귀">4.2.1 단순선형회귀</a></li>
+  <li><a href="#다중선형회귀" id="toc-다중선형회귀" class="nav-link" data-scroll-target="#다중선형회귀">4.2.2 다중선형회귀</a></li>
   </ul></li>
-  <li><a href="#프리슈-워-로벨-정리와-직교화" id="toc-프리슈-워-로벨-정리와-직교화" class="nav-link" data-scroll-target="#프리슈-워-로벨-정리와-직교화"><span class="header-section-number">7.3</span> 4.3 프리슈-워-로벨 정리와 직교화</a>
+  <li><a href="#프리슈-워-로벨-정리와-직교화" id="toc-프리슈-워-로벨-정리와-직교화" class="nav-link" data-scroll-target="#프리슈-워-로벨-정리와-직교화">4.3 프리슈-워-로벨 정리와 직교화</a>
   <ul class="collapse">
-  <li><a href="#편향-제거-단계" id="toc-편향-제거-단계" class="nav-link" data-scroll-target="#편향-제거-단계"><span class="header-section-number">7.3.1</span> 4.3.1 편향 제거 단계</a></li>
-  <li><a href="#잡음-제거-단계" id="toc-잡음-제거-단계" class="nav-link" data-scroll-target="#잡음-제거-단계"><span class="header-section-number">7.3.2</span> 4.3.2 잡음 제거 단계</a></li>
-  <li><a href="#회귀-추정량의-표준오차" id="toc-회귀-추정량의-표준오차" class="nav-link" data-scroll-target="#회귀-추정량의-표준오차"><span class="header-section-number">7.3.3</span> 4.3.3 회귀 추정량의 표준오차</a></li>
-  <li><a href="#최종-결과-모델" id="toc-최종-결과-모델" class="nav-link" data-scroll-target="#최종-결과-모델"><span class="header-section-number">7.3.4</span> 4.3.4 최종 결과 모델</a></li>
-  <li><a href="#fwl-정리-요약" id="toc-fwl-정리-요약" class="nav-link" data-scroll-target="#fwl-정리-요약"><span class="header-section-number">7.3.5</span> 4.3.5 FWL 정리 요약</a></li>
+  <li><a href="#편향-제거-단계" id="toc-편향-제거-단계" class="nav-link" data-scroll-target="#편향-제거-단계">4.3.1 편향 제거 단계</a></li>
+  <li><a href="#잡음-제거-단계" id="toc-잡음-제거-단계" class="nav-link" data-scroll-target="#잡음-제거-단계">4.3.2 잡음 제거 단계</a></li>
+  <li><a href="#회귀-추정량의-표준오차" id="toc-회귀-추정량의-표준오차" class="nav-link" data-scroll-target="#회귀-추정량의-표준오차">4.3.3 회귀 추정량의 표준오차</a></li>
+  <li><a href="#최종-결과-모델" id="toc-최종-결과-모델" class="nav-link" data-scroll-target="#최종-결과-모델">4.3.4 최종 결과 모델</a></li>
+  <li><a href="#fwl-정리-요약" id="toc-fwl-정리-요약" class="nav-link" data-scroll-target="#fwl-정리-요약">4.3.5 FWL 정리 요약</a></li>
   </ul></li>
-  <li><a href="#결과-모델으로서의-회귀분석" id="toc-결과-모델으로서의-회귀분석" class="nav-link" data-scroll-target="#결과-모델으로서의-회귀분석"><span class="header-section-number">7.4</span> 4.4 결과 모델으로서의 회귀분석</a></li>
-  <li><a href="#양수성과-외삽" id="toc-양수성과-외삽" class="nav-link" data-scroll-target="#양수성과-외삽"><span class="header-section-number">7.5</span> 4.5 양수성과 외삽</a></li>
-  <li><a href="#선형회귀에서의-비선형성" id="toc-선형회귀에서의-비선형성" class="nav-link" data-scroll-target="#선형회귀에서의-비선형성"><span class="header-section-number">7.6</span> 4.6 선형회귀에서의 비선형성</a>
+  <li><a href="#결과-모델으로서의-회귀분석" id="toc-결과-모델으로서의-회귀분석" class="nav-link" data-scroll-target="#결과-모델으로서의-회귀분석">4.4 결과 모델으로서의 회귀분석</a></li>
+  <li><a href="#양수성과-외삽" id="toc-양수성과-외삽" class="nav-link" data-scroll-target="#양수성과-외삽">4.5 양수성과 외삽</a></li>
+  <li><a href="#선형회귀에서의-비선형성" id="toc-선형회귀에서의-비선형성" class="nav-link" data-scroll-target="#선형회귀에서의-비선형성">4.6 선형회귀에서의 비선형성</a>
   <ul class="collapse">
-  <li><a href="#처치-선형화" id="toc-처치-선형화" class="nav-link" data-scroll-target="#처치-선형화"><span class="header-section-number">7.6.1</span> 4.6.1 처치 선형화</a></li>
-  <li><a href="#비선형-fwl과-편향-제거" id="toc-비선형-fwl과-편향-제거" class="nav-link" data-scroll-target="#비선형-fwl과-편향-제거"><span class="header-section-number">7.6.2</span> 4.6.2 비선형 FWL과 편향 제거</a></li>
+  <li><a href="#처치-선형화" id="toc-처치-선형화" class="nav-link" data-scroll-target="#처치-선형화">4.6.1 처치 선형화</a></li>
+  <li><a href="#비선형-fwl과-편향-제거" id="toc-비선형-fwl과-편향-제거" class="nav-link" data-scroll-target="#비선형-fwl과-편향-제거">4.6.2 비선형 FWL과 편향 제거</a></li>
   </ul></li>
-  <li><a href="#더미변수를-활용한-회귀분석" id="toc-더미변수를-활용한-회귀분석" class="nav-link" data-scroll-target="#더미변수를-활용한-회귀분석"><span class="header-section-number">7.7</span> 4.7 더미변수를 활용한 회귀분석</a>
+  <li><a href="#더미변수를-활용한-회귀분석" id="toc-더미변수를-활용한-회귀분석" class="nav-link" data-scroll-target="#더미변수를-활용한-회귀분석">4.7 더미변수를 활용한 회귀분석</a>
   <ul class="collapse">
-  <li><a href="#조건부-무작위-실험" id="toc-조건부-무작위-실험" class="nav-link" data-scroll-target="#조건부-무작위-실험"><span class="header-section-number">7.7.1</span> 4.7.1 조건부 무작위 실험</a></li>
-  <li><a href="#더미변수" id="toc-더미변수" class="nav-link" data-scroll-target="#더미변수"><span class="header-section-number">7.7.2</span> 4.7.2 더미변수</a></li>
-  <li><a href="#포화회귀모델" id="toc-포화회귀모델" class="nav-link" data-scroll-target="#포화회귀모델"><span class="header-section-number">7.7.3</span> 4.7.3 포화회귀모델</a></li>
-  <li><a href="#분산의-가중평균과-회귀분석" id="toc-분산의-가중평균과-회귀분석" class="nav-link" data-scroll-target="#분산의-가중평균과-회귀분석"><span class="header-section-number">7.7.4</span> 4.7.4 분산의 가중평균과 회귀분석</a></li>
-  <li><a href="#평균-제거와-고정효과" id="toc-평균-제거와-고정효과" class="nav-link" data-scroll-target="#평균-제거와-고정효과"><span class="header-section-number">7.7.5</span> 4.7.5 평균 제거와 고정효과</a></li>
+  <li><a href="#조건부-무작위-실험" id="toc-조건부-무작위-실험" class="nav-link" data-scroll-target="#조건부-무작위-실험">4.7.1 조건부 무작위 실험</a></li>
+  <li><a href="#더미변수" id="toc-더미변수" class="nav-link" data-scroll-target="#더미변수">4.7.2 더미변수</a></li>
+  <li><a href="#포화회귀모델" id="toc-포화회귀모델" class="nav-link" data-scroll-target="#포화회귀모델">4.7.3 포화회귀모델</a></li>
+  <li><a href="#분산의-가중평균과-회귀분석" id="toc-분산의-가중평균과-회귀분석" class="nav-link" data-scroll-target="#분산의-가중평균과-회귀분석">4.7.4 분산의 가중평균과 회귀분석</a></li>
+  <li><a href="#평균-제거와-고정효과" id="toc-평균-제거와-고정효과" class="nav-link" data-scroll-target="#평균-제거와-고정효과">4.7.5 평균 제거와 고정효과</a></li>
   </ul></li>
-  <li><a href="#누락-변수-편향" id="toc-누락-변수-편향" class="nav-link" data-scroll-target="#누락-변수-편향"><span class="header-section-number">7.8</span> 4.8 누락 변수 편향</a></li>
-  <li><a href="#중립-통제변수" id="toc-중립-통제변수" class="nav-link" data-scroll-target="#중립-통제변수"><span class="header-section-number">7.9</span> 4.9 중립 통제변수</a>
+  <li><a href="#누락-변수-편향" id="toc-누락-변수-편향" class="nav-link" data-scroll-target="#누락-변수-편향">4.8 누락 변수 편향</a></li>
+  <li><a href="#중립-통제변수" id="toc-중립-통제변수" class="nav-link" data-scroll-target="#중립-통제변수">4.9 중립 통제변수</a>
   <ul class="collapse">
-  <li><a href="#잡음-유발-통제변수" id="toc-잡음-유발-통제변수" class="nav-link" data-scroll-target="#잡음-유발-통제변수"><span class="header-section-number">7.9.1</span> 4.9.1 잡음 유발 통제변수</a></li>
-  <li><a href="#특성-선택-편향-분산-트레이드오프" id="toc-특성-선택-편향-분산-트레이드오프" class="nav-link" data-scroll-target="#특성-선택-편향-분산-트레이드오프"><span class="header-section-number">7.9.2</span> 4.9.2 특성 선택: 편향-분산 트레이드오프</a></li>
+  <li><a href="#잡음-유발-통제변수" id="toc-잡음-유발-통제변수" class="nav-link" data-scroll-target="#잡음-유발-통제변수">4.9.1 잡음 유발 통제변수</a></li>
+  <li><a href="#특성-선택-편향-분산-트레이드오프" id="toc-특성-선택-편향-분산-트레이드오프" class="nav-link" data-scroll-target="#특성-선택-편향-분산-트레이드오프">4.9.2 특성 선택: 편향-분산 트레이드오프</a></li>
   </ul></li>
-  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약"><span class="header-section-number">7.10</span> 4.10 요약</a></li>
+  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약">4.10 요약</a></li>
   </ul>
 </nav>
     </div>
@@ -289,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></h1>
+<h1 class="title"><span class="chapter-title">4장 - 유용한 선형회귀</span></h1>
 </div>
 
 
@@ -306,10 +295,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="선형회귀의-필요성" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="선형회귀의-필요성"><span class="header-section-number">7.1</span> 4.1 선형회귀의 필요성</h2>
-<section id="모델이-필요한-이유" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="모델이-필요한-이유"><span class="header-section-number">7.1.1</span> 4.1.1 모델이 필요한 이유</h3>
+<section id="선형회귀의-필요성" class="level2">
+<h2 class="anchored" data-anchor-id="선형회귀의-필요성">4.1 선형회귀의 필요성</h2>
+<section id="모델이-필요한-이유" class="level3">
+<h3 class="anchored" data-anchor-id="모델이-필요한-이유">4.1.1 모델이 필요한 이유</h3>
 <div id="cell-1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:47.845199Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:45.813625Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -354,8 +343,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="ab-테스트와-회귀분석" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="ab-테스트와-회귀분석"><span class="header-section-number">7.1.2</span> 4.1.2 A/B 테스트와 회귀분석</h3>
+<section id="ab-테스트와-회귀분석" class="level3">
+<h3 class="anchored" data-anchor-id="ab-테스트와-회귀분석">4.1.2 A/B 테스트와 회귀분석</h3>
+<p>무작위 실험인 A/B 테스트 결과를 분석할 때도 선형회귀를 사용하면 더 정밀한 추정치를 얻을 수 있습니다.</p>
 <div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:48.104171Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:48.090446Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"../data/rec_ab_test.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
@@ -463,8 +453,9 @@ Name: watch_time, dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="회귀분석을-통한-보정" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="회귀분석을-통한-보정"><span class="header-section-number">7.1.3</span> 4.1.3 회귀분석을 통한 보정</h3>
+<section id="회귀분석을-통한-보정" class="level3">
+<h3 class="anchored" data-anchor-id="회귀분석을-통한-보정">4.1.3 회귀분석을 통한 보정</h3>
+<p>관측 데이터에서 발생할 수 있는 교란 요인들을 회귀 모델에 포함시켜 통제함으로써 인과 관계에 더 가까운 결과를 얻습니다.</p>
 <div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-25T15:09:48.919026Z&quot;,&quot;start_time&quot;:&quot;2023-06-25T15:09:48.871583Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>risk_data <span class="op">=</span> pd.read_csv(<span class="st">"../data/risk_data.csv"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -691,8 +682,8 @@ dtype: int64</code></pre>
 </div>
 </section>
 </section>
-<section id="회귀분석-이론" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="회귀분석-이론"><span class="header-section-number">7.2</span> 4.2 회귀분석 이론</h2>
+<section id="회귀분석-이론" class="level2">
+<h2 class="anchored" data-anchor-id="회귀분석-이론">4.2 회귀분석 이론</h2>
 <div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:45.659057Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.650525Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X_cols <span class="op">=</span> [<span class="st">"credit_limit"</span>, <span class="st">"wage"</span>, <span class="st">"credit_score1"</span>, <span class="st">"credit_score2"</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> risk_data[X_cols].assign(intercep<span class="op">=</span><span class="dv">1</span>)</span>
@@ -710,15 +701,15 @@ dtype: int64</code></pre>
         4.03661277e-01])</code></pre>
 </div>
 </div>
-<section id="단순선형회귀" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="단순선형회귀"><span class="header-section-number">7.2.1</span> 4.2.1 단순선형회귀</h3>
+<section id="단순선형회귀" class="level3">
+<h3 class="anchored" data-anchor-id="단순선형회귀">4.2.1 단순선형회귀</h3>
 </section>
-<section id="다중선형회귀" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="다중선형회귀"><span class="header-section-number">7.2.2</span> 4.2.2 다중선형회귀</h3>
+<section id="다중선형회귀" class="level3">
+<h3 class="anchored" data-anchor-id="다중선형회귀">4.2.2 다중선형회귀</h3>
 </section>
 </section>
-<section id="프리슈-워-로벨-정리와-직교화" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="프리슈-워-로벨-정리와-직교화"><span class="header-section-number">7.3</span> 4.3 프리슈-워-로벨 정리와 직교화</h2>
+<section id="프리슈-워-로벨-정리와-직교화" class="level2">
+<h2 class="anchored" data-anchor-id="프리슈-워-로벨-정리와-직교화">4.3 프리슈-워-로벨 정리와 직교화</h2>
 <div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:45.707252Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.660874Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="st">"default ~ credit_limit + wage+credit_score1+credit_score2"</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(formula, data<span class="op">=</span>risk_data).fit()</span>
@@ -784,8 +775,8 @@ dtype: int64</code></pre>
 </table>
 </div>
 </div>
-<section id="편향-제거-단계" class="level3" data-number="7.3.1">
-<h3 data-number="7.3.1" class="anchored" data-anchor-id="편향-제거-단계"><span class="header-section-number">7.3.1</span> 4.3.1 편향 제거 단계</h3>
+<section id="편향-제거-단계" class="level3">
+<h3 class="anchored" data-anchor-id="편향-제거-단계">4.3.1 편향 제거 단계</h3>
 <div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:45.848780Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:45.709053Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    risk_data.assign(size<span class="op">=</span><span class="dv">1</span>)</span>
@@ -886,8 +877,8 @@ dtype: int64</code></pre>
 </div>
 </div>
 </section>
-<section id="잡음-제거-단계" class="level3" data-number="7.3.2">
-<h3 data-number="7.3.2" class="anchored" data-anchor-id="잡음-제거-단계"><span class="header-section-number">7.3.2</span> 4.3.2 잡음 제거 단계</h3>
+<section id="잡음-제거-단계" class="level3">
+<h3 class="anchored" data-anchor-id="잡음-제거-단계">4.3.2 잡음 제거 단계</h3>
 <div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.096204Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.058746Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>denoising_model <span class="op">=</span> smf.ols(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default ~ wage + credit_score1  + credit_score2"</span>, data<span class="op">=</span>risk_data_deb</span>
@@ -898,8 +889,8 @@ dtype: int64</code></pre>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="회귀-추정량의-표준오차" class="level3" data-number="7.3.3">
-<h3 data-number="7.3.3" class="anchored" data-anchor-id="회귀-추정량의-표준오차"><span class="header-section-number">7.3.3</span> 4.3.3 회귀 추정량의 표준오차</h3>
+<section id="회귀-추정량의-표준오차" class="level3">
+<h3 class="anchored" data-anchor-id="회귀-추정량의-표준오차">4.3.3 회귀 추정량의 표준오차</h3>
 <div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.158157Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.097819Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>model_se <span class="op">=</span> smf.ols(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default ~ wage + credit_score1  + credit_score2"</span>, data<span class="op">=</span>risk_data</span>
@@ -922,8 +913,8 @@ SE formula:    5.364242347548201e-06</code></pre>
 </div>
 </div>
 </section>
-<section id="최종-결과-모델" class="level3" data-number="7.3.4">
-<h3 data-number="7.3.4" class="anchored" data-anchor-id="최종-결과-모델"><span class="header-section-number">7.3.4</span> 4.3.4 최종 결과 모델</h3>
+<section id="최종-결과-모델" class="level3">
+<h3 class="anchored" data-anchor-id="최종-결과-모델">4.3.4 최종 결과 모델</h3>
 <div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.184760Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.159719Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model_w_orthogonal <span class="op">=</span> smf.ols(</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"default_res ~ credit_limit_res"</span>, data<span class="op">=</span>risk_data_denoise</span>
@@ -995,15 +986,15 @@ SE formula:    5.364242347548201e-06</code></pre>
 </div>
 </div>
 </section>
-<section id="fwl-정리-요약" class="level3" data-number="7.3.5">
-<h3 data-number="7.3.5" class="anchored" data-anchor-id="fwl-정리-요약"><span class="header-section-number">7.3.5</span> 4.3.5 FWL 정리 요약</h3>
+<section id="fwl-정리-요약" class="level3">
+<h3 class="anchored" data-anchor-id="fwl-정리-요약">4.3.5 FWL 정리 요약</h3>
 </section>
 </section>
-<section id="결과-모델으로서의-회귀분석" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="결과-모델으로서의-회귀분석"><span class="header-section-number">7.4</span> 4.4 결과 모델으로서의 회귀분석</h2>
+<section id="결과-모델으로서의-회귀분석" class="level2">
+<h2 class="anchored" data-anchor-id="결과-모델으로서의-회귀분석">4.4 결과 모델으로서의 회귀분석</h2>
 </section>
-<section id="양수성과-외삽" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="양수성과-외삽"><span class="header-section-number">7.5</span> 4.5 양수성과 외삽</h2>
+<section id="양수성과-외삽" class="level2">
+<h2 class="anchored" data-anchor-id="양수성과-외삽">4.5 양수성과 외삽</h2>
 <div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.671640Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.333383Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1075,8 +1066,8 @@ SE formula:    5.364242347548201e-06</code></pre>
 </div>
 </div>
 </section>
-<section id="선형회귀에서의-비선형성" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="선형회귀에서의-비선형성"><span class="header-section-number">7.6</span> 4.6 선형회귀에서의 비선형성</h2>
+<section id="선형회귀에서의-비선형성" class="level2">
+<h2 class="anchored" data-anchor-id="선형회귀에서의-비선형성">4.6 선형회귀에서의 비선형성</h2>
 <div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:46.700699Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:46.672696Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>spend_data <span class="op">=</span> pd.read_csv(<span class="st">"../data/spend_data.csv"</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1197,8 +1188,8 @@ SE formula:    5.364242347548201e-06</code></pre>
 </div>
 </div>
 </div>
-<section id="처치-선형화" class="level3" data-number="7.6.1">
-<h3 data-number="7.6.1" class="anchored" data-anchor-id="처치-선형화"><span class="header-section-number">7.6.1</span> 4.6.1 처치 선형화</h3>
+<section id="처치-선형화" class="level3">
+<h3 class="anchored" data-anchor-id="처치-선형화">4.6.1 처치 선형화</h3>
 <div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.389071Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.166140Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt_df <span class="op">=</span> (</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    spend_data</span>
@@ -1339,8 +1330,8 @@ SE formula:    5.364242347548201e-06</code></pre>
 </div>
 </div>
 </section>
-<section id="비선형-fwl과-편향-제거" class="level3" data-number="7.6.2">
-<h3 data-number="7.6.2" class="anchored" data-anchor-id="비선형-fwl과-편향-제거"><span class="header-section-number">7.6.2</span> 4.6.2 비선형 FWL과 편향 제거</h3>
+<section id="비선형-fwl과-편향-제거" class="level3">
+<h3 class="anchored" data-anchor-id="비선형-fwl과-편향-제거">4.6.2 비선형 FWL과 편향 제거</h3>
 <div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.701043Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.642293Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>debias_spend_model <span class="op">=</span> smf.ols(<span class="st">"np.sqrt(credit_limit) ~ wage"</span>, data<span class="op">=</span>spend_data).fit()</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>denoise_spend_model <span class="op">=</span> smf.ols(<span class="st">"spend ~ wage"</span>, data<span class="op">=</span>spend_data).fit()</span>
@@ -1427,10 +1418,10 @@ SE formula:    5.364242347548201e-06</code></pre>
 </div>
 </section>
 </section>
-<section id="더미변수를-활용한-회귀분석" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="더미변수를-활용한-회귀분석"><span class="header-section-number">7.7</span> 4.7 더미변수를 활용한 회귀분석</h2>
-<section id="조건부-무작위-실험" class="level3" data-number="7.7.1">
-<h3 data-number="7.7.1" class="anchored" data-anchor-id="조건부-무작위-실험"><span class="header-section-number">7.7.1</span> 4.7.1 조건부 무작위 실험</h3>
+<section id="더미변수를-활용한-회귀분석" class="level2">
+<h2 class="anchored" data-anchor-id="더미변수를-활용한-회귀분석">4.7 더미변수를 활용한 회귀분석</h2>
+<section id="조건부-무작위-실험" class="level3">
+<h3 class="anchored" data-anchor-id="조건부-무작위-실험">4.7.1 조건부 무작위 실험</h3>
 <div id="cell-48" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:47.942790Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:47.928761Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>risk_data_rnd <span class="op">=</span> pd.read_csv(<span class="st">"../data/risk_data_rnd.csv"</span>)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>risk_data_rnd.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1542,8 +1533,8 @@ SE formula:    5.364242347548201e-06</code></pre>
 </div>
 </div>
 </section>
-<section id="더미변수" class="level3" data-number="7.7.2">
-<h3 data-number="7.7.2" class="anchored" data-anchor-id="더미변수"><span class="header-section-number">7.7.2</span> 4.7.2 더미변수</h3>
+<section id="더미변수" class="level3">
+<h3 class="anchored" data-anchor-id="더미변수">4.7.2 더미변수</h3>
 <div id="cell-51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.342917Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.331844Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"default ~ credit_limit"</span>, data<span class="op">=</span>risk_data_rnd).fit()</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>model.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1874,8 +1865,8 @@ SE formula:    5.364242347548201e-06</code></pre>
 </div>
 </div>
 </section>
-<section id="포화회귀모델" class="level3" data-number="7.7.3">
-<h3 data-number="7.7.3" class="anchored" data-anchor-id="포화회귀모델"><span class="header-section-number">7.7.3</span> 4.7.3 포화회귀모델</h3>
+<section id="포화회귀모델" class="level3">
+<h3 class="anchored" data-anchor-id="포화회귀모델">4.7.3 포화회귀모델</h3>
 <div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.578768Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.556705Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> regress(df, t, y):</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> smf.ols(<span class="ss">f"</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">~</span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">"</span>, data<span class="op">=</span>df).fit().params[t]</span>
@@ -2074,8 +2065,8 @@ dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="분산의-가중평균과-회귀분석" class="level3" data-number="7.7.4">
-<h3 data-number="7.7.4" class="anchored" data-anchor-id="분산의-가중평균과-회귀분석"><span class="header-section-number">7.7.4</span> 4.7.4 분산의 가중평균과 회귀분석</h3>
+<section id="분산의-가중평균과-회귀분석" class="level3">
+<h3 class="anchored" data-anchor-id="분산의-가중평균과-회귀분석">4.7.4 분산의 가중평균과 회귀분석</h3>
 <div id="cell-64" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.837985Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.830057Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2170,8 +2161,8 @@ dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="평균-제거와-고정효과" class="level3" data-number="7.7.5">
-<h3 data-number="7.7.5" class="anchored" data-anchor-id="평균-제거와-고정효과"><span class="header-section-number">7.7.5</span> 4.7.5 평균 제거와 고정효과</h3>
+<section id="평균-제거와-고정효과" class="level3">
+<h3 class="anchored" data-anchor-id="평균-제거와-고정효과">4.7.5 평균 제거와 고정효과</h3>
 <div id="cell-68" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:48.912734Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.867121Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>model_deb <span class="op">=</span> smf.ols(<span class="st">"credit_limit ~ C(credit_score1_buckets)"</span>, data<span class="op">=</span>risk_data_rnd).fit()</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>model_deb.summary().tables[<span class="dv">1</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2350,8 +2341,8 @@ Name: credit_limit, dtype: float64</code></pre>
 </div>
 </section>
 </section>
-<section id="누락-변수-편향" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="누락-변수-편향"><span class="header-section-number">7.8</span> 4.8 누락 변수 편향</h2>
+<section id="누락-변수-편향" class="level2">
+<h2 class="anchored" data-anchor-id="누락-변수-편향">4.8 누락 변수 편향</h2>
 <div id="cell-74" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.131659Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:48.955782Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2391,8 +2382,8 @@ Name: credit_limit, dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="중립-통제변수" class="level2" data-number="7.9">
-<h2 data-number="7.9" class="anchored" data-anchor-id="중립-통제변수"><span class="header-section-number">7.9</span> 4.9 중립 통제변수</h2>
+<section id="중립-통제변수" class="level2">
+<h2 class="anchored" data-anchor-id="중립-통제변수">4.9 중립 통제변수</h2>
 <div id="cell-78" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.384088Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.219727Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2502,8 +2493,8 @@ Name: credit_limit, dtype: float64</code></pre>
 </table>
 </div>
 </div>
-<section id="잡음-유발-통제변수" class="level3" data-number="7.9.1">
-<h3 data-number="7.9.1" class="anchored" data-anchor-id="잡음-유발-통제변수"><span class="header-section-number">7.9.1</span> 4.9.1 잡음 유발 통제변수</h3>
+<section id="잡음-유발-통제변수" class="level3">
+<h3 class="anchored" data-anchor-id="잡음-유발-통제변수">4.9.1 잡음 유발 통제변수</h3>
 <div id="cell-81" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.600381Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.442100Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2647,8 +2638,8 @@ Name: credit_limit, dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="특성-선택-편향-분산-트레이드오프" class="level3" data-number="7.9.2">
-<h3 data-number="7.9.2" class="anchored" data-anchor-id="특성-선택-편향-분산-트레이드오프"><span class="header-section-number">7.9.2</span> 4.9.2 특성 선택: 편향-분산 트레이드오프</h3>
+<section id="특성-선택-편향-분산-트레이드오프" class="level3">
+<h3 class="anchored" data-anchor-id="특성-선택-편향-분산-트레이드오프">4.9.2 특성 선택: 편향-분산 트레이드오프</h3>
 <div id="cell-85" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:49.835553Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.631596Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> gr.Digraph(graph_attr<span class="op">=</span>{<span class="st">"rankdir"</span>: <span class="st">"LR"</span>})</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2801,8 +2792,8 @@ Name: credit_limit, dtype: float64</code></pre>
 </div>
 </section>
 </section>
-<section id="요약" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="요약"><span class="header-section-number">7.10</span> 4.10 요약</h2>
+<section id="요약" class="level2">
+<h2 class="anchored" data-anchor-id="요약">4.10 요약</h2>
 <div id="cell-89" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-12T11:02:50.050118Z&quot;,&quot;start_time&quot;:&quot;2023-05-12T11:02:49.865957Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz <span class="im">as</span> gr</span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2907,7 +2898,7 @@ Name: credit_limit, dtype: float64</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/partrita\.github\.io\/causal-inference-in-python-code\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -3237,12 +3228,12 @@ Name: credit_limit, dtype: float64</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../notebook/03장-그래프 인과모델.html" class="pagination-link" aria-label="3장 - 그래프 인과모델">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">3장 - 그래프 인과모델</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebook/05장-성향점수.html" class="pagination-link" aria-label="5징 - 성향점수">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">5징 - 성향점수</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

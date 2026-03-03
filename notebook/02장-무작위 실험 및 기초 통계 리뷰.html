@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; 2장 - 무작위 실험 및 기초 통계 리뷰 – 실무로 통하는 인과추론 with 파이썬</title>
+<title>2장 - 무작위 실험 및 기초 통계 리뷰 – 실무로 통하는 인과추론 with 파이썬</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-803ae4f7a8810f475153517dc3c4ebae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-90c14ce40e219e6b75daf91fb96820a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html"><span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -133,10 +133,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">실무로 통하는 인과추론 with 파이썬</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/partrita/causal-inference-in-python-code" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -148,86 +151,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">책 소개</span></span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">실무로 통하는 인과추론 with 파이썬</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 1</span></span></a>
+  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 1</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></span></a>
+  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span></a>
+  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3장 - 그래프 인과모델</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></span></a>
+  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4장 - 유용한 선형회귀</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span></a>
+  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5징 - 성향점수</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></span></a>
+  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6장 - 이질적 처치효과</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span></a>
+  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7장 - 메타러너</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></span></a>
+  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8장 - 이중차분법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></span></a>
+  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9장 - 통제집단합성법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span></a>
+  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">11장 - 불응과 도구변수</span></span></a>
+  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11장 - 불응과 도구변수</span></a>
   </div>
 </li>
     </ul>
@@ -240,21 +229,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#무작위-배정으로-독립성-확보하기" id="toc-무작위-배정으로-독립성-확보하기" class="nav-link active" data-scroll-target="#무작위-배정으로-독립성-확보하기"><span class="header-section-number">5.1</span> 2.1 무작위 배정으로 독립성 확보하기</a></li>
-  <li><a href="#ab-테스트-사례" id="toc-ab-테스트-사례" class="nav-link" data-scroll-target="#ab-테스트-사례"><span class="header-section-number">5.2</span> 2.2 A/B 테스트 사례</a></li>
-  <li><a href="#이상적인-실험" id="toc-이상적인-실험" class="nav-link" data-scroll-target="#이상적인-실험"><span class="header-section-number">5.3</span> 2.3 이상적인 실험</a></li>
-  <li><a href="#가장-위험한-수식" id="toc-가장-위험한-수식" class="nav-link" data-scroll-target="#가장-위험한-수식"><span class="header-section-number">5.4</span> 2.4 가장 위험한 수식</a></li>
-  <li><a href="#추정값의-표준오차" id="toc-추정값의-표준오차" class="nav-link" data-scroll-target="#추정값의-표준오차"><span class="header-section-number">5.5</span> 2.5 추정값의 표준오차</a></li>
-  <li><a href="#신뢰구간" id="toc-신뢰구간" class="nav-link" data-scroll-target="#신뢰구간"><span class="header-section-number">5.6</span> 2.6 신뢰구간</a></li>
-  <li><a href="#가설검정" id="toc-가설검정" class="nav-link" data-scroll-target="#가설검정"><span class="header-section-number">5.7</span> 2.7 가설검정</a>
+  <li><a href="#무작위-배정으로-독립성-확보하기" id="toc-무작위-배정으로-독립성-확보하기" class="nav-link active" data-scroll-target="#무작위-배정으로-독립성-확보하기">2.1 무작위 배정으로 독립성 확보하기</a></li>
+  <li><a href="#ab-테스트-사례" id="toc-ab-테스트-사례" class="nav-link" data-scroll-target="#ab-테스트-사례">2.2 A/B 테스트 사례</a></li>
+  <li><a href="#이상적인-실험" id="toc-이상적인-실험" class="nav-link" data-scroll-target="#이상적인-실험">2.3 이상적인 실험</a></li>
+  <li><a href="#가장-위험한-수식" id="toc-가장-위험한-수식" class="nav-link" data-scroll-target="#가장-위험한-수식">2.4 가장 위험한 수식</a></li>
+  <li><a href="#추정값의-표준오차" id="toc-추정값의-표준오차" class="nav-link" data-scroll-target="#추정값의-표준오차">2.5 추정값의 표준오차</a></li>
+  <li><a href="#신뢰구간" id="toc-신뢰구간" class="nav-link" data-scroll-target="#신뢰구간">2.6 신뢰구간</a></li>
+  <li><a href="#가설검정" id="toc-가설검정" class="nav-link" data-scroll-target="#가설검정">2.7 가설검정</a>
   <ul class="collapse">
-  <li><a href="#귀무가설" id="toc-귀무가설" class="nav-link" data-scroll-target="#귀무가설"><span class="header-section-number">5.7.1</span> 2.7.1 귀무가설</a></li>
-  <li><a href="#검정통계량" id="toc-검정통계량" class="nav-link" data-scroll-target="#검정통계량"><span class="header-section-number">5.7.2</span> 2.7.2 검정통계량</a></li>
+  <li><a href="#귀무가설" id="toc-귀무가설" class="nav-link" data-scroll-target="#귀무가설">2.7.1 귀무가설</a></li>
+  <li><a href="#검정통계량" id="toc-검정통계량" class="nav-link" data-scroll-target="#검정통계량">2.7.2 검정통계량</a></li>
   </ul></li>
-  <li><a href="#p-값" id="toc-p-값" class="nav-link" data-scroll-target="#p-값"><span class="header-section-number">5.8</span> 2.8 p 값</a></li>
-  <li><a href="#검정력" id="toc-검정력" class="nav-link" data-scroll-target="#검정력"><span class="header-section-number">5.9</span> 2.9 검정력</a></li>
-  <li><a href="#표본-크기-계산" id="toc-표본-크기-계산" class="nav-link" data-scroll-target="#표본-크기-계산"><span class="header-section-number">5.10</span> 2.10 표본 크기 계산</a></li>
-  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약"><span class="header-section-number">5.11</span> 2.11 요약</a></li>
+  <li><a href="#p-값" id="toc-p-값" class="nav-link" data-scroll-target="#p-값">2.8 p 값</a></li>
+  <li><a href="#검정력" id="toc-검정력" class="nav-link" data-scroll-target="#검정력">2.9 검정력</a></li>
+  <li><a href="#표본-크기-계산" id="toc-표본-크기-계산" class="nav-link" data-scroll-target="#표본-크기-계산">2.10 표본 크기 계산</a></li>
+  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약">2.11 요약</a></li>
   </ul>
 </nav>
     </div>
@@ -263,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></h1>
+<h1 class="title"><span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></h1>
 </div>
 
 
@@ -280,11 +269,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="무작위-배정으로-독립성-확보하기" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="무작위-배정으로-독립성-확보하기"><span class="header-section-number">5.1</span> 2.1 무작위 배정으로 독립성 확보하기</h2>
+<section id="무작위-배정으로-독립성-확보하기" class="level2">
+<h2 class="anchored" data-anchor-id="무작위-배정으로-독립성-확보하기">2.1 무작위 배정으로 독립성 확보하기</h2>
 </section>
-<section id="ab-테스트-사례" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="ab-테스트-사례"><span class="header-section-number">5.2</span> 2.2 A/B 테스트 사례</h2>
+<section id="ab-테스트-사례" class="level2">
+<h2 class="anchored" data-anchor-id="ab-테스트-사례">2.2 A/B 테스트 사례</h2>
+<p>실제 산업 현장에서 무작위 실험은 A/B 테스트라는 이름으로 널리 사용됩니다. 새로운 기능을 도입하기 전, 일부 사용자에게만 노출하여 효과를 정밀하게 측정합니다.</p>
 <div id="cell-2" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -448,11 +438,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="이상적인-실험" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="이상적인-실험"><span class="header-section-number">5.3</span> 2.3 이상적인 실험</h2>
+<section id="이상적인-실험" class="level2">
+<h2 class="anchored" data-anchor-id="이상적인-실험">2.3 이상적인 실험</h2>
+<p>이상적인 실험에서는 모든 외생 변수가 통제되며, 오직 처치 변수만이 결과에 영향을 미칩니다.</p>
 </section>
-<section id="가장-위험한-수식" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="가장-위험한-수식"><span class="header-section-number">5.4</span> 2.4 가장 위험한 수식</h2>
+<section id="가장-위험한-수식" class="level2">
+<h2 class="anchored" data-anchor-id="가장-위험한-수식">2.4 가장 위험한 수식</h2>
 <div id="cell-8" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -597,8 +588,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="추정값의-표준오차" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="추정값의-표준오차"><span class="header-section-number">5.5</span> 2.5 추정값의 표준오차</h2>
+<section id="추정값의-표준오차" class="level2">
+<h2 class="anchored" data-anchor-id="추정값의-표준오차">2.5 추정값의 표준오차</h2>
+<p>추정된 처치 효과가 우연에 의한 것인지 아닌지를 판단하기 위해 표준오차(Standard Error)를 계산합니다. 표본의 크기가 클수록 추정값의 불확실성은 줄어듭니다.</p>
 <div id="cell-13" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"../data/cross_sell_email.csv"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -637,8 +629,8 @@ SE for Short Email: 0.030316953129541618</code></pre>
 </div>
 </div>
 </section>
-<section id="신뢰구간" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="신뢰구간"><span class="header-section-number">5.6</span> 2.6 신뢰구간</h2>
+<section id="신뢰구간" class="level2">
+<h2 class="anchored" data-anchor-id="신뢰구간">2.6 신뢰구간</h2>
 <div id="cell-17" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>conv_rate <span class="op">=</span> <span class="fl">0.08</span></span>
@@ -847,8 +839,8 @@ SE for Short Email: 0.030316953129541618</code></pre>
 </div>
 </div>
 </section>
-<section id="가설검정" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="가설검정"><span class="header-section-number">5.7</span> 2.7 가설검정</h2>
+<section id="가설검정" class="level2">
+<h2 class="anchored" data-anchor-id="가설검정">2.7 가설검정</h2>
 <div id="cell-29" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
@@ -912,8 +904,8 @@ SE for Short Email: 0.030316953129541618</code></pre>
 </div>
 </div>
 </div>
-<section id="귀무가설" class="level3" data-number="5.7.1">
-<h3 data-number="5.7.1" class="anchored" data-anchor-id="귀무가설"><span class="header-section-number">5.7.1</span> 2.7.1 귀무가설</h3>
+<section id="귀무가설" class="level3">
+<h3 class="anchored" data-anchor-id="귀무가설">2.7.1 귀무가설</h3>
 <div id="cell-33" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shifting the CI</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>diff_mu_shifted <span class="op">=</span> short_email.mean() <span class="op">-</span> no_email.mean() <span class="op">-</span> <span class="fl">0.01</span></span>
@@ -927,8 +919,8 @@ SE for Short Email: 0.030316953129541618</code></pre>
 </div>
 </div>
 </section>
-<section id="검정통계량" class="level3" data-number="5.7.2">
-<h3 data-number="5.7.2" class="anchored" data-anchor-id="검정통계량"><span class="header-section-number">5.7.2</span> 2.7.2 검정통계량</h3>
+<section id="검정통계량" class="level3">
+<h3 class="anchored" data-anchor-id="검정통계량">2.7.2 검정통계량</h3>
 <div id="cell-35" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>t_stat <span class="op">=</span> (diff_mu <span class="op">-</span> <span class="dv">0</span>) <span class="op">/</span> diff_se</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>t_stat</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
@@ -938,8 +930,8 @@ SE for Short Email: 0.030316953129541618</code></pre>
 </div>
 </section>
 </section>
-<section id="p-값" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="p-값"><span class="header-section-number">5.8</span> 2.8 p 값</h2>
+<section id="p-값" class="level2">
+<h2 class="anchored" data-anchor-id="p-값">2.8 p 값</h2>
 <div id="cell-37" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">100</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> stats.norm.pdf(x, <span class="dv">0</span>, <span class="dv">1</span>)</span>
@@ -967,8 +959,8 @@ SE for Short Email: 0.030316953129541618</code></pre>
 </div>
 </div>
 </section>
-<section id="검정력" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="검정력"><span class="header-section-number">5.9</span> 2.9 검정력</h2>
+<section id="검정력" class="level2">
+<h2 class="anchored" data-anchor-id="검정력">2.9 검정력</h2>
 <div id="cell-40" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>stats.norm.cdf(<span class="fl">0.84</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -976,8 +968,8 @@ SE for Short Email: 0.030316953129541618</code></pre>
 </div>
 </div>
 </section>
-<section id="표본-크기-계산" class="level2" data-number="5.10">
-<h2 data-number="5.10" class="anchored" data-anchor-id="표본-크기-계산"><span class="header-section-number">5.10</span> 2.10 표본 크기 계산</h2>
+<section id="표본-크기-계산" class="level2">
+<h2 class="anchored" data-anchor-id="표본-크기-계산">2.10 표본 크기 계산</h2>
 <div id="cell-42" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in the book it is np.ceil(16 * no_email.std()**2/0.01), but it is missing the **2 in the denominator.</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>np.ceil(<span class="dv">16</span> <span class="op">*</span> (no_email.std() <span class="op">/</span> <span class="fl">0.08</span>) <span class="op">**</span> <span class="dv">2</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
@@ -996,8 +988,8 @@ dtype: int64</code></pre>
 </div>
 </div>
 </section>
-<section id="요약" class="level2" data-number="5.11">
-<h2 data-number="5.11" class="anchored" data-anchor-id="요약"><span class="header-section-number">5.11</span> 2.11 요약</h2>
+<section id="요약" class="level2">
+<h2 class="anchored" data-anchor-id="요약">2.11 요약</h2>
 
 
 </section>
@@ -1076,7 +1068,7 @@ dtype: int64</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/partrita\.github\.io\/causal-inference-in-python-code\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1406,12 +1398,12 @@ dtype: int64</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../notebook/01장-인과추론 소개.html" class="pagination-link" aria-label="1장 - 인과추론 소개">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1장 - 인과추론 소개</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebook/03장-그래프 인과모델.html" class="pagination-link" aria-label="3장 - 그래프 인과모델">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">3장 - 그래프 인과모델</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

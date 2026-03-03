@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; 9장 - 통제집단합성법 – 실무로 통하는 인과추론 with 파이썬</title>
+<title>9장 - 통제집단합성법 – 실무로 통하는 인과추론 with 파이썬</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-803ae4f7a8810f475153517dc3c4ebae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-90c14ce40e219e6b75daf91fb96820a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/09장-통제집단합성법.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/09장-통제집단합성법.html"><span class="chapter-title">9장 - 통제집단합성법</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -133,10 +133,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">실무로 통하는 인과추론 with 파이썬</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/partrita/causal-inference-in-python-code" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -148,86 +151,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">책 소개</span></span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">실무로 통하는 인과추론 with 파이썬</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 1</span></span></a>
+  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 1</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></span></a>
+  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span></a>
+  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3장 - 그래프 인과모델</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></span></a>
+  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4장 - 유용한 선형회귀</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span></a>
+  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5징 - 성향점수</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></span></a>
+  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6장 - 이질적 처치효과</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span></a>
+  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7장 - 메타러너</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></span></a>
+  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8장 - 이중차분법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></span></a>
+  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">9장 - 통제집단합성법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span></a>
+  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">11장 - 불응과 도구변수</span></span></a>
+  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11장 - 불응과 도구변수</span></a>
   </div>
 </li>
     </ul>
@@ -240,21 +229,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#온라인-마케팅-데이터셋" id="toc-온라인-마케팅-데이터셋" class="nav-link active" data-scroll-target="#온라인-마케팅-데이터셋"><span class="header-section-number">12.1</span> 9.1 온라인 마케팅 데이터셋</a></li>
-  <li><a href="#행렬-표현" id="toc-행렬-표현" class="nav-link" data-scroll-target="#행렬-표현"><span class="header-section-number">12.2</span> 9.2 행렬 표현</a></li>
-  <li><a href="#통제집단합성법과-수평-회귀분석" id="toc-통제집단합성법과-수평-회귀분석" class="nav-link" data-scroll-target="#통제집단합성법과-수평-회귀분석"><span class="header-section-number">12.3</span> 9.3 통제집단합성법과 수평 회귀분석</a></li>
-  <li><a href="#표준-통제집단합성법" id="toc-표준-통제집단합성법" class="nav-link" data-scroll-target="#표준-통제집단합성법"><span class="header-section-number">12.4</span> 9.4 표준 통제집단합성법</a></li>
-  <li><a href="#통제집단합성법과-공변량" id="toc-통제집단합성법과-공변량" class="nav-link" data-scroll-target="#통제집단합성법과-공변량"><span class="header-section-number">12.5</span> 9.5 통제집단합성법과 공변량</a></li>
-  <li><a href="#통제집단합성법과-편향-제거" id="toc-통제집단합성법과-편향-제거" class="nav-link" data-scroll-target="#통제집단합성법과-편향-제거"><span class="header-section-number">12.6</span> 9.6 통제집단합성법과 편향 제거</a></li>
-  <li><a href="#추론" id="toc-추론" class="nav-link" data-scroll-target="#추론"><span class="header-section-number">12.7</span> 9.7 추론</a></li>
-  <li><a href="#합성-이중차분법" id="toc-합성-이중차분법" class="nav-link" data-scroll-target="#합성-이중차분법"><span class="header-section-number">12.8</span> 9.8 합성 이중차분법</a>
+  <li><a href="#온라인-마케팅-데이터셋" id="toc-온라인-마케팅-데이터셋" class="nav-link active" data-scroll-target="#온라인-마케팅-데이터셋">9.1 온라인 마케팅 데이터셋</a></li>
+  <li><a href="#행렬-표현" id="toc-행렬-표현" class="nav-link" data-scroll-target="#행렬-표현">9.2 행렬 표현</a></li>
+  <li><a href="#통제집단합성법과-수평-회귀분석" id="toc-통제집단합성법과-수평-회귀분석" class="nav-link" data-scroll-target="#통제집단합성법과-수평-회귀분석">9.3 통제집단합성법과 수평 회귀분석</a></li>
+  <li><a href="#표준-통제집단합성법" id="toc-표준-통제집단합성법" class="nav-link" data-scroll-target="#표준-통제집단합성법">9.4 표준 통제집단합성법</a></li>
+  <li><a href="#통제집단합성법과-공변량" id="toc-통제집단합성법과-공변량" class="nav-link" data-scroll-target="#통제집단합성법과-공변량">9.5 통제집단합성법과 공변량</a></li>
+  <li><a href="#통제집단합성법과-편향-제거" id="toc-통제집단합성법과-편향-제거" class="nav-link" data-scroll-target="#통제집단합성법과-편향-제거">9.6 통제집단합성법과 편향 제거</a></li>
+  <li><a href="#추론" id="toc-추론" class="nav-link" data-scroll-target="#추론">9.7 추론</a></li>
+  <li><a href="#합성-이중차분법" id="toc-합성-이중차분법" class="nav-link" data-scroll-target="#합성-이중차분법">9.8 합성 이중차분법</a>
   <ul class="collapse">
-  <li><a href="#이중차분법-복습" id="toc-이중차분법-복습" class="nav-link" data-scroll-target="#이중차분법-복습"><span class="header-section-number">12.8.1</span> 9.8.1 이중차분법 복습</a></li>
-  <li><a href="#통제집단합성법-복습" id="toc-통제집단합성법-복습" class="nav-link" data-scroll-target="#통제집단합성법-복습"><span class="header-section-number">12.8.2</span> 9.8.2 통제집단합성법 복습</a></li>
-  <li><a href="#시간-가중치-추정하기" id="toc-시간-가중치-추정하기" class="nav-link" data-scroll-target="#시간-가중치-추정하기"><span class="header-section-number">12.8.3</span> 9.8.3 시간 가중치 추정하기</a></li>
-  <li><a href="#통제집단합성법과-이중차분법" id="toc-통제집단합성법과-이중차분법" class="nav-link" data-scroll-target="#통제집단합성법과-이중차분법"><span class="header-section-number">12.8.4</span> 9.8.4 통제집단합성법과 이중차분법</a></li>
+  <li><a href="#이중차분법-복습" id="toc-이중차분법-복습" class="nav-link" data-scroll-target="#이중차분법-복습">9.8.1 이중차분법 복습</a></li>
+  <li><a href="#통제집단합성법-복습" id="toc-통제집단합성법-복습" class="nav-link" data-scroll-target="#통제집단합성법-복습">9.8.2 통제집단합성법 복습</a></li>
+  <li><a href="#시간-가중치-추정하기" id="toc-시간-가중치-추정하기" class="nav-link" data-scroll-target="#시간-가중치-추정하기">9.8.3 시간 가중치 추정하기</a></li>
+  <li><a href="#통제집단합성법과-이중차분법" id="toc-통제집단합성법과-이중차분법" class="nav-link" data-scroll-target="#통제집단합성법과-이중차분법">9.8.4 통제집단합성법과 이중차분법</a></li>
   </ul></li>
-  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약"><span class="header-section-number">12.9</span> 9.9 요약</a></li>
+  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약">9.9 요약</a></li>
   </ul>
 </nav>
     </div>
@@ -263,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></h1>
+<h1 class="title"><span class="chapter-title">9장 - 통제집단합성법</span></h1>
 </div>
 
 
@@ -300,8 +289,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, prop_cycle<span class="op">=</span>default_cycler)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="온라인-마케팅-데이터셋" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="온라인-마케팅-데이터셋"><span class="header-section-number">12.1</span> 9.1 온라인 마케팅 데이터셋</h2>
+<section id="온라인-마케팅-데이터셋" class="level2">
+<h2 class="anchored" data-anchor-id="온라인-마케팅-데이터셋">9.1 온라인 마케팅 데이터셋</h2>
 <div id="48236235" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:10.002094Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:09.980748Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/online_mkt.csv"</span>).astype({<span class="st">"date"</span>: <span class="st">"datetime64[ns]"</span>})</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -502,8 +491,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="행렬-표현" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="행렬-표현"><span class="header-section-number">12.2</span> 9.2 행렬 표현</h2>
+<section id="행렬-표현" class="level2">
+<h2 class="anchored" data-anchor-id="행렬-표현">9.2 행렬 표현</h2>
 <div id="6e3fae6e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:10.349222Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:10.345921Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reshape_sc_data(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    df: pd.DataFrame,</span>
@@ -594,8 +583,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="통제집단합성법과-수평-회귀분석" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="통제집단합성법과-수평-회귀분석"><span class="header-section-number">12.3</span> 9.3 통제집단합성법과 수평 회귀분석</h2>
+<section id="통제집단합성법과-수평-회귀분석" class="level2">
+<h2 class="anchored" data-anchor-id="통제집단합성법과-수평-회귀분석">9.3 통제집단합성법과 수평 회귀분석</h2>
 <div id="f30ba6f8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:10.547010Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:10.361564Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -665,8 +654,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="표준-통제집단합성법" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="표준-통제집단합성법"><span class="header-section-number">12.4</span> 9.4 표준 통제집단합성법</h2>
+<section id="표준-통제집단합성법" class="level2">
+<h2 class="anchored" data-anchor-id="표준-통제집단합성법">9.4 표준 통제집단합성법</h2>
 <div id="696b76e1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:10.977662Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:10.847322Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> BaseEstimator, RegressorMixin</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.utils.validation <span class="im">import</span> check_X_y, check_array, check_is_fitted</span>
@@ -741,8 +730,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="통제집단합성법과-공변량" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="통제집단합성법과-공변량"><span class="header-section-number">12.5</span> 9.5 통제집단합성법과 공변량</h2>
+<section id="통제집단합성법과-공변량" class="level2">
+<h2 class="anchored" data-anchor-id="통제집단합성법과-공변량">9.5 통제집단합성법과 공변량</h2>
 <div id="dd4ce6f6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:11.230768Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:11.214295Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_norm_cov <span class="op">=</span> pd.read_csv(<span class="st">"../data/online_mkt_cov.csv"</span>).astype(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"date"</span>: <span class="st">"datetime64[ns]"</span>}</span>
@@ -929,8 +918,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="통제집단합성법과-편향-제거" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="통제집단합성법과-편향-제거"><span class="header-section-number">12.6</span> 9.6 통제집단합성법과 편향 제거</h2>
+<section id="통제집단합성법과-편향-제거" class="level2">
+<h2 class="anchored" data-anchor-id="통제집단합성법과-편향-제거">9.6 통제집단합성법과 편향 제거</h2>
 <div id="24166ad2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:14.725014Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:12.007242Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.arima_process <span class="im">import</span> ArmaProcess</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1112,8 +1101,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="추론" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="추론"><span class="header-section-number">12.7</span> 9.7 추론</h2>
+<section id="추론" class="level2">
+<h2 class="anchored" data-anchor-id="추론">9.7 추론</h2>
 <div id="08edfa11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:22.472291Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:22.467461Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>deb_atts.head()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
@@ -1207,13 +1196,13 @@ ATT: 0.003324950193632595</code></pre>
 </div>
 </div>
 </section>
-<section id="합성-이중차분법" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="합성-이중차분법"><span class="header-section-number">12.8</span> 9.8 합성 이중차분법</h2>
-<section id="이중차분법-복습" class="level3" data-number="12.8.1">
-<h3 data-number="12.8.1" class="anchored" data-anchor-id="이중차분법-복습"><span class="header-section-number">12.8.1</span> 9.8.1 이중차분법 복습</h3>
+<section id="합성-이중차분법" class="level2">
+<h2 class="anchored" data-anchor-id="합성-이중차분법">9.8 합성 이중차분법</h2>
+<section id="이중차분법-복습" class="level3">
+<h3 class="anchored" data-anchor-id="이중차분법-복습">9.8.1 이중차분법 복습</h3>
 </section>
-<section id="통제집단합성법-복습" class="level3" data-number="12.8.2">
-<h3 data-number="12.8.2" class="anchored" data-anchor-id="통제집단합성법-복습"><span class="header-section-number">12.8.2</span> 9.8.2 통제집단합성법 복습</h3>
+<section id="통제집단합성법-복습" class="level3">
+<h3 class="anchored" data-anchor-id="통제집단합성법-복습">9.8.2 통제집단합성법 복습</h3>
 <div id="9d7b10e6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:22.503287Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:22.489069Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>sc_model <span class="op">=</span> SyntheticControl()</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>sc_model.fit(y_pre_co, y_pre_tr.mean(axis<span class="op">=</span><span class="dv">1</span>))</span>
@@ -1372,8 +1361,8 @@ ATT: 0.003324950193632595</code></pre>
 </div>
 </div>
 </section>
-<section id="시간-가중치-추정하기" class="level3" data-number="12.8.3">
-<h3 data-number="12.8.3" class="anchored" data-anchor-id="시간-가중치-추정하기"><span class="header-section-number">12.8.3</span> 9.8.3 시간 가중치 추정하기</h3>
+<section id="시간-가중치-추정하기" class="level3">
+<h3 class="anchored" data-anchor-id="시간-가중치-추정하기">9.8.3 시간 가중치 추정하기</h3>
 <div id="7d7e9511" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:22.623285Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:22.618413Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> BaseEstimator, RegressorMixin</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1473,8 +1462,8 @@ ATT: 0.003324950193632595</code></pre>
 </div>
 </div>
 </section>
-<section id="통제집단합성법과-이중차분법" class="level3" data-number="12.8.4">
-<h3 data-number="12.8.4" class="anchored" data-anchor-id="통제집단합성법과-이중차분법"><span class="header-section-number">12.8.4</span> 9.8.4 통제집단합성법과 이중차분법</h3>
+<section id="통제집단합성법과-이중차분법" class="level3">
+<h3 class="anchored" data-anchor-id="통제집단합성법과-이중차분법">9.8.4 통제집단합성법과 이중차분법</h3>
 <div id="67ca2010" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-05-17T10:25:22.787947Z&quot;,&quot;start_time&quot;:&quot;2023-05-17T10:25:22.780992Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>scdid_df <span class="op">=</span> (</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    df_with_w.merge(time_w, on<span class="op">=</span>[<span class="st">"date"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span>
@@ -1544,8 +1533,8 @@ ATT: 0.003324950193632595</code></pre>
 </div>
 </section>
 </section>
-<section id="요약" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="요약"><span class="header-section-number">12.9</span> 9.9 요약</h2>
+<section id="요약" class="level2">
+<h2 class="anchored" data-anchor-id="요약">9.9 요약</h2>
 
 
 </section>
@@ -1624,7 +1613,7 @@ ATT: 0.003324950193632595</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/partrita\.github\.io\/causal-inference-in-python-code\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1954,12 +1943,12 @@ ATT: 0.003324950193632595</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../notebook/08장-이중차분법.html" class="pagination-link" aria-label="8장 - 이중차분법">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">8장 - 이중차분법</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="pagination-link" aria-label="10장 - 지역 실험과 스위치백 실험">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

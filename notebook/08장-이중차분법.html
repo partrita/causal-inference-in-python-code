@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; 8장 - 이중차분법 – 실무로 통하는 인과추론 with 파이썬</title>
+<title>8장 - 이중차분법 – 실무로 통하는 인과추론 with 파이썬</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-803ae4f7a8810f475153517dc3c4ebae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-90c14ce40e219e6b75daf91fb96820a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/08장-이중차분법.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/08장-이중차분법.html"><span class="chapter-title">8장 - 이중차분법</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -133,10 +133,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">실무로 통하는 인과추론 with 파이썬</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/partrita/causal-inference-in-python-code" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -148,86 +151,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">책 소개</span></span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">실무로 통하는 인과추론 with 파이썬</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 1</span></span></a>
+  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 1</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></span></a>
+  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span></a>
+  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3장 - 그래프 인과모델</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></span></a>
+  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4장 - 유용한 선형회귀</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span></a>
+  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5징 - 성향점수</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></span></a>
+  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6장 - 이질적 처치효과</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span></a>
+  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7장 - 메타러너</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></span></a>
+  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">8장 - 이중차분법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></span></a>
+  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9장 - 통제집단합성법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span></a>
+  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">11장 - 불응과 도구변수</span></span></a>
+  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11장 - 불응과 도구변수</span></a>
   </div>
 </li>
     </ul>
@@ -240,38 +229,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#패널데이터" id="toc-패널데이터" class="nav-link active" data-scroll-target="#패널데이터"><span class="header-section-number">11.1</span> 8.1 패널데이터</a></li>
-  <li><a href="#표준-이중차분법" id="toc-표준-이중차분법" class="nav-link" data-scroll-target="#표준-이중차분법"><span class="header-section-number">11.2</span> 8.2 표준 이중차분법</a>
+  <li><a href="#패널데이터" id="toc-패널데이터" class="nav-link active" data-scroll-target="#패널데이터">8.1 패널데이터</a></li>
+  <li><a href="#표준-이중차분법" id="toc-표준-이중차분법" class="nav-link" data-scroll-target="#표준-이중차분법">8.2 표준 이중차분법</a>
   <ul class="collapse">
-  <li><a href="#이중차분법과-결과-변화" id="toc-이중차분법과-결과-변화" class="nav-link" data-scroll-target="#이중차분법과-결과-변화"><span class="header-section-number">11.2.1</span> 8.2.1 이중차분법과 결과 변화</a></li>
-  <li><a href="#이중차분법과-ols" id="toc-이중차분법과-ols" class="nav-link" data-scroll-target="#이중차분법과-ols"><span class="header-section-number">11.2.2</span> 8.2.2 이중차분법과 OLS</a></li>
-  <li><a href="#이중차분법과-고정효과" id="toc-이중차분법과-고정효과" class="nav-link" data-scroll-target="#이중차분법과-고정효과"><span class="header-section-number">11.2.3</span> 8.2.3 이중차분법과 고정효과</a></li>
-  <li><a href="#이중차분법과-블록-디자인" id="toc-이중차분법과-블록-디자인" class="nav-link" data-scroll-target="#이중차분법과-블록-디자인"><span class="header-section-number">11.2.4</span> 8.2.4 이중차분법과 블록 디자인</a></li>
-  <li><a href="#추론" id="toc-추론" class="nav-link" data-scroll-target="#추론"><span class="header-section-number">11.2.5</span> 8.2.5 추론</a></li>
+  <li><a href="#이중차분법과-결과-변화" id="toc-이중차분법과-결과-변화" class="nav-link" data-scroll-target="#이중차분법과-결과-변화">8.2.1 이중차분법과 결과 변화</a></li>
+  <li><a href="#이중차분법과-ols" id="toc-이중차분법과-ols" class="nav-link" data-scroll-target="#이중차분법과-ols">8.2.2 이중차분법과 OLS</a></li>
+  <li><a href="#이중차분법과-고정효과" id="toc-이중차분법과-고정효과" class="nav-link" data-scroll-target="#이중차분법과-고정효과">8.2.3 이중차분법과 고정효과</a></li>
+  <li><a href="#이중차분법과-블록-디자인" id="toc-이중차분법과-블록-디자인" class="nav-link" data-scroll-target="#이중차분법과-블록-디자인">8.2.4 이중차분법과 블록 디자인</a></li>
+  <li><a href="#추론" id="toc-추론" class="nav-link" data-scroll-target="#추론">8.2.5 추론</a></li>
   </ul></li>
-  <li><a href="#식별-가정" id="toc-식별-가정" class="nav-link" data-scroll-target="#식별-가정"><span class="header-section-number">11.3</span> 8.3 식별 가정</a>
+  <li><a href="#식별-가정" id="toc-식별-가정" class="nav-link" data-scroll-target="#식별-가정">8.3 식별 가정</a>
   <ul class="collapse">
-  <li><a href="#평행-추세" id="toc-평행-추세" class="nav-link" data-scroll-target="#평행-추세"><span class="header-section-number">11.3.1</span> 8.3.1 평행 추세</a></li>
-  <li><a href="#비기대-가정과-sutva" id="toc-비기대-가정과-sutva" class="nav-link" data-scroll-target="#비기대-가정과-sutva"><span class="header-section-number">11.3.2</span> 8.3.2 비기대 가정과 SUTVA</a></li>
-  <li><a href="#강외생성" id="toc-강외생성" class="nav-link" data-scroll-target="#강외생성"><span class="header-section-number">11.3.3</span> 8.3.3 강외생성</a></li>
-  <li><a href="#시간에-따라-변하지-않는-교란-요인" id="toc-시간에-따라-변하지-않는-교란-요인" class="nav-link" data-scroll-target="#시간에-따라-변하지-않는-교란-요인"><span class="header-section-number">11.3.4</span> 8.3.4 시간에 따라 변하지 않는 교란 요인</a></li>
-  <li><a href="#피드백-없음" id="toc-피드백-없음" class="nav-link" data-scroll-target="#피드백-없음"><span class="header-section-number">11.3.5</span> 8.3.5 피드백 없음</a></li>
-  <li><a href="#이월-효과와-시차종속변수-없음" id="toc-이월-효과와-시차종속변수-없음" class="nav-link" data-scroll-target="#이월-효과와-시차종속변수-없음"><span class="header-section-number">11.3.6</span> 8.3.6 이월 효과와 시차종속변수 없음</a></li>
+  <li><a href="#평행-추세" id="toc-평행-추세" class="nav-link" data-scroll-target="#평행-추세">8.3.1 평행 추세</a></li>
+  <li><a href="#비기대-가정과-sutva" id="toc-비기대-가정과-sutva" class="nav-link" data-scroll-target="#비기대-가정과-sutva">8.3.2 비기대 가정과 SUTVA</a></li>
+  <li><a href="#강외생성" id="toc-강외생성" class="nav-link" data-scroll-target="#강외생성">8.3.3 강외생성</a></li>
+  <li><a href="#시간에-따라-변하지-않는-교란-요인" id="toc-시간에-따라-변하지-않는-교란-요인" class="nav-link" data-scroll-target="#시간에-따라-변하지-않는-교란-요인">8.3.4 시간에 따라 변하지 않는 교란 요인</a></li>
+  <li><a href="#피드백-없음" id="toc-피드백-없음" class="nav-link" data-scroll-target="#피드백-없음">8.3.5 피드백 없음</a></li>
+  <li><a href="#이월-효과와-시차종속변수-없음" id="toc-이월-효과와-시차종속변수-없음" class="nav-link" data-scroll-target="#이월-효과와-시차종속변수-없음">8.3.6 이월 효과와 시차종속변수 없음</a></li>
   </ul></li>
-  <li><a href="#시간에-따른-효과-변동" id="toc-시간에-따른-효과-변동" class="nav-link" data-scroll-target="#시간에-따른-효과-변동"><span class="header-section-number">11.4</span> 8.4 시간에 따른 효과 변동</a></li>
-  <li><a href="#이중차분법과-공변량" id="toc-이중차분법과-공변량" class="nav-link" data-scroll-target="#이중차분법과-공변량"><span class="header-section-number">11.5</span> 8.5 이중차분법과 공변량</a></li>
-  <li><a href="#이중-강건-이중차분법" id="toc-이중-강건-이중차분법" class="nav-link" data-scroll-target="#이중-강건-이중차분법"><span class="header-section-number">11.6</span> 8.6 이중 강건 이중차분법</a>
+  <li><a href="#시간에-따른-효과-변동" id="toc-시간에-따른-효과-변동" class="nav-link" data-scroll-target="#시간에-따른-효과-변동">8.4 시간에 따른 효과 변동</a></li>
+  <li><a href="#이중차분법과-공변량" id="toc-이중차분법과-공변량" class="nav-link" data-scroll-target="#이중차분법과-공변량">8.5 이중차분법과 공변량</a></li>
+  <li><a href="#이중-강건-이중차분법" id="toc-이중-강건-이중차분법" class="nav-link" data-scroll-target="#이중-강건-이중차분법">8.6 이중 강건 이중차분법</a>
   <ul class="collapse">
-  <li><a href="#성향점수-모델" id="toc-성향점수-모델" class="nav-link" data-scroll-target="#성향점수-모델"><span class="header-section-number">11.6.1</span> 8.6.1 성향점수 모델</a></li>
-  <li><a href="#델타-결과-모델" id="toc-델타-결과-모델" class="nav-link" data-scroll-target="#델타-결과-모델"><span class="header-section-number">11.6.2</span> 8.6.2 델타 결과 모델</a></li>
-  <li><a href="#최종-결과" id="toc-최종-결과" class="nav-link" data-scroll-target="#최종-결과"><span class="header-section-number">11.6.3</span> 8.6.3 최종 결과</a></li>
+  <li><a href="#성향점수-모델" id="toc-성향점수-모델" class="nav-link" data-scroll-target="#성향점수-모델">8.6.1 성향점수 모델</a></li>
+  <li><a href="#델타-결과-모델" id="toc-델타-결과-모델" class="nav-link" data-scroll-target="#델타-결과-모델">8.6.2 델타 결과 모델</a></li>
+  <li><a href="#최종-결과" id="toc-최종-결과" class="nav-link" data-scroll-target="#최종-결과">8.6.3 최종 결과</a></li>
   </ul></li>
-  <li><a href="#처치의-시차-도입" id="toc-처치의-시차-도입" class="nav-link" data-scroll-target="#처치의-시차-도입"><span class="header-section-number">11.7</span> 8.7 처치의 시차 도입</a>
+  <li><a href="#처치의-시차-도입" id="toc-처치의-시차-도입" class="nav-link" data-scroll-target="#처치의-시차-도입">8.7 처치의 시차 도입</a>
   <ul class="collapse">
-  <li><a href="#시간에-따른-이질적-효과" id="toc-시간에-따른-이질적-효과" class="nav-link" data-scroll-target="#시간에-따른-이질적-효과"><span class="header-section-number">11.7.1</span> 8.7.1 시간에 따른 이질적 효과</a></li>
-  <li><a href="#공변량" id="toc-공변량" class="nav-link" data-scroll-target="#공변량"><span class="header-section-number">11.7.2</span> 8.7.2 공변량</a></li>
+  <li><a href="#시간에-따른-이질적-효과" id="toc-시간에-따른-이질적-효과" class="nav-link" data-scroll-target="#시간에-따른-이질적-효과">8.7.1 시간에 따른 이질적 효과</a></li>
+  <li><a href="#공변량" id="toc-공변량" class="nav-link" data-scroll-target="#공변량">8.7.2 공변량</a></li>
   </ul></li>
-  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약"><span class="header-section-number">11.8</span> 8.8 요약</a></li>
+  <li><a href="#요약" id="toc-요약" class="nav-link" data-scroll-target="#요약">8.8 요약</a></li>
   </ul>
 </nav>
     </div>
@@ -280,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></h1>
+<h1 class="title"><span class="chapter-title">8장 - 이중차분법</span></h1>
 </div>
 
 
@@ -297,8 +286,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="패널데이터" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="패널데이터"><span class="header-section-number">11.1</span> 8.1 패널데이터</h2>
+<section id="패널데이터" class="level2">
+<h2 class="anchored" data-anchor-id="패널데이터">8.1 패널데이터</h2>
 <div id="a6d9bc21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:09.552555Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:06.893550Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> toolz <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -444,8 +433,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="표준-이중차분법" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="표준-이중차분법"><span class="header-section-number">11.2</span> 8.2 표준 이중차분법</h2>
+<section id="표준-이중차분법" class="level2">
+<h2 class="anchored" data-anchor-id="표준-이중차분법">8.2 표준 이중차분법</h2>
+<p>이중차분법(DiD)은 처치군의 전후 변화에서 대조군의 전후 변화를 차감하여 순수한 처치 효과를 계산합니다.</p>
 <div id="355d9c2c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:09.622154Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:09.611867Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>did_data <span class="op">=</span> mkt_data.groupby([<span class="st">"treated"</span>, <span class="st">"post"</span>]).agg(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"downloads"</span>: <span class="st">"mean"</span>, <span class="st">"date"</span>: <span class="st">"min"</span>}</span>
@@ -519,8 +509,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>0.7660316402518457</code></pre>
 </div>
 </div>
-<section id="이중차분법과-결과-변화" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="이중차분법과-결과-변화"><span class="header-section-number">11.2.1</span> 8.2.1 이중차분법과 결과 변화</h3>
+<section id="이중차분법과-결과-변화" class="level3">
+<h3 class="anchored" data-anchor-id="이중차분법과-결과-변화">8.2.1 이중차분법과 결과 변화</h3>
+<p>처치 전후의 결과값 변화량이 처치 여부에 따라 어떻게 다른지 비교하는 것이 이중차분법의 핵심 원리입니다.</p>
 <div id="10e16d8d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:09.656244Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:09.642523Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pre <span class="op">=</span> mkt_data.query(<span class="st">"post==0"</span>).groupby(<span class="st">"city"</span>)[<span class="st">"downloads"</span>].mean()</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>post <span class="op">=</span> mkt_data.query(<span class="st">"post==1"</span>).groupby(<span class="st">"city"</span>)[<span class="st">"downloads"</span>].mean()</span>
@@ -652,8 +643,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="이중차분법과-ols" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="이중차분법과-ols"><span class="header-section-number">11.2.2</span> 8.2.2 이중차분법과 OLS</h3>
+<section id="이중차분법과-ols" class="level3">
+<h3 class="anchored" data-anchor-id="이중차분법과-ols">8.2.2 이중차분법과 OLS</h3>
 <div id="bead249f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:09.887639Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:09.879115Z&quot;}}" data-scrolled="true">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>did_data <span class="op">=</span> (</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    mkt_data.groupby([<span class="st">"city"</span>, <span class="st">"post"</span>])</span>
@@ -731,8 +722,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="이중차분법과-고정효과" class="level3" data-number="11.2.3">
-<h3 data-number="11.2.3" class="anchored" data-anchor-id="이중차분법과-고정효과"><span class="header-section-number">11.2.3</span> 8.2.3 이중차분법과 고정효과</h3>
+<section id="이중차분법과-고정효과" class="level3">
+<h3 class="anchored" data-anchor-id="이중차분법과-고정효과">8.2.3 이중차분법과 고정효과</h3>
 <div id="bd379d42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:09.913703Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:09.898238Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> smf.ols(<span class="st">"downloads ~ treated:post + C(city) + C(post)"</span>, data<span class="op">=</span>did_data).fit()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -742,8 +733,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="이중차분법과-블록-디자인" class="level3" data-number="11.2.4">
-<h3 data-number="11.2.4" class="anchored" data-anchor-id="이중차분법과-블록-디자인"><span class="header-section-number">11.2.4</span> 8.2.4 이중차분법과 블록 디자인</h3>
+<section id="이중차분법과-블록-디자인" class="level3">
+<h3 class="anchored" data-anchor-id="이중차분법과-블록-디자인">8.2.4 이중차분법과 블록 디자인</h3>
 <div id="d1eed2c4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:11.143922Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:09.915271Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> plticker</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -815,8 +806,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="추론" class="level3" data-number="11.2.5">
-<h3 data-number="11.2.5" class="anchored" data-anchor-id="추론"><span class="header-section-number">11.2.5</span> 8.2.5 추론</h3>
+<section id="추론" class="level3">
+<h3 class="anchored" data-anchor-id="추론">8.2.5 추론</h3>
 <div id="7d2cd163" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:11.263156Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:11.209780Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> smf.ols(<span class="st">"downloads ~ treated:post + C(city) + C(date)"</span>, data<span class="op">=</span>mkt_data).fit(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    cov_type<span class="op">=</span><span class="st">"cluster"</span>, cov_kwds<span class="op">=</span>{<span class="st">"groups"</span>: mkt_data[<span class="st">"city"</span>]}</span>
@@ -896,10 +887,10 @@ Name: treated:post, dtype: float64</code></pre>
 </div>
 </section>
 </section>
-<section id="식별-가정" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="식별-가정"><span class="header-section-number">11.3</span> 8.3 식별 가정</h2>
-<section id="평행-추세" class="level3" data-number="11.3.1">
-<h3 data-number="11.3.1" class="anchored" data-anchor-id="평행-추세"><span class="header-section-number">11.3.1</span> 8.3.1 평행 추세</h3>
+<section id="식별-가정" class="level2">
+<h2 class="anchored" data-anchor-id="식별-가정">8.3 식별 가정</h2>
+<section id="평행-추세" class="level3">
+<h3 class="anchored" data-anchor-id="평행-추세">8.3.1 평행 추세</h3>
 <div id="708b214a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:14.882883Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:14.535841Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2, ax3) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">7</span>))</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1031,24 +1022,24 @@ Name: treated:post, dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="비기대-가정과-sutva" class="level3" data-number="11.3.2">
-<h3 data-number="11.3.2" class="anchored" data-anchor-id="비기대-가정과-sutva"><span class="header-section-number">11.3.2</span> 8.3.2 비기대 가정과 SUTVA</h3>
+<section id="비기대-가정과-sutva" class="level3">
+<h3 class="anchored" data-anchor-id="비기대-가정과-sutva">8.3.2 비기대 가정과 SUTVA</h3>
 </section>
-<section id="강외생성" class="level3" data-number="11.3.3">
-<h3 data-number="11.3.3" class="anchored" data-anchor-id="강외생성"><span class="header-section-number">11.3.3</span> 8.3.3 강외생성</h3>
+<section id="강외생성" class="level3">
+<h3 class="anchored" data-anchor-id="강외생성">8.3.3 강외생성</h3>
 </section>
-<section id="시간에-따라-변하지-않는-교란-요인" class="level3" data-number="11.3.4">
-<h3 data-number="11.3.4" class="anchored" data-anchor-id="시간에-따라-변하지-않는-교란-요인"><span class="header-section-number">11.3.4</span> 8.3.4 시간에 따라 변하지 않는 교란 요인</h3>
+<section id="시간에-따라-변하지-않는-교란-요인" class="level3">
+<h3 class="anchored" data-anchor-id="시간에-따라-변하지-않는-교란-요인">8.3.4 시간에 따라 변하지 않는 교란 요인</h3>
 </section>
-<section id="피드백-없음" class="level3" data-number="11.3.5">
-<h3 data-number="11.3.5" class="anchored" data-anchor-id="피드백-없음"><span class="header-section-number">11.3.5</span> 8.3.5 피드백 없음</h3>
+<section id="피드백-없음" class="level3">
+<h3 class="anchored" data-anchor-id="피드백-없음">8.3.5 피드백 없음</h3>
 </section>
-<section id="이월-효과와-시차종속변수-없음" class="level3" data-number="11.3.6">
-<h3 data-number="11.3.6" class="anchored" data-anchor-id="이월-효과와-시차종속변수-없음"><span class="header-section-number">11.3.6</span> 8.3.6 이월 효과와 시차종속변수 없음</h3>
+<section id="이월-효과와-시차종속변수-없음" class="level3">
+<h3 class="anchored" data-anchor-id="이월-효과와-시차종속변수-없음">8.3.6 이월 효과와 시차종속변수 없음</h3>
 </section>
 </section>
-<section id="시간에-따른-효과-변동" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="시간에-따른-효과-변동"><span class="header-section-number">11.4</span> 8.4 시간에 따른 효과 변동</h2>
+<section id="시간에-따른-효과-변동" class="level2">
+<h2 class="anchored" data-anchor-id="시간에-따른-효과-변동">8.4 시간에 따른 효과 변동</h2>
 <div id="3671f124" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:14.887265Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:14.884119Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> did_date(df, date):</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    df_date <span class="op">=</span> (</span>
@@ -1153,8 +1144,8 @@ Name: treated:post, dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="이중차분법과-공변량" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="이중차분법과-공변량"><span class="header-section-number">11.5</span> 8.5 이중차분법과 공변량</h2>
+<section id="이중차분법과-공변량" class="level2">
+<h2 class="anchored" data-anchor-id="이중차분법과-공변량">8.5 이중차분법과 공변량</h2>
 <div id="772ea9be" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:15.793664Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:15.783819Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mkt_data_all <span class="op">=</span> pd.read_csv(<span class="st">"../data/short_offline_mkt_all_regions.csv"</span>).astype(</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"date"</span>: <span class="st">"datetime64[ns]"</span>}</span>
@@ -1342,10 +1333,10 @@ dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="이중-강건-이중차분법" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="이중-강건-이중차분법"><span class="header-section-number">11.6</span> 8.6 이중 강건 이중차분법</h2>
-<section id="성향점수-모델" class="level3" data-number="11.6.1">
-<h3 data-number="11.6.1" class="anchored" data-anchor-id="성향점수-모델"><span class="header-section-number">11.6.1</span> 8.6.1 성향점수 모델</h3>
+<section id="이중-강건-이중차분법" class="level2">
+<h2 class="anchored" data-anchor-id="이중-강건-이중차분법">8.6 이중 강건 이중차분법</h2>
+<section id="성향점수-모델" class="level3">
+<h3 class="anchored" data-anchor-id="성향점수-모델">8.6.1 성향점수 모델</h3>
 <div id="3b36415c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:16.905292Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:16.903355Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1363,8 +1354,8 @@ dtype: float64</code></pre>
 <span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>ps_model <span class="op">=</span> smf.logit(<span class="st">"treated~C(region)"</span>, data<span class="op">=</span>unit_df).fit(disp<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="델타-결과-모델" class="level3" data-number="11.6.2">
-<h3 data-number="11.6.2" class="anchored" data-anchor-id="델타-결과-모델"><span class="header-section-number">11.6.2</span> 8.6.2 델타 결과 모델</h3>
+<section id="델타-결과-모델" class="level3">
+<h3 class="anchored" data-anchor-id="델타-결과-모델">8.6.2 델타 결과 모델</h3>
 <div id="0461e333" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:16.983583Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:16.977717Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>delta_y <span class="op">=</span> (</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    mkt_data_all.query(<span class="st">"post==1"</span>).groupby(<span class="st">"city"</span>)[<span class="st">"downloads"</span>].mean()</span>
@@ -1377,8 +1368,8 @@ dtype: float64</code></pre>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>outcome_model <span class="op">=</span> smf.ols(<span class="st">"delta_y ~ C(region)"</span>, data<span class="op">=</span>df_delta_y).fit()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="최종-결과" class="level3" data-number="11.6.3">
-<h3 data-number="11.6.3" class="anchored" data-anchor-id="최종-결과"><span class="header-section-number">11.6.3</span> 8.6.3 최종 결과</h3>
+<section id="최종-결과" class="level3">
+<h3 class="anchored" data-anchor-id="최종-결과">8.6.3 최종 결과</h3>
 <div id="c444c816" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:17.005940Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:16.994243Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df_dr <span class="op">=</span> df_delta_y.assign(y_hat<span class="op">=</span><span class="kw">lambda</span> d: outcome_model.predict(d)).assign(</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    ps<span class="op">=</span><span class="kw">lambda</span> d: ps_model.predict(d)</span>
@@ -1492,8 +1483,8 @@ dtype: float64</code></pre>
 </div>
 </section>
 </section>
-<section id="처치의-시차-도입" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="처치의-시차-도입"><span class="header-section-number">11.7</span> 8.7 처치의 시차 도입</h2>
+<section id="처치의-시차-도입" class="level2">
+<h2 class="anchored" data-anchor-id="처치의-시차-도입">8.7 처치의 시차 도입</h2>
 <div id="8cf441b3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:17.038353Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:17.015632Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>mkt_data_cohorts <span class="op">=</span> pd.read_csv(<span class="st">"../data/offline_mkt_staggered.csv"</span>).astype(</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"date"</span>: <span class="st">"datetime64[ns]"</span>, <span class="st">"cohort"</span>: <span class="st">"datetime64[ns]"</span>}</span>
@@ -1887,8 +1878,8 @@ Estimated ATT: 1.7599504780633743</code></pre>
 </div>
 </div>
 </div>
-<section id="시간에-따른-이질적-효과" class="level3" data-number="11.7.1">
-<h3 data-number="11.7.1" class="anchored" data-anchor-id="시간에-따른-이질적-효과"><span class="header-section-number">11.7.1</span> 8.7.1 시간에 따른 이질적 효과</h3>
+<section id="시간에-따른-이질적-효과" class="level3">
+<h3 class="anchored" data-anchor-id="시간에-따른-이질적-효과">8.7.1 시간에 따른 이질적 효과</h3>
 <div id="63a48d15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:19.558367Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:18.624891Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="st">"downloads ~ treated:post:C(cohort):C(date) + C(city)+C(date)"</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2017,8 +2008,8 @@ Pred. Effect:  2.259766144685074</code></pre>
 </div>
 </div>
 </section>
-<section id="공변량" class="level3" data-number="11.7.2">
-<h3 data-number="11.7.2" class="anchored" data-anchor-id="공변량"><span class="header-section-number">11.7.2</span> 8.7.2 공변량</h3>
+<section id="공변량" class="level3">
+<h3 class="anchored" data-anchor-id="공변량">8.7.2 공변량</h3>
 <div id="a0db0197" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-01-20T14:39:26.293019Z&quot;,&quot;start_time&quot;:&quot;2024-01-20T14:39:20.620396Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="st">downloads ~ treated:post:C(cohort):C(date)</span></span>
@@ -2044,8 +2035,8 @@ Pred. Effect:  2.0426262863584568</code></pre>
 </div>
 </section>
 </section>
-<section id="요약" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="요약"><span class="header-section-number">11.8</span> 8.8 요약</h2>
+<section id="요약" class="level2">
+<h2 class="anchored" data-anchor-id="요약">8.8 요약</h2>
 
 
 </section>
@@ -2124,7 +2115,7 @@ Pred. Effect:  2.0426262863584568</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/partrita\.github\.io\/causal-inference-in-python-code\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -2454,12 +2445,12 @@ Pred. Effect:  2.0426262863584568</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../notebook/07장-메타러너.html" class="pagination-link" aria-label="7장 - 메타러너">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">7장 - 메타러너</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebook/09장-통제집단합성법.html" class="pagination-link" aria-label="9장 - 통제집단합성법">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">9장 - 통제집단합성법</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

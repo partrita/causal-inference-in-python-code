@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; 6장 - 이질적 처치효과 – 실무로 통하는 인과추론 with 파이썬</title>
+<title>6장 - 이질적 처치효과 – 실무로 통하는 인과추론 with 파이썬</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-803ae4f7a8810f475153517dc3c4ebae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-90c14ce40e219e6b75daf91fb96820a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/06장-이질적 처치효과.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebook/06장-이질적 처치효과.html"><span class="chapter-title">6장 - 이질적 처치효과</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -133,10 +133,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">실무로 통하는 인과추론 with 파이썬</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/partrita/causal-inference-in-python-code" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -148,86 +151,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">책 소개</span></span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">실무로 통하는 인과추론 with 파이썬</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/Part1_CausalInference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 1</span></span></a>
+  <a href="../notebook/0. 시뮬레이션 데이터.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter 1</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1장 - 인과추론 소개</span></span></a>
+  <a href="../notebook/01장-인과추론 소개.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1장 - 인과추론 소개</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></span></a>
+  <a href="../notebook/02장-무작위 실험 및 기초 통계 리뷰.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2장 - 무작위 실험 및 기초 통계 리뷰</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">3장 - 그래프 인과모델</span></span></a>
+  <a href="../notebook/03장-그래프 인과모델.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3장 - 그래프 인과모델</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">4장 - 유용한 선형회귀</span></span></a>
+  <a href="../notebook/04장-유용한 선형회귀.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4장 - 유용한 선형회귀</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span></a>
+  <a href="../notebook/05장-성향점수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5징 - 성향점수</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></span></a>
+  <a href="../notebook/06장-이질적 처치효과.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">6장 - 이질적 처치효과</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span></a>
+  <a href="../notebook/07장-메타러너.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7장 - 메타러너</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">8장 - 이중차분법</span></span></a>
+  <a href="../notebook/08장-이중차분법.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8장 - 이중차분법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">9장 - 통제집단합성법</span></span></a>
+  <a href="../notebook/09장-통제집단합성법.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9장 - 통제집단합성법</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></span></a>
+  <a href="../notebook/10장-지역 실험과 스위치백 실험.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10장 - 지역 실험과 스위치백 실험</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">11장 - 불응과 도구변수</span></span></a>
+  <a href="../notebook/11장-불응과 도구변수.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11장 - 불응과 도구변수</span></a>
   </div>
 </li>
     </ul>
@@ -240,21 +229,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#ate에서-cate로" id="toc-ate에서-cate로" class="nav-link active" data-scroll-target="#ate에서-cate로"><span class="header-section-number">9.1</span> 6.1 ATE에서 CATE로</a></li>
-  <li><a href="#why-prediction-is-not-the-answer" id="toc-why-prediction-is-not-the-answer" class="nav-link" data-scroll-target="#why-prediction-is-not-the-answer"><span class="header-section-number">9.2</span> Why Prediction is not the Answer</a></li>
-  <li><a href="#cate-with-regression" id="toc-cate-with-regression" class="nav-link" data-scroll-target="#cate-with-regression"><span class="header-section-number">9.3</span> CATE with Regression</a></li>
-  <li><a href="#evaluating-cate-predictions" id="toc-evaluating-cate-predictions" class="nav-link" data-scroll-target="#evaluating-cate-predictions"><span class="header-section-number">9.4</span> Evaluating CATE Predictions</a></li>
-  <li><a href="#effect-by-model-quantile" id="toc-effect-by-model-quantile" class="nav-link" data-scroll-target="#effect-by-model-quantile"><span class="header-section-number">9.5</span> Effect by Model Quantile</a></li>
-  <li><a href="#cumulative-effect" id="toc-cumulative-effect" class="nav-link" data-scroll-target="#cumulative-effect"><span class="header-section-number">9.6</span> Cumulative Effect</a></li>
-  <li><a href="#cumulative-gain" id="toc-cumulative-gain" class="nav-link" data-scroll-target="#cumulative-gain"><span class="header-section-number">9.7</span> Cumulative Gain</a></li>
-  <li><a href="#target-transformation" id="toc-target-transformation" class="nav-link" data-scroll-target="#target-transformation"><span class="header-section-number">9.8</span> Target Transformation</a></li>
-  <li><a href="#when-prediction-models-are-good-for-effect-ordering" id="toc-when-prediction-models-are-good-for-effect-ordering" class="nav-link" data-scroll-target="#when-prediction-models-are-good-for-effect-ordering"><span class="header-section-number">9.9</span> When Prediction Models are Good for Effect Ordering</a>
+  <li><a href="#ate에서-cate로" id="toc-ate에서-cate로" class="nav-link active" data-scroll-target="#ate에서-cate로">6.1 ATE에서 CATE로</a></li>
+  <li><a href="#why-prediction-is-not-the-answer" id="toc-why-prediction-is-not-the-answer" class="nav-link" data-scroll-target="#why-prediction-is-not-the-answer">Why Prediction is not the Answer</a></li>
+  <li><a href="#cate-with-regression" id="toc-cate-with-regression" class="nav-link" data-scroll-target="#cate-with-regression">CATE with Regression</a></li>
+  <li><a href="#evaluating-cate-predictions" id="toc-evaluating-cate-predictions" class="nav-link" data-scroll-target="#evaluating-cate-predictions">Evaluating CATE Predictions</a></li>
+  <li><a href="#effect-by-model-quantile" id="toc-effect-by-model-quantile" class="nav-link" data-scroll-target="#effect-by-model-quantile">Effect by Model Quantile</a></li>
+  <li><a href="#cumulative-effect" id="toc-cumulative-effect" class="nav-link" data-scroll-target="#cumulative-effect">Cumulative Effect</a></li>
+  <li><a href="#cumulative-gain" id="toc-cumulative-gain" class="nav-link" data-scroll-target="#cumulative-gain">Cumulative Gain</a></li>
+  <li><a href="#target-transformation" id="toc-target-transformation" class="nav-link" data-scroll-target="#target-transformation">Target Transformation</a></li>
+  <li><a href="#when-prediction-models-are-good-for-effect-ordering" id="toc-when-prediction-models-are-good-for-effect-ordering" class="nav-link" data-scroll-target="#when-prediction-models-are-good-for-effect-ordering">When Prediction Models are Good for Effect Ordering</a>
   <ul class="collapse">
-  <li><a href="#marginal-decreasing-returns" id="toc-marginal-decreasing-returns" class="nav-link" data-scroll-target="#marginal-decreasing-returns"><span class="header-section-number">9.9.1</span> Marginal Decreasing Returns</a></li>
-  <li><a href="#binary-outcomes" id="toc-binary-outcomes" class="nav-link" data-scroll-target="#binary-outcomes"><span class="header-section-number">9.9.2</span> Binary Outcomes</a></li>
+  <li><a href="#marginal-decreasing-returns" id="toc-marginal-decreasing-returns" class="nav-link" data-scroll-target="#marginal-decreasing-returns">Marginal Decreasing Returns</a></li>
+  <li><a href="#binary-outcomes" id="toc-binary-outcomes" class="nav-link" data-scroll-target="#binary-outcomes">Binary Outcomes</a></li>
   </ul></li>
-  <li><a href="#cate-for-decision-making" id="toc-cate-for-decision-making" class="nav-link" data-scroll-target="#cate-for-decision-making"><span class="header-section-number">9.10</span> CATE for Decision Making</a></li>
-  <li><a href="#key-ideas" id="toc-key-ideas" class="nav-link" data-scroll-target="#key-ideas"><span class="header-section-number">9.11</span> Key Ideas</a></li>
+  <li><a href="#cate-for-decision-making" id="toc-cate-for-decision-making" class="nav-link" data-scroll-target="#cate-for-decision-making">CATE for Decision Making</a></li>
+  <li><a href="#key-ideas" id="toc-key-ideas" class="nav-link" data-scroll-target="#key-ideas">Key Ideas</a></li>
   </ul>
 </nav>
     </div>
@@ -263,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">6장 - 이질적 처치효과</span></h1>
+<h1 class="title"><span class="chapter-title">6장 - 이질적 처치효과</span></h1>
 </div>
 
 
@@ -280,14 +269,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="ate에서-cate로" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="ate에서-cate로"><span class="header-section-number">9.1</span> 6.1 ATE에서 CATE로</h2>
+<section id="ate에서-cate로" class="level2">
+<h2 class="anchored" data-anchor-id="ate에서-cate로">6.1 ATE에서 CATE로</h2>
 </section>
-<section id="why-prediction-is-not-the-answer" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="why-prediction-is-not-the-answer"><span class="header-section-number">9.2</span> Why Prediction is not the Answer</h2>
+<section id="why-prediction-is-not-the-answer" class="level2">
+<h2 class="anchored" data-anchor-id="why-prediction-is-not-the-answer">Why Prediction is not the Answer</h2>
 </section>
-<section id="cate-with-regression" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="cate-with-regression"><span class="header-section-number">9.3</span> CATE with Regression</h2>
+<section id="cate-with-regression" class="level2">
+<h2 class="anchored" data-anchor-id="cate-with-regression">CATE with Regression</h2>
 <div id="225ef0c5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:40.886176Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:38.992451Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -421,8 +410,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-</span> regr_cate.predict(data)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="evaluating-cate-predictions" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="evaluating-cate-predictions"><span class="header-section-number">9.4</span> Evaluating CATE Predictions</h2>
+<section id="evaluating-cate-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-cate-predictions">Evaluating CATE Predictions</h2>
 <div id="7a91f7cb" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:41.146365Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:41.140384Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> data.query(<span class="st">"day&lt;'2018-01-01'"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> data.query(<span class="st">"day&gt;='2018-01-01'"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
@@ -526,8 +515,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="effect-by-model-quantile" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="effect-by-model-quantile"><span class="header-section-number">9.5</span> Effect by Model Quantile</h2>
+<section id="effect-by-model-quantile" class="level2">
+<h2 class="anchored" data-anchor-id="effect-by-model-quantile">Effect by Model Quantile</h2>
 <div id="97b983d8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:42.137748Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:42.116681Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> toolz <span class="im">import</span> curry</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -591,8 +580,8 @@ dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="cumulative-effect" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="cumulative-effect"><span class="header-section-number">9.6</span> Cumulative Effect</h2>
+<section id="cumulative-effect" class="level2">
+<h2 class="anchored" data-anchor-id="cumulative-effect">Cumulative Effect</h2>
 <div id="39ea9ae3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:42.437357Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:42.435301Z&quot;}}" data-tags="[&quot;hide-input&quot;]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(linewidth<span class="op">=</span><span class="dv">80</span>, threshold<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -645,8 +634,8 @@ dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="cumulative-gain" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="cumulative-gain"><span class="header-section-number">9.7</span> Cumulative Gain</h2>
+<section id="cumulative-gain" class="level2">
+<h2 class="anchored" data-anchor-id="cumulative-gain">Cumulative Gain</h2>
 <div id="7f6c0cf1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:43.090974Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:42.941598Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cumulative_gain_curve(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    df, prediction, y, t, ascending<span class="op">=</span><span class="va">False</span>, normalize<span class="op">=</span><span class="va">False</span>, steps<span class="op">=</span><span class="dv">100</span></span>
@@ -728,8 +717,8 @@ AUC for cate_pred: 181.74573239200615</code></pre>
 </div>
 </div>
 </section>
-<section id="target-transformation" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="target-transformation"><span class="header-section-number">9.8</span> Target Transformation</h2>
+<section id="target-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="target-transformation">Target Transformation</h2>
 <div id="cbf3bc4d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:44.262424Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:44.207570Z&quot;}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [<span class="st">"C(month)"</span>, <span class="st">"C(weekday)"</span>, <span class="st">"is_holiday"</span>, <span class="st">"competitors_price"</span>]</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -751,10 +740,10 @@ MSE for cate_pred: 42.90447405550281</code></pre>
 </div>
 </div>
 </section>
-<section id="when-prediction-models-are-good-for-effect-ordering" class="level2" data-number="9.9">
-<h2 data-number="9.9" class="anchored" data-anchor-id="when-prediction-models-are-good-for-effect-ordering"><span class="header-section-number">9.9</span> When Prediction Models are Good for Effect Ordering</h2>
-<section id="marginal-decreasing-returns" class="level3" data-number="9.9.1">
-<h3 data-number="9.9.1" class="anchored" data-anchor-id="marginal-decreasing-returns"><span class="header-section-number">9.9.1</span> Marginal Decreasing Returns</h3>
+<section id="when-prediction-models-are-good-for-effect-ordering" class="level2">
+<h2 class="anchored" data-anchor-id="when-prediction-models-are-good-for-effect-ordering">When Prediction Models are Good for Effect Ordering</h2>
+<section id="marginal-decreasing-returns" class="level3">
+<h3 class="anchored" data-anchor-id="marginal-decreasing-returns">Marginal Decreasing Returns</h3>
 <div id="dd9dcc16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:44.342118Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:44.269282Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -778,8 +767,8 @@ MSE for cate_pred: 42.90447405550281</code></pre>
 </div>
 </div>
 </section>
-<section id="binary-outcomes" class="level3" data-number="9.9.2">
-<h3 data-number="9.9.2" class="anchored" data-anchor-id="binary-outcomes"><span class="header-section-number">9.9.2</span> Binary Outcomes</h3>
+<section id="binary-outcomes" class="level3">
+<h3 class="anchored" data-anchor-id="binary-outcomes">Binary Outcomes</h3>
 <div id="84934f6d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:44.663150Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:44.343590Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -839,8 +828,8 @@ MSE for cate_pred: 42.90447405550281</code></pre>
 </div>
 </section>
 </section>
-<section id="cate-for-decision-making" class="level2" data-number="9.10">
-<h2 data-number="9.10" class="anchored" data-anchor-id="cate-for-decision-making"><span class="header-section-number">9.10</span> CATE for Decision Making</h2>
+<section id="cate-for-decision-making" class="level2">
+<h2 class="anchored" data-anchor-id="cate-for-decision-making">CATE for Decision Making</h2>
 <div id="1c8e2014" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-06-26T13:25:44.782782Z&quot;,&quot;start_time&quot;:&quot;2023-06-26T13:25:44.664436Z&quot;}}" data-tags="[&quot;hide-input&quot;]" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> demand(price, tau):</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">50</span> <span class="op">-</span> tau <span class="op">*</span> price</span>
@@ -914,8 +903,8 @@ MSE for cate_pred: 42.90447405550281</code></pre>
 </div>
 </div>
 </section>
-<section id="key-ideas" class="level2" data-number="9.11">
-<h2 data-number="9.11" class="anchored" data-anchor-id="key-ideas"><span class="header-section-number">9.11</span> Key Ideas</h2>
+<section id="key-ideas" class="level2">
+<h2 class="anchored" data-anchor-id="key-ideas">Key Ideas</h2>
 
 
 </section>
@@ -994,7 +983,7 @@ MSE for cate_pred: 42.90447405550281</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/partrita\.github\.io\/causal-inference-in-python-code\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1324,12 +1313,12 @@ MSE for cate_pred: 42.90447405550281</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../notebook/05장-성향점수.html" class="pagination-link" aria-label="5징 - 성향점수">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">5징 - 성향점수</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">5징 - 성향점수</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebook/07장-메타러너.html" class="pagination-link" aria-label="7장 - 메타러너">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">7장 - 메타러너</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">7장 - 메타러너</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
