@@ -20,8 +20,6 @@ book:
     collapse-level: 2
   chapters:
     - index.qmd
-    - notebook/Part1_CausalInference.ipynb
-    - notebook/0. 시뮬레이션 데이터.ipynb
     - notebook/01장-인과추론 소개.ipynb
     - notebook/02장-무작위 실험 및 기초 통계 리뷰.ipynb
     - notebook/03장-그래프 인과모델.ipynb
@@ -33,6 +31,9 @@ book:
     - notebook/09장-통제집단합성법.ipynb
     - notebook/10장-지역 실험과 스위치백 실험.ipynb
     - notebook/11장-불응과 도구변수.ipynb
+    - notebook/98.시뮬레이션 데이터.ipynb
+    - notebook/99.부록.ipynb
+
 
 bibliography: references.bib
 
