@@ -72,271 +72,281 @@
   {
     "objectID": "notebook/Part1_CausalInference.html",
     "href": "notebook/Part1_CausalInference.html",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "",
-    "text": "1.1 인과추론의 개념\n인과추론 기초\n앞으로 내용을 인과추론을 이해하는 데 필요한 용어와 인과추론이 왜 필요한지와 무엇을 할 수 있는지에 대해서 알아보겠습니다.\n연관관계는 인과관계가 아니다. 그러나 때로는 연관관계가 인과관계가 될 수 있습니다.",
+    "text": "1장 - 인과추론 소개\n인과추론 기초\n인과추론의 핵심은 상관관계에서 인과관계를 분리해내는 것입니다. 본 섹션에서는 인과추론의 기본 개념과 목적, 그리고 머신러닝과의 차이점에 대해 학습합니다.\n앞으로 내용을 인과추론을 이해하는 데 필요한 용어와 인과추론이 왜 필요한지와 무엇을 할 수 있는지에 대해서 알아보겠습니다.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
+    ]
+  },
+  {
+    "objectID": "notebook/Part1_CausalInference.html#인과추론의-개념",
+    "href": "notebook/Part1_CausalInference.html#인과추론의-개념",
+    "title": "Part 1: 인과추론 기초",
+    "section": "1.1 인과추론의 개념",
+    "text": "1.1 인과추론의 개념\n인과관계는 하나의 변수가 다른 변수를 변화시키는 직접적인 영향을 의미합니다. 단순히 두 변수가 함께 움직이는 상관관계와는 구별되어야 합니다.\n연관관계는 인과관계가 아니다. 그러나 때로는 연관관계가 인과관계가 될 수 있습니다.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#인과추론의-목적",
     "href": "notebook/Part1_CausalInference.html#인과추론의-목적",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "1.2 인과추론의 목적",
-    "text": "1.2 인과추론의 목적",
+    "text": "1.2 인과추론의 목적\n인과추론의 주된 목적은 처치(Treatment)가 결과(Outcome)에 미치는 효과를 추정하는 것입니다. 이를 통해 비즈니스 의사결정의 근거를 마련합니다.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#머신러닝과-인과추론",
     "href": "notebook/Part1_CausalInference.html#머신러닝과-인과추론",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "1.3 머신러닝과 인과추론",
-    "text": "1.3 머신러닝과 인과추론",
+    "text": "1.3 머신러닝과 인과추론\n머신러닝이 ‘무엇이 일어날까?’라는 예측에 집중한다면, 인과추론은 ’왜 일어났을까?’ 또는 ’내가 개입한다면 어떻게 바뀔까?’라는 질문에 답합니다.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#연관관계와-인과관계",
     "href": "notebook/Part1_CausalInference.html#연관관계와-인과관계",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "1.4 연관관계와 인과관계",
-    "text": "1.4 연관관계와 인과관계\n\nfrom pathlib import Path\nimport pandas as pd\nimport numpy as np\nimport seaborn as sns\nfrom matplotlib import pyplot as plt\nfrom cycler import cycler\n\n# 기본 cycler 설정\ndefault_cycler = (\n    cycler(color=[\"0.3\", \"0.5\", \"0.7\", \"0.5\"])\n    + cycler(linestyle=[\"-\", \"--\", \":\", \"-.\"])\n    + cycler(marker=[\"o\", \"v\", \"d\", \"p\"])\n)\n\n# 색상, 선 스타일, 마커 리스트\ncolor = [\"0.3\", \"0.5\", \"0.7\", \"0.5\"]\nlinestyle = [\"-\", \"--\", \":\", \"-.\"]\nmarker = [\"o\", \"v\", \"d\", \"p\"]\n\n# matplotlib rc 설정\nplt.rc(\"axes\", prop_cycle=default_cycler)\nplt.rc(\"font\", size=20)\n\n# pathlib를 사용하여 파일 경로 설정\ndata_path = Path(\"../data/xmas_sales.csv\")\n\n# 데이터 로드\ndata = pd.read_csv(data_path)\ndata.tail()\n\n\n\n\n\n\n\n\nstore\nweeks_to_xmas\navg_week_sales\nis_on_sale\nweekly_amount_sold\n\n\n\n\n1995\n499\n0\n23.10\n1\n15.60\n\n\n1996\n500\n3\n20.52\n0\n154.68\n\n\n1997\n500\n2\n20.52\n0\n93.52\n\n\n1998\n500\n1\n20.52\n1\n111.16\n\n\n1999\n500\n0\n20.52\n0\n3.77\n\n\n\n\n\n\n\n\n1.4.1 처치와 결과\n\n\n1.4.2 인과추론의 근본적인 문제\n\ndef plot_weekly_sales_boxplot(data: pd.DataFrame, ax: plt.Axes = None, figsize=(3, 4)):\n    \"\"\"\n    할인 여부에 따른 주간 판매량 박스 플롯을 그립니다.\n\n    Args:\n        data (pd.DataFrame): 시각화할 데이터프레임 ('weekly_amount_sold', 'is_on_sale' 컬럼 필요).\n        ax (plt.Axes, optional): 그림을 그릴 Axes 객체. None이면 새로운 figure와 axes를 생성합니다.\n    \"\"\"\n    if ax is None:\n        fig, ax = plt.subplots(1, 1, figsize=figsize)\n\n    sns.boxplot(y=\"weekly_amount_sold\", x=\"is_on_sale\", data=data, ax=ax)\n\n    # 폰트 크기 줄임\n    ax.set_xlabel(\"Is On Sale\", fontsize=10)\n    ax.set_ylabel(\"Weekly Amount Sold\", fontsize=10)\n    ax.tick_params(axis=\"both\", which=\"major\", labelsize=10)\n\n    plt.tight_layout()\n\n    if ax is None:\n        plt.show()\n\n\n# 시각화 함수 호출\nplot_weekly_sales_boxplot(data, figsize=(4, 3))\n\n\n\n\n\n\n\n\n\n\n1.4.3 인과모델\n\n\n1.4.4 개입\n\n\n1.4.5 개별 처치효과\n\n\n1.4.6 잠재적 결과\n\n\n1.4.7 일치성 및 SUTVA 가정\n\n\n1.4.8 인과 추정량\n\n\n1.4.9 인과 추정량 예시\n\npd.DataFrame(\n    dict(\n        i=[1, 2, 3, 4, 5, 6],\n        y0=[200, 120, 300, 450, 600, 600],\n        y1=[220, 140, 400, 500, 600, 800],\n        t=[0, 0, 0, 1, 1, 1],\n        x=[0, 0, 1, 0, 0, 1],\n    )\n).assign(\n    y=lambda d: (d[\"t\"] * d[\"y1\"] + (1 - d[\"t\"]) * d[\"y0\"]).astype(int),\n    te=lambda d: d[\"y1\"] - d[\"y0\"],\n)\n\n\n\n\n\n\n\n\ni\ny0\ny1\nt\nx\ny\nte\n\n\n\n\n0\n1\n200\n220\n0\n0\n200\n20\n\n\n1\n2\n120\n140\n0\n0\n120\n20\n\n\n2\n3\n300\n400\n0\n1\n300\n100\n\n\n3\n4\n450\n500\n1\n0\n500\n50\n\n\n4\n5\n600\n600\n1\n0\n600\n0\n\n\n5\n6\n600\n800\n1\n1\n800\n200\n\n\n\n\n\n\n\n\npd.DataFrame(\n    dict(\n        i=[1, 2, 3, 4, 5, 6],\n        y0=[\n            200,\n            120,\n            300,\n            np.nan,\n            np.nan,\n            np.nan,\n        ],\n        y1=[np.nan, np.nan, np.nan, 500, 600, 800],\n        t=[0, 0, 0, 1, 1, 1],\n        x=[0, 0, 1, 0, 0, 1],\n    )\n).assign(\n    y=lambda d: np.where(d[\"t\"] == 1, d[\"y1\"], d[\"y0\"]).astype(int),\n    te=lambda d: d[\"y1\"] - d[\"y0\"],\n)\n\n\n\n\n\n\n\n\ni\ny0\ny1\nt\nx\ny\nte\n\n\n\n\n0\n1\n200.0\nNaN\n0\n0\n200\nNaN\n\n\n1\n2\n120.0\nNaN\n0\n0\n120\nNaN\n\n\n2\n3\n300.0\nNaN\n0\n1\n300\nNaN\n\n\n3\n4\nNaN\n500.0\n1\n0\n500\nNaN\n\n\n4\n5\nNaN\n600.0\n1\n0\n600\nNaN\n\n\n5\n6\nNaN\n800.0\n1\n1\n800\nNaN",
+    "text": "1.4 연관관계와 인과관계\n상관관계는 인과관계를 의미하지 않습니다. 데이터 속에 숨겨진 교란 요인을 배제해야만 진정한 인과 효과를 발견할 수 있습니다.\n\nfrom pathlib import Path\nimport pandas as pd\nimport numpy as np\nimport seaborn as sns\nfrom matplotlib import pyplot as plt\nfrom cycler import cycler\n\n# 기본 cycler 설정\ndefault_cycler = (\n    cycler(color=[\"0.3\", \"0.5\", \"0.7\", \"0.5\"])\n    + cycler(linestyle=[\"-\", \"--\", \":\", \"-.\"])\n    + cycler(marker=[\"o\", \"v\", \"d\", \"p\"])\n)\n\n# 색상, 선 스타일, 마커 리스트\ncolor = [\"0.3\", \"0.5\", \"0.7\", \"0.5\"]\nlinestyle = [\"-\", \"--\", \":\", \"-.\"]\nmarker = [\"o\", \"v\", \"d\", \"p\"]\n\n# matplotlib rc 설정\nplt.rc(\"axes\", prop_cycle=default_cycler)\nplt.rc(\"font\", size=20)\n\n# pathlib를 사용하여 파일 경로 설정\ndata_path = Path(\"../data/xmas_sales.csv\")\n\n# 데이터 로드\ndata = pd.read_csv(data_path)\ndata.tail()\n\n\n\n\n\n\n\n\nstore\nweeks_to_xmas\navg_week_sales\nis_on_sale\nweekly_amount_sold\n\n\n\n\n1995\n499\n0\n23.10\n1\n15.60\n\n\n1996\n500\n3\n20.52\n0\n154.68\n\n\n1997\n500\n2\n20.52\n0\n93.52\n\n\n1998\n500\n1\n20.52\n1\n111.16\n\n\n1999\n500\n0\n20.52\n0\n3.77\n\n\n\n\n\n\n\n\n1.4.1 처치와 결과\n처치(Treatment)는 우리가 효과를 알고 싶어 하는 개입이며, 결과(Outcome)는 그로 인해 변화하는 변수입니다.\n\n\n1.4.2 인과추론의 근본적인 문제\n개별 개체에 대해 처치를 받았을 때와 받지 않았을 때의 결과를 동시에 관찰할 수 없다는 점이 인과추론의 근본적인 한계입니다.\n\ndef plot_weekly_sales_boxplot(data: pd.DataFrame, ax: plt.Axes = None, figsize=(3, 4)):\n    \"\"\"\n    할인 여부에 따른 주간 판매량 박스 플롯을 그립니다.\n\n    Args:\n        data (pd.DataFrame): 시각화할 데이터프레임 ('weekly_amount_sold', 'is_on_sale' 컬럼 필요).\n        ax (plt.Axes, optional): 그림을 그릴 Axes 객체. None이면 새로운 figure와 axes를 생성합니다.\n    \"\"\"\n    if ax is None:\n        fig, ax = plt.subplots(1, 1, figsize=figsize)\n\n    sns.boxplot(y=\"weekly_amount_sold\", x=\"is_on_sale\", data=data, ax=ax)\n\n    # 폰트 크기 줄임\n    ax.set_xlabel(\"Is On Sale\", fontsize=10)\n    ax.set_ylabel(\"Weekly Amount Sold\", fontsize=10)\n    ax.tick_params(axis=\"both\", which=\"major\", labelsize=10)\n\n    plt.tight_layout()\n\n    if ax is None:\n        plt.show()\n\n\n# 시각화 함수 호출\nplot_weekly_sales_boxplot(data, figsize=(4, 3))\n\n\n\n\n\n\n\n\n\n\n1.4.3 인과모델\n인과모델은 변수 간의 관계를 정의하여 개입의 효과를 추론할 수 있게 하는 틀입니다.\n\n\n1.4.4 개입\n개입(Intervention)은 시스템의 특정 변수 값을 인위적으로 조정하는 행위를 의미합니다.\n\n\n1.4.5 개별 처치효과\n개별 처치효과(ITE)는 특정 개체에 대해 처치가 있을 때와 없을 때의 결과 차이입니다.\n\n\n1.4.6 잠재적 결과\n잠재적 결과(Potential Outcomes)는 특정 처치 상태에서 나타날 수 있는 가상의 결과값들입니다.\n\n\n1.4.7 일치성 및 SUTVA 가정\n\n\n1.4.8 인과 추정량\nATE(Average Treatment Effect)와 같은 지표를 통해 집단 전체의 인과 효과를 요약하여 측정합니다.\n\n\n1.4.9 인과 추정량 예시\n\npd.DataFrame(\n    dict(\n        i=[1, 2, 3, 4, 5, 6],\n        y0=[200, 120, 300, 450, 600, 600],\n        y1=[220, 140, 400, 500, 600, 800],\n        t=[0, 0, 0, 1, 1, 1],\n        x=[0, 0, 1, 0, 0, 1],\n    )\n).assign(\n    y=lambda d: (d[\"t\"] * d[\"y1\"] + (1 - d[\"t\"]) * d[\"y0\"]).astype(int),\n    te=lambda d: d[\"y1\"] - d[\"y0\"],\n)\n\n\n\n\n\n\n\n\ni\ny0\ny1\nt\nx\ny\nte\n\n\n\n\n0\n1\n200\n220\n0\n0\n200\n20\n\n\n1\n2\n120\n140\n0\n0\n120\n20\n\n\n2\n3\n300\n400\n0\n1\n300\n100\n\n\n3\n4\n450\n500\n1\n0\n500\n50\n\n\n4\n5\n600\n600\n1\n0\n600\n0\n\n\n5\n6\n600\n800\n1\n1\n800\n200\n\n\n\n\n\n\n\n\npd.DataFrame(\n    dict(\n        i=[1, 2, 3, 4, 5, 6],\n        y0=[\n            200,\n            120,\n            300,\n            np.nan,\n            np.nan,\n            np.nan,\n        ],\n        y1=[np.nan, np.nan, np.nan, 500, 600, 800],\n        t=[0, 0, 0, 1, 1, 1],\n        x=[0, 0, 1, 0, 0, 1],\n    )\n).assign(\n    y=lambda d: np.where(d[\"t\"] == 1, d[\"y1\"], d[\"y0\"]).astype(int),\n    te=lambda d: d[\"y1\"] - d[\"y0\"],\n)\n\n\n\n\n\n\n\n\ni\ny0\ny1\nt\nx\ny\nte\n\n\n\n\n0\n1\n200.0\nNaN\n0\n0\n200\nNaN\n\n\n1\n2\n120.0\nNaN\n0\n0\n120\nNaN\n\n\n2\n3\n300.0\nNaN\n0\n1\n300\nNaN\n\n\n3\n4\nNaN\n500.0\n1\n0\n500\nNaN\n\n\n4\n5\nNaN\n600.0\n1\n0\n600\nNaN\n\n\n5\n6\nNaN\n800.0\n1\n1\n800\nNaN",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#편향",
     "href": "notebook/Part1_CausalInference.html#편향",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "1.5 편향",
     "text": "1.5 편향\n\n1.5.1 편향식\n\n\n1.5.2 편향의 시각적 가이드\n\nfrom pathlib import Path\nimport pandas as pd\nimport seaborn as sns\nfrom matplotlib import pyplot as plt\nfrom cycler import cycler\n\n# Nord 테마 색상 팔레트 정의\nnord_colors = [\n    \"#2E3440\",\n    \"#3B4252\",\n    \"#434C5E\",\n    \"#4C566A\",\n    \"#D8DEE9\",\n    \"#E5E9F0\",\n    \"#ECEFF4\",\n    \"#8FBCBB\",\n    \"#88C0D0\",\n    \"#81A1C1\",\n    \"#5E81AC\",\n]\n\n\ndef plot_sales_with_regression(data: pd.DataFrame, ax: plt.Axes = None):\n    \"\"\"\n    주간 판매량과 평균 주간 판매액에 대한 산점도와 회귀선을 그립니다.\n    할인 여부에 따라 다른 색상과 마커를 사용하고, Nord 테마를 적용합니다.\n\n    Args:\n        data (pd.DataFrame): 시각화할 데이터프레임 ( 'avg_week_sales', 'weekly_amount_sold', 'is_on_sale' 컬럼 필요).\n        ax (plt.Axes, optional): 그림을 그릴 Axes 객체. None이면 새로운 figure와 axes를 생성합니다.\n    \"\"\"\n    if ax is None:\n        fig, ax = plt.subplots(figsize=(4, 4))\n\n    # Nord 테마 색상 적용\n    color_on_sale = nord_colors[7]\n    color_not_on_sale = nord_colors[4]\n    marker_on_sale = \"o\"\n    marker_not_on_sale = \"v\"\n\n    # 회귀선 그리기\n    sns.regplot(\n        data=data,\n        x=\"avg_week_sales\",\n        y=\"weekly_amount_sold\",\n        ci=None,\n        scatter=False,\n        color=nord_colors[3],\n        ax=ax,\n    )\n\n    # 할인 상품 산점도\n    on_sale_data = data[data[\"is_on_sale\"] == 1]\n    ax.scatter(\n        x=on_sale_data[\"avg_week_sales\"],\n        y=on_sale_data[\"weekly_amount_sold\"],\n        label=\"on sale\",\n        color=color_on_sale,\n        alpha=0.9,\n        marker=marker_on_sale,\n        s=20,  # 점 크기 줄임 (선택 사항)\n    )\n\n    # 비할인 상품 산점도\n    not_on_sale_data = data[data[\"is_on_sale\"] == 0]\n    ax.scatter(\n        x=not_on_sale_data[\"avg_week_sales\"],\n        y=not_on_sale_data[\"weekly_amount_sold\"],\n        label=\"not on sale\",\n        color=color_not_on_sale,\n        alpha=0.9,\n        marker=marker_not_on_sale,\n        s=20,  # 점 크기 줄임 (선택 사항)\n    )\n\n    # 범례 설정 (폰트 크기 줄임)\n    ax.legend(fontsize=10)\n\n    # 축 레이블 폰트 크기 줄임\n    ax.set_xlabel(\"Average Weekly Sales\", fontsize=8)\n    ax.set_ylabel(\"Weekly Amount Sold\", fontsize=8)\n    ax.tick_params(\n        axis=\"both\", which=\"major\", labelsize=6\n    )  # 눈금 레이블 폰트 크기 줄임\n\n    # 그래프 제목 폰트 크기 줄임 (선택 사항)\n    ax.set_title(\"Weekly Sales vs. Average Weekly Sales\", fontsize=10)\n\n    # 레이아웃 조정\n    plt.tight_layout()\n\n    if ax is None:\n        plt.show()\n\n\n# 시각화 함수 호출\nplot_sales_with_regression(data)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#처치효과-식별하기",
     "href": "notebook/Part1_CausalInference.html#처치효과-식별하기",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "1.6 처치효과 식별하기",
     "text": "1.6 처치효과 식별하기\n\n1.6.1독립성 가정\n\n\n1.6.2 랜덤화와 식별",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#요약",
     "href": "notebook/Part1_CausalInference.html#요약",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "1.7 요약",
     "text": "1.7 요약",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#무작위-배정으로-독립성-확보하기",
     "href": "notebook/Part1_CausalInference.html#무작위-배정으로-독립성-확보하기",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.1 무작위 배정으로 독립성 확보하기",
-    "text": "2.1 무작위 배정으로 독립성 확보하기",
+    "text": "2.1 무작위 배정으로 독립성 확보하기\n처치군과 대조군을 무작위로 나눔으로써, 처치 여부와 다른 잠재적 요인들 간의 상관관계를 끊어내고 독립성을 확보합니다.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#ab-테스트-사례",
     "href": "notebook/Part1_CausalInference.html#ab-테스트-사례",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.2 A/B 테스트 사례",
-    "text": "2.2 A/B 테스트 사례\n\nimport pandas as pd  # for data manipulation\nimport numpy as np  # for numerical computation\n\ndata = pd.read_csv(\"../data/cross_sell_email.csv\")\ndata\n\n\n\n\n\n\n\n\ngender\ncross_sell_email\nage\nconversion\n\n\n\n\n0\n0\nshort\n15\n0\n\n\n1\n1\nshort\n27\n0\n\n\n...\n...\n...\n...\n...\n\n\n321\n1\nno_email\n16\n0\n\n\n322\n1\nlong\n24\n1\n\n\n\n\n323 rows × 4 columns\n\n\n\n\n(data.groupby([\"cross_sell_email\"]).mean())\n\n\n\n\n\n\n\n\ngender\nage\nconversion\n\n\ncross_sell_email\n\n\n\n\n\n\n\nlong\n0.550459\n21.752294\n0.055046\n\n\nno_email\n0.542553\n20.489362\n0.042553\n\n\nshort\n0.633333\n20.991667\n0.125000\n\n\n\n\n\n\n\n\nX = [\"gender\", \"age\"]\n\nmu = data.groupby(\"cross_sell_email\")[X].mean()\nvar = data.groupby(\"cross_sell_email\")[X].var()\n\nnorm_diff = (mu - mu.loc[\"no_email\"]) / np.sqrt((var + var.loc[\"no_email\"]) / 2)\n\nnorm_diff\n\n\n\n\n\n\n\n\ngender\nage\n\n\ncross_sell_email\n\n\n\n\n\n\nlong\n0.015802\n0.221423\n\n\nno_email\n0.000000\n0.000000\n\n\nshort\n0.184341\n0.087370",
+    "text": "2.2 A/B 테스트 사례\n비즈니스 현장에서는 웹사이트 UI 변경이나 마케팅 메시지의 효과를 측정하기 위해 A/B 테스트를 적극적으로 활용합니다.\n\nimport pandas as pd  # for data manipulation\nimport numpy as np  # for numerical computation\n\ndata = pd.read_csv(\"../data/cross_sell_email.csv\")\ndata\n\n\n\n\n\n\n\n\ngender\ncross_sell_email\nage\nconversion\n\n\n\n\n0\n0\nshort\n15\n0\n\n\n1\n1\nshort\n27\n0\n\n\n...\n...\n...\n...\n...\n\n\n321\n1\nno_email\n16\n0\n\n\n322\n1\nlong\n24\n1\n\n\n\n\n323 rows × 4 columns\n\n\n\n\n(data.groupby([\"cross_sell_email\"]).mean())\n\n\n\n\n\n\n\n\ngender\nage\nconversion\n\n\ncross_sell_email\n\n\n\n\n\n\n\nlong\n0.550459\n21.752294\n0.055046\n\n\nno_email\n0.542553\n20.489362\n0.042553\n\n\nshort\n0.633333\n20.991667\n0.125000\n\n\n\n\n\n\n\n\nX = [\"gender\", \"age\"]\n\nmu = data.groupby(\"cross_sell_email\")[X].mean()\nvar = data.groupby(\"cross_sell_email\")[X].var()\n\nnorm_diff = (mu - mu.loc[\"no_email\"]) / np.sqrt((var + var.loc[\"no_email\"]) / 2)\n\nnorm_diff\n\n\n\n\n\n\n\n\ngender\nage\n\n\ncross_sell_email\n\n\n\n\n\n\nlong\n0.015802\n0.221423\n\n\nno_email\n0.000000\n0.000000\n\n\nshort\n0.184341\n0.087370",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#이상적인-실험",
     "href": "notebook/Part1_CausalInference.html#이상적인-실험",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.3 이상적인 실험",
     "text": "2.3 이상적인 실험",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#가장-위험한-수식",
     "href": "notebook/Part1_CausalInference.html#가장-위험한-수식",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.4 가장 위험한 수식",
     "text": "2.4 가장 위험한 수식\n\nimport warnings\n\nwarnings.filterwarnings(\"ignore\")\n\nimport pandas as pd\nimport numpy as np\nfrom scipy import stats\nimport seaborn as sns\nfrom matplotlib import pyplot as plt\nfrom cycler import cycler\nimport matplotlib\n\ndefault_cycler = cycler(color=[\"0.1\", \"0.5\", \"1.0\"])\n\ncolor = [\"0.3\", \"0.5\", \"0.7\", \"0.9\"]\nlinestyle = [\"-\", \"--\", \":\", \"-.\"]\nmarker = [\"o\", \"v\", \"d\", \"p\"]\n\nplt.rc(\"axes\", prop_cycle=default_cycler)\n\nmatplotlib.rcParams.update({\"font.size\": 18})\n\n\ndf = pd.read_csv(\"data/enem_scores.csv\")\ndf.sort_values(by=\"avg_score\", ascending=False).head(10)\n\n\n\n\n\n\n\n\nyear\nschool_id\nnumber_of_students\navg_score\n\n\n\n\n16670\n2007\n33062633\n68\n82.97\n\n\n16796\n2007\n33065403\n172\n82.04\n\n\n...\n...\n...\n...\n...\n\n\n14636\n2007\n31311723\n222\n79.41\n\n\n17318\n2007\n33087679\n210\n79.38\n\n\n\n\n10 rows × 4 columns\n\n\n\n\nplot_data = df.assign(top_school=df[\"avg_score\"] &gt;= np.quantile(df[\"avg_score\"], 0.99))[\n    [\"top_school\", \"number_of_students\"]\n].query(\n    f\"number_of_students&lt;{np.quantile(df['number_of_students'], 0.98)}\"\n)  # remove outliers\n\nplt.figure(figsize=(8, 4))\nax = sns.boxplot(x=\"top_school\", y=\"number_of_students\", data=plot_data)\n\nplt.title(\"Number of Students of 1% Top Schools (Right)\")\n\nText(0.5, 1.0, 'Number of Students of 1% Top Schools (Right)')\n\n\n\n\n\n\n\n\n\n\nq_99 = np.quantile(df[\"avg_score\"], 0.99)\nq_01 = np.quantile(df[\"avg_score\"], 0.01)\n\nplot_data = df.sample(10000).assign(\n    Group=lambda d: np.select(\n        [(d[\"avg_score\"] &gt; q_99) | (d[\"avg_score\"] &lt; q_01)],\n        [\"Top and Bottom\"],\n        \"Middle\",\n    )\n)\nplt.figure(figsize=(10, 5))\nsns.scatterplot(\n    y=\"avg_score\",\n    x=\"number_of_students\",\n    data=plot_data.query(\"Group=='Middle'\"),\n    label=\"Middle\",\n)\nax = sns.scatterplot(\n    y=\"avg_score\",\n    x=\"number_of_students\",\n    data=plot_data.query(\"Group!='Middle'\"),\n    color=\"0.7\",\n    label=\"Top and Bottom\",\n)\n\nplt.title(\"ENEM Score by Number of Students in the School\")\n\nText(0.5, 1.0, 'ENEM Score by Number of Students in the School')",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#추정값의-표준오차",
     "href": "notebook/Part1_CausalInference.html#추정값의-표준오차",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.5 추정값의 표준오차",
     "text": "2.5 추정값의 표준오차\n\ndata = pd.read_csv(\"../data/cross_sell_email.csv\")\n\nshort_email = data.query(\"cross_sell_email=='short'\")[\"conversion\"]\nlong_email = data.query(\"cross_sell_email=='long'\")[\"conversion\"]\nemail = data.query(\"cross_sell_email!='no_email'\")[\"conversion\"]\nno_email = data.query(\"cross_sell_email=='no_email'\")[\"conversion\"]\n\ndata.groupby(\"cross_sell_email\").size()\n\ncross_sell_email\nlong        109\nno_email     94\nshort       120\ndtype: int64\n\n\n\ndef se(y: pd.Series):\n    return y.std() / np.sqrt(len(y))\n\n\nprint(\"SE for Long Email:\", se(long_email))\nprint(\"SE for Short Email:\", se(short_email))\n\nSE for Long Email: 0.021946024609185506\nSE for Short Email: 0.030316953129541618\n\n\n\nprint(\"SE for Long Email:\", long_email.sem())\nprint(\"SE for Short Email:\", short_email.sem())\n\nSE for Long Email: 0.021946024609185506\nSE for Short Email: 0.030316953129541618",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#신뢰구간",
     "href": "notebook/Part1_CausalInference.html#신뢰구간",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.6 신뢰구간",
     "text": "2.6 신뢰구간\n\nn = 100\nconv_rate = 0.08\n\n\ndef run_experiment():\n    return np.random.binomial(1, conv_rate, size=n)\n\n\nnp.random.seed(42)\n\nexperiments = [run_experiment().mean() for _ in range(10000)]\n\n\nplt.figure(figsize=(10, 4))\nfreq, bins, img = plt.hist(experiments, bins=20, label=\"Experiment Means\", color=\"0.6\")\nplt.vlines(\n    conv_rate,\n    ymin=0,\n    ymax=freq.max(),\n    linestyles=\"dashed\",\n    label=\"True Mean\",\n    color=\"0.3\",\n)\nplt.legend()\n\n&lt;matplotlib.legend.Legend at 0x7fd451a4bc10&gt;\n\n\n\n\n\n\n\n\n\n\nnp.random.seed(42)\nplt.figure(figsize=(10, 4))\nplt.hist(np.random.binomial(1, 0.08, 100), bins=20)\n\n(array([92.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n         0.,  0.,  0.,  0.,  0.,  0.,  8.]),\n array([0.  , 0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 , 0.35, 0.4 , 0.45, 0.5 ,\n        0.55, 0.6 , 0.65, 0.7 , 0.75, 0.8 , 0.85, 0.9 , 0.95, 1.  ]),\n &lt;BarContainer object of 20 artists&gt;)\n\n\n\n\n\n\n\n\n\n\nx = np.linspace(-4, 4, 100)\ny = stats.norm.pdf(x, 0, 1)\n\nplt.figure(figsize=(10, 4))\nplt.plot(x, y, linestyle=\"solid\")\nplt.fill_between(x.clip(-3, +3), 0, y, alpha=0.5, label=\"~99.7% mass\", color=\"C2\")\nplt.fill_between(x.clip(-2, +2), 0, y, alpha=0.5, label=\"~95% mass\", color=\"C1\")\nplt.fill_between(x.clip(-1, +1), 0, y, alpha=0.5, label=\"~68% mass\", color=\"C0\")\nplt.ylabel(\"Density\")\nplt.legend()\n\n&lt;matplotlib.legend.Legend at 0x7fd451c295d0&gt;\n\n\n\n\n\n\n\n\n\n\nexp_se = short_email.sem()\nexp_mu = short_email.mean()\nci = (exp_mu - 2 * exp_se, exp_mu + 2 * exp_se)\nprint(\"95% CI for Short Email: \", ci)\n\n95% CI for Short Email:  (0.06436609374091676, 0.18563390625908324)\n\n\n\nx = np.linspace(exp_mu - 4 * exp_se, exp_mu + 4 * exp_se, 100)\ny = stats.norm.pdf(x, exp_mu, exp_se)\n\nplt.figure(figsize=(10, 4))\nplt.plot(x, y, lw=3)\nplt.vlines(ci[1], ymin=0, ymax=4, ls=\"dotted\")\nplt.vlines(ci[0], ymin=0, ymax=4, ls=\"dotted\", label=\"95% CI\")\nplt.xlabel(\"Conversion\")\nplt.legend()\n\n&lt;matplotlib.legend.Legend at 0x7fd46289cdd0&gt;\n\n\n\n\n\n\n\n\n\n\nfrom scipy import stats\n\nz = np.abs(stats.norm.ppf((1 - 0.99) / 2))\nprint(z)\nci = (exp_mu - z * exp_se, exp_mu + z * exp_se)\nci\n\n2.5758293035489004\n\n\n(0.04690870373460816, 0.20309129626539185)\n\n\n\nstats.norm.ppf((1 - 0.99) / 2)\n\n-2.5758293035489004\n\n\n\nx = np.linspace(exp_mu - 4 * exp_se, exp_mu + 4 * exp_se, 100)\ny = stats.norm.pdf(x, exp_mu, exp_se)\n\nplt.figure(figsize=(10, 4))\nplt.plot(x, y, lw=3)\nplt.vlines(ci[1], ymin=0, ymax=4, ls=\"dotted\")\nplt.vlines(ci[0], ymin=0, ymax=4, ls=\"dotted\", label=\"99% CI\")\n\n\nci_95 = (exp_mu - 1.96 * exp_se, exp_mu + 1.96 * exp_se)\n\nplt.vlines(ci_95[1], ymin=0, ymax=4, ls=\"dashed\")\nplt.vlines(ci_95[0], ymin=0, ymax=4, ls=\"dashed\", label=\"95% CI\")\nplt.xlabel(\"Conversion\")\nplt.legend()\n\n&lt;matplotlib.legend.Legend at 0x7fd462983b50&gt;\n\n\n\n\n\n\n\n\n\n\ndef ci(y: pd.Series):\n    return (y.mean() - 2 * y.sem(), y.mean() + 2 * y.sem())\n\n\nprint(\"95% CI for Short Email:\", ci(short_email))\nprint(\"95% CI for Long Email:\", ci(long_email))\nprint(\"95% CI for No Email:\", ci(no_email))\n\n95% CI for Short Email: (0.06436609374091676, 0.18563390625908324)\n95% CI for Long Email: (0.01115382234126202, 0.09893792077800403)\n95% CI for No Email: (0.0006919679286838468, 0.08441441505003955)\n\n\n\nplt.figure(figsize=(10, 4))\n\nx = np.linspace(-0.05, 0.25, 100)\nshort_dist = stats.norm.pdf(x, short_email.mean(), short_email.sem())\nplt.plot(x, short_dist, lw=2, label=\"Short\", linestyle=linestyle[0])\nplt.fill_between(\n    x.clip(ci(short_email)[0], ci(short_email)[1]),\n    0,\n    short_dist,\n    alpha=0.2,\n    color=\"0.0\",\n)\n\nlong_dist = stats.norm.pdf(x, long_email.mean(), long_email.sem())\nplt.plot(x, long_dist, lw=2, label=\"Long\", linestyle=linestyle[1])\nplt.fill_between(\n    x.clip(ci(long_email)[0], ci(long_email)[1]), 0, long_dist, alpha=0.2, color=\"0.4\"\n)\n\nno_email_dist = stats.norm.pdf(x, no_email.mean(), no_email.sem())\nplt.plot(x, no_email_dist, lw=2, label=\"No email\", linestyle=linestyle[2])\nplt.fill_between(\n    x.clip(ci(no_email)[0], ci(no_email)[1]), 0, no_email_dist, alpha=0.2, color=\"0.8\"\n)\n\nplt.xlabel(\"Conversion\")\nplt.legend()\n\n&lt;matplotlib.legend.Legend at 0x7fd451a96810&gt;",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#가설검정",
     "href": "notebook/Part1_CausalInference.html#가설검정",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.7 가설검정",
     "text": "2.7 가설검정\n\nimport seaborn as sns\nfrom matplotlib import pyplot as plt\n\nnp.random.seed(123)\n\nn1 = np.random.normal(4, 3, 30000)\nn2 = np.random.normal(1, 4, 30000)\nn_diff = n2 - n1\n\nplt.figure(figsize=(10, 4))\nsns.distplot(\n    n1, hist=False, label=\"$N(4,3^2)$\", color=\"0.0\", kde_kws={\"linestyle\": linestyle[0]}\n)\nsns.distplot(\n    n2, hist=False, label=\"$N(1,4^2)$\", color=\"0.4\", kde_kws={\"linestyle\": linestyle[1]}\n)\nsns.distplot(\n    n_diff,\n    hist=False,\n    label=\"$N(-3, 5^2) = N(1,4^2) - (4,3^2)$\",\n    color=\"0.8\",\n    kde_kws={\"linestyle\": linestyle[1]},\n)\nplt.legend();\n\n\n\n\n\n\n\n\n\ndiff_mu = short_email.mean() - no_email.mean()\ndiff_se = np.sqrt(no_email.sem() ** 2 + short_email.sem() ** 2)\n\nci = (diff_mu - 1.96 * diff_se, diff_mu + 1.96 * diff_se)\nprint(f\"95% CI for the differece (short email - no email):\\n{ci}\")\n\n95% CI for the differece (short email - no email):\n(0.01023980847439844, 0.15465380854687816)\n\n\n\nx = np.linspace(diff_mu - 4 * diff_se, diff_mu + 4 * diff_se, 100)\ny = stats.norm.pdf(x, diff_mu, diff_se)\n\nplt.figure(figsize=(10, 3))\nplt.plot(x, y, lw=3)\nplt.vlines(ci[1], ymin=0, ymax=4, ls=\"dotted\")\nplt.vlines(ci[0], ymin=0, ymax=4, ls=\"dotted\", label=\"95% CI\")\nplt.xlabel(\"Diff. in Conversion (Short - No Email)\\n\")\nplt.legend()\nplt.subplots_adjust(bottom=0.15)\n\n\n\n\n\n\n\n\n\n2.7.1 귀무가설\n\n# shifting the CI\ndiff_mu_shifted = short_email.mean() - no_email.mean() - 0.01\ndiff_se = np.sqrt(no_email.sem() ** 2 + short_email.sem() ** 2)\n\nci = (diff_mu_shifted - 1.96 * diff_se, diff_mu_shifted + 1.96 * diff_se)\nprint(f\"95% CI 1% difference between (short email - no email):\\n{ci}\")\n\n95% CI 1% difference between (short email - no email):\n(0.00023980847439844521, 0.14465380854687815)\n\n\n\n\n2.7.2 검정통계량\n\nt_stat = (diff_mu - 0) / diff_se\nt_stat\n\n2.2379512318715364",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#p-값",
     "href": "notebook/Part1_CausalInference.html#p-값",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.8 p 값",
     "text": "2.8 p 값\n\nx = np.linspace(-4, 4, 100)\ny = stats.norm.pdf(x, 0, 1)\n\nplt.figure(figsize=(10, 4))\nplt.plot(x, y, lw=2)\nplt.vlines(t_stat, ymin=0, ymax=0.1, ls=\"dotted\", label=\"T-Stat\", lw=2)\nplt.fill_between(x.clip(t_stat), 0, y, alpha=0.4, label=\"P-value\")\nplt.legend()\n\n&lt;matplotlib.legend.Legend at 0x7fd462fd6650&gt;\n\n\n\n\n\n\n\n\n\n\nprint(\"P-value:\", (1 - stats.norm.cdf(t_stat)) * 2)\n\nP-value: 0.025224235562152142",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#검정력",
     "href": "notebook/Part1_CausalInference.html#검정력",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.9 검정력",
     "text": "2.9 검정력\n\nstats.norm.cdf(0.84)\n\n0.7995458067395503",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#표본-크기-계산",
     "href": "notebook/Part1_CausalInference.html#표본-크기-계산",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.10 표본 크기 계산",
     "text": "2.10 표본 크기 계산\n\n# in the book it is np.ceil(16 * no_email.std()**2/0.01), but it is missing the **2 in the denominator.\nnp.ceil(16 * (no_email.std() / 0.08) ** 2)\n\n103.0\n\n\n\ndata.groupby(\"cross_sell_email\").size()\n\ncross_sell_email\nlong        109\nno_email     94\nshort       120\ndtype: int64",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#요약-1",
     "href": "notebook/Part1_CausalInference.html#요약-1",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "2.11 요약",
     "text": "2.11 요약",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#인과관계에-대해-생각해보기",
     "href": "notebook/Part1_CausalInference.html#인과관계에-대해-생각해보기",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.1 인과관계에 대해 생각해보기",
     "text": "3.1 인과관계에 대해 생각해보기\n\nimport warnings\n\nwarnings.filterwarnings(\"ignore\")\n\nimport pandas as pd\nimport numpy as np\nimport graphviz as gr\n\ncolor = [\"0.3\", \"0.5\", \"0.7\", \"0.9\"]\nlinestyle = [\"-\", \"--\", \":\", \"-.\"]\nmarker = [\"o\", \"v\", \"d\", \"p\"]\n\npd.set_option(\"display.max_rows\", 6)\n\ngr.set_default_format(\"png\");\n\n\nimport pandas as pd\n\ndata = pd.read_csv(\"../data/cross_sell_email.csv\")\ndata\n\n\n\n\n\n\n\n\ngender\ncross_sell_email\nage\nconversion\n\n\n\n\n0\n0\nshort\n15\n0\n\n\n1\n1\nshort\n27\n0\n\n\n2\n1\nlong\n17\n0\n\n\n...\n...\n...\n...\n...\n\n\n320\n0\nno_email\n15\n0\n\n\n321\n1\nno_email\n16\n0\n\n\n322\n1\nlong\n24\n1\n\n\n\n\n323 rows × 4 columns\n\n\n\n\n3.1.1 인과관계 시각화\n\nimport graphviz as gr\n\ng_cross_sell = gr.Digraph()\n\ng_cross_sell.edge(\"U\", \"conversion\")\ng_cross_sell.edge(\"U\", \"age\")\ng_cross_sell.edge(\"U\", \"gender\")\n\ng_cross_sell.edge(\"rnd\", \"cross_sell_email\")\ng_cross_sell.edge(\"cross_sell_email\", \"conversion\")\ng_cross_sell.edge(\"age\", \"conversion\")\ng_cross_sell.edge(\"gender\", \"conversion\")\n\ng_cross_sell\n\n\n\n\n\n\n\n\n\ng_cross_sell = gr.Digraph()\n\ng_cross_sell.edge(\"U\", \"conversion\")\ng_cross_sell.edge(\"U\", \"age\")\ng_cross_sell.edge(\"U\", \"gender\")\n\ng_cross_sell.edge(\"rnd\", \"cross_sell_email\")\ng_cross_sell.edge(\"cross_sell_email\", \"conversion\")\ng_cross_sell.edge(\"age\", \"conversion\")\ng_cross_sell.edge(\"gender\", \"conversion\")\n\ng_cross_sell\n\n\n\n\n\n\n\n\n\n# rankdir:LR layers the graph from left to right\ng_cross_sell = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\n\ng_cross_sell.edge(\"U\", \"conversion\")\ng_cross_sell.edge(\"U\", \"X\")\n\ng_cross_sell.edge(\"cross_sell_email\", \"conversion\")\ng_cross_sell.edge(\"X\", \"conversion\")\n\ng_cross_sell\n\n\n\n\n\n\n\n\n\ng_cross_sell = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\n\ng_cross_sell.edge(\"U\", \"conversion\")\ng_cross_sell.edge(\"U\", \"X\")\n\ng_cross_sell.edge(\"cross_sell_email\", \"conversion\")\ng_cross_sell.edge(\"X\", \"conversion\")\n\ng_cross_sell\n\n\n\n\n\n\n\n\n\n\n3.1.2 컨설턴트 영입 여부 결정하기\n\ng_consultancy = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\n\ng_consultancy.edge(\"U1\", \"profits_next_6m\")\ng_consultancy.edge(\"U2\", \"consultancy\")\ng_consultancy.edge(\"U3\", \"profits_prev_6m\")\n\ng_consultancy.edge(\"consultancy\", \"profits_next_6m\")\n\ng_consultancy.edge(\"profits_prev_6m\", \"consultancy\")\ng_consultancy.edge(\"profits_prev_6m\", \"profits_next_6m\")\n\ng_consultancy\n\n\n\n\n\n\n\n\n\ng_consultancy = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\n\ng_consultancy.edge(\"consultancy\", \"profits_next_6m\")\ng_consultancy.edge(\"profits_prev_6m\", \"consultancy\")\ng_consultancy.edge(\"profits_prev_6m\", \"profits_next_6m\")\n\ng_consultancy",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#그래프-모델-집중-훈련",
     "href": "notebook/Part1_CausalInference.html#그래프-모델-집중-훈련",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.2 그래프 모델 집중 훈련",
     "text": "3.2 그래프 모델 집중 훈련\n\n3.2.1 사슬\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\n\ng.edge(\"T\", \"M\")\ng.edge(\"M\", \"Y\")\ng.node(\"M\", \"M\")\n\n\ng.edge(\"causal knowledge\", \"solve problems\")\ng.edge(\"solve problems\", \"job promotion\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\n\ng.edge(\"T\", \"M\")\ng.edge(\"M\", \"Y\")\ng.node(\"M\", \"M\")\ng.node(\"M\", color=\"lightgrey\", style=\"filled\")\n\n\ng.edge(\"causal knowledge\", \"solve problems\")\ng.edge(\"solve problems\", \"job promotion\")\ng.node(\"solve problems\", color=\"lightgrey\", style=\"filled\")\n\ng\n\n\n\n\n\n\n\n\n\n\n3.2.2 분기\n\ng = gr.Digraph()\n\n\ng.edge(\"X\", \"Y\")\ng.edge(\"X\", \"T\")\ng.node(\"X\", \"X\")\n\ng.edge(\"statistics\", \"causal inference\")\ng.edge(\"statistics\", \"machine learning\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph()\n\ng.edge(\"good programmer\", \"can invert a binary tree\")\ng.edge(\"good programmer\", \"good employee\")\n\ng\n\n\n\n\n\n\n\n\n\n\n3.2.3 충돌부\n\ng = gr.Digraph()\n\ng.edge(\"Y\", \"X\")\ng.edge(\"T\", \"X\")\n\ng.edge(\"statistics\", \"job promotion\")\ng.edge(\"flatter\", \"job promotion\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph()\n\ng.edge(\"Y\", \"X1\")\ng.edge(\"T\", \"X1\")\ng.edge(\"X1\", \"X2\")\ng.node(\"X2\", color=\"lightgrey\", style=\"filled\")\n\ng.edge(\"statistics\", \"job promotion\")\ng.edge(\"flatter\", \"job promotion\")\ng.edge(\"job promotion\", \"high salary\")\n\ng.node(\"high salary\", color=\"lightgrey\", style=\"filled\")\n\ng\n\n\n\n\n\n\n\n\n\n\n3.2.4 연관관계 흐름 커닝 페이퍼\n\n\n3.2.5 파이썬에서 그래프 쿼리하기\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"C\", \"A\")\ng.edge(\"C\", \"B\")\ng.edge(\"D\", \"A\")\ng.edge(\"B\", \"E\")\ng.edge(\"F\", \"E\")\ng.edge(\"A\", \"G\")\n\ng\n\n\n\n\n\n\n\n\n\nimport networkx as nx\n\nmodel = nx.DiGraph(\n    [\n        (\"C\", \"A\"),\n        (\"C\", \"B\"),\n        (\"D\", \"A\"),\n        (\"B\", \"E\"),\n        (\"F\", \"E\"),\n        (\"A\", \"G\"),\n    ]\n)\n\n\nprint(\"Are D and C dependent?\")\nprint(not (nx.d_separated(model, {\"D\"}, {\"C\"}, {})))\n\nprint(\"Are D and C dependent given A?\")\nprint(not (nx.d_separated(model, {\"D\"}, {\"C\"}, {\"A\"})))\n\nprint(\"Are D and C dependent given G?\")\nprint(not (nx.d_separated(model, {\"D\"}, {\"C\"}, {\"G\"})))\n\nAre D and C dependent?\nFalse\nAre D and C dependent given A?\nTrue\nAre D and C dependent given G?\nTrue\n\n\n\nprint(\"Are G and D dependent?\")\nprint(not (nx.d_separated(model, {\"G\"}, {\"D\"}, {})))\n\nprint(\"Are G and D dependent given A?\")\nprint(not (nx.d_separated(model, {\"G\"}, {\"D\"}, {\"A\"})))\n\nAre G and D dependent?\nTrue\nAre G and D dependent given A?\nFalse\n\n\n\nprint(\"Are A and B dependent?\")\nprint(not (nx.d_separated(model, {\"A\"}, {\"B\"}, {})))\n\nprint(\"Are A and B dependent given C?\")\nprint(not (nx.d_separated(model, {\"A\"}, {\"B\"}, {\"C\"})))\n\nAre A and B dependent?\nTrue\nAre A and B dependent given C?\nFalse\n\n\n\nprint(\"Are G and F dependent?\")\nprint(not (nx.d_separated(model, {\"G\"}, {\"F\"}, {})))\n\nprint(\"Are G and F dependent given E?\")\nprint(not (nx.d_separated(model, {\"G\"}, {\"F\"}, {\"E\"})))\n\nAre G and F dependent?\nFalse\nAre G and F dependent given E?\nTrue",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#식별-재해석",
     "href": "notebook/Part1_CausalInference.html#식별-재해석",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.3 식별 재해석",
     "text": "3.3 식별 재해석\n\nconsultancy_sev = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\nconsultancy_sev.edge(\"profits_prev_6m\", \"profits_next_6m\")\nconsultancy_sev.edge(\"profits_prev_6m\", \"consultancy\")\n\nconsultancy_sev\n\n\n\n\n\n\n\n\n\nconsultancy_model_severed = nx.DiGraph(\n    [\n        (\"profits_prev_6m\", \"profits_next_6m\"),\n        (\"profits_prev_6m\", \"consultancy\"),\n        #     (\"consultancy\", \"profits_next_6m\"), # causal relationship removed\n    ]\n)\n\nnot (\n    nx.d_separated(consultancy_model_severed, {\"consultancy\"}, {\"profits_next_6m\"}, {})\n)\n\nTrue\n\n\n\ng_consultancy = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng_consultancy.edge(\"profits_prev_6m\", \"profits_next_6m\")\ng_consultancy.edge(\"profits_prev_6m\", \"consultancy\")\ng_consultancy.edge(\"consultancy\", \"profits_next_6m\")\ng_consultancy.node(\"profits_prev_6m\", color=\"lightgrey\", style=\"filled\")\n\ng_consultancy",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#조건부-독립성-가정과-보정-공식",
     "href": "notebook/Part1_CausalInference.html#조건부-독립성-가정과-보정-공식",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.4 조건부 독립성 가정과 보정 공식",
     "text": "3.4 조건부 독립성 가정과 보정 공식",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#양수성-가정",
     "href": "notebook/Part1_CausalInference.html#양수성-가정",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.5 양수성 가정",
     "text": "3.5 양수성 가정",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#구체적인-식별-예제",
     "href": "notebook/Part1_CausalInference.html#구체적인-식별-예제",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.6 구체적인 식별 예제",
     "text": "3.6 구체적인 식별 예제\n\ndf = pd.DataFrame(\n    dict(\n        profits_prev_6m=[1.0, 1.0, 1.0, 5.0, 5.0, 5.0],\n        consultancy=[0, 0, 1, 0, 1, 1],\n        profits_next_6m=[1, 1.1, 1.2, 5.5, 5.7, 5.7],\n    )\n)\n\ndf\n\n\n\n\n\n\n\n\nprofits_prev_6m\nconsultancy\nprofits_next_6m\n\n\n\n\n0\n1.0\n0\n1.0\n\n\n1\n1.0\n0\n1.1\n\n\n2\n1.0\n1\n1.2\n\n\n3\n5.0\n0\n5.5\n\n\n4\n5.0\n1\n5.7\n\n\n5\n5.0\n1\n5.7\n\n\n\n\n\n\n\n\n(\n    df.query(\"consultancy==1\")[\"profits_next_6m\"].mean()\n    - df.query(\"consultancy==0\")[\"profits_next_6m\"].mean()\n)\n\n1.666666666666667\n\n\n\navg_df = df.groupby([\"consultancy\", \"profits_prev_6m\"])[\"profits_next_6m\"].mean()\n\navg_df.loc[1] - avg_df.loc[0]\n\nprofits_prev_6m\n1.0    0.15\n5.0    0.20\nName: profits_next_6m, dtype: float64\n\n\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"U\", \"T\")\ng.edge(\"U\", \"Y\")\ng.edge(\"T\", \"M\")\ng.edge(\"M\", \"Y\")\n\ng",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#교란편향",
     "href": "notebook/Part1_CausalInference.html#교란편향",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.7 교란편향",
     "text": "3.7 교란편향\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"X\", \"T\")\ng.edge(\"X\", \"Y\")\ng.edge(\"T\", \"Y\")\n\n(g.edge(\"Manager Quality\", \"Training\"),)\n(g.edge(\"Manager Quality\", \"Engagement\"),)\ng.edge(\"Training\", \"Engagement\")\n\ng\n\n\n\n\n\n\n\n\n\n3.7.1 대리 교란 요인\n\ng = gr.Digraph()\ng.edge(\"X1\", \"U\")\ng.edge(\"U\", \"X2\")\ng.edge(\"U\", \"T\")\ng.edge(\"T\", \"Y\")\ng.edge(\"U\", \"Y\")\n\ng.edge(\"Manager Quality\", \"Team's Attrition\")\ng.edge(\"Manager Quality\", \"Team's Past Performance\")\ng.edge(\"Manager's Tenure\", \"Manager Quality\")\ng.edge(\"Manager's Education Level\", \"Manager Quality\")\n\ng.edge(\"Manager Quality\", \"Training\")\ng.edge(\"Training\", \"Engagement\")\ng.edge(\"Manager Quality\", \"Engagement\")\n\ng\n\n\n\n\n\n\n\n\n\n\n3.7.2 랜덤화 재해석\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"rnd\", \"T\")\ng.edge(\"T\", \"Y\")\ng.edge(\"U\", \"Y\")\n\ng",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#선택편향",
     "href": "notebook/Part1_CausalInference.html#선택편향",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.8 선택편향",
     "text": "3.8 선택편향\n\n3.8.1 충돌부 조건부 설정\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"T\", \"S\")\ng.edge(\"T\", \"Y\")\ng.edge(\"Y\", \"S\")\ng.node(\"S\", color=\"lightgrey\", style=\"filled\")\n\n(g.edge(\"RND\", \"New Feature\"),)\n(g.edge(\"New Feature\", \"Customer Satisfaction\"),)\n(g.edge(\"Customer Satisfaction\", \"NPS\"),)\n(g.edge(\"Customer Satisfaction\", \"Response\"),)\n(g.edge(\"New Feature\", \"Response\"),)\ng.node(\"Response\", \"Response\", color=\"lightgrey\", style=\"filled\")\n\ng\n\n\n\n\n\n\n\n\n\nnps_model = nx.DiGraph(\n    [\n        (\"RND\", \"New Feature\"),\n        #     (\"New Feature\", \"Customer Satisfaction\"),\n        (\"Customer Satisfaction\", \"NPS\"),\n        (\"Customer Satisfaction\", \"Response\"),\n        (\"New Feature\", \"Response\"),\n    ]\n)\n\n\nnot (nx.d_separated(nps_model, {\"NPS\"}, {\"New Feature\"}, {\"Response\"}))\n\nTrue\n\n\n\nnp.random.seed(2)\nn = 100000\nnew_feature = np.random.binomial(1, 0.5, n)\n\nsatisfaction_0 = np.random.normal(0, 0.5, n)\nsatisfaction_1 = satisfaction_0 + 0.4\nsatisfaction = new_feature * satisfaction_1 + (1 - new_feature) * satisfaction_0\n\nnps_0 = np.random.normal(satisfaction_0, 1)\nnps_1 = np.random.normal(satisfaction_1, 1)\nnps = new_feature * nps_1 + (1 - new_feature) * nps_0\n\n\nresponded = (np.random.normal(0 + new_feature + satisfaction, 1) &gt; 1).astype(int)\n\ntr_df = pd.DataFrame(\n    dict(\n        new_feature=new_feature, responded=responded, nps_0=nps_0, nps_1=nps_1, nps=nps\n    )\n)\n\ntr_df_measurable = pd.DataFrame(\n    dict(\n        new_feature=new_feature,\n        responded=responded,\n        nps_0=np.nan,\n        nps_1=np.nan,\n        nps=np.where(responded, nps, np.nan),\n    )\n)\n\ntr_df.groupby(\"new_feature\").mean()\n\n\n\n\n\n\n\n\nresponded\nnps_0\nnps_1\nnps\n\n\nnew_feature\n\n\n\n\n\n\n\n\n0\n0.183715\n-0.005047\n0.395015\n-0.005047\n\n\n1\n0.639342\n-0.005239\n0.401082\n0.401082\n\n\n\n\n\n\n\n\ntr_df_measurable.groupby(\"new_feature\").mean().assign(**{\"nps\": np.nan})\n\n\n\n\n\n\n\n\nresponded\nnps_0\nnps_1\nnps\n\n\nnew_feature\n\n\n\n\n\n\n\n\n0\n0.183715\nNaN\nNaN\nNaN\n\n\n1\n0.639342\nNaN\nNaN\nNaN\n\n\n\n\n\n\n\n\ntr_df_measurable.groupby([\"responded\", \"new_feature\"]).mean()\n\n\n\n\n\n\n\n\n\nnps_0\nnps_1\nnps\n\n\nresponded\nnew_feature\n\n\n\n\n\n\n\n0\n0\nNaN\nNaN\nNaN\n\n\n1\nNaN\nNaN\nNaN\n\n\n1\n0\nNaN\nNaN\n0.314073\n\n\n1\nNaN\nNaN\n0.536106\n\n\n\n\n\n\n\n\ntr_df.groupby([\"responded\", \"new_feature\"]).mean()\n\n\n\n\n\n\n\n\n\nnps_0\nnps_1\nnps\n\n\nresponded\nnew_feature\n\n\n\n\n\n\n\n0\n0\n-0.076869\n0.320616\n-0.076869\n\n\n1\n-0.234852\n0.161725\n0.161725\n\n\n1\n0\n0.314073\n0.725585\n0.314073\n\n\n1\n0.124287\n0.536106\n0.536106\n\n\n\n\n\n\n\n\n\n3.8.2 선택편향 보정\n\ng = gr.Digraph()\n\ng.edge(\"U\", \"X\")\ng.edge(\"X\", \"S\")\ng.edge(\"U\", \"Y\")\ng.edge(\"T\", \"Y\")\ng.edge(\"T\", \"S\")\ng.node(\"S\", color=\"lightgrey\", style=\"filled\")\n\n(g.edge(\"New Feature\", \"Customer Satisfaction\"),)\n(g.edge(\"Unknown Stuff\", \"Customer Satisfaction\"),)\n(g.edge(\"Unknown Stuff\", \"Time in App\"),)\n(g.edge(\"Time in App\", \"Response\"),)\n(g.edge(\"New Feature\", \"Response\"),)\n\ng.node(\"Response\", \"Response\", color=\"lightgrey\", style=\"filled\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\n\ng.edge(\"X1\", \"U\")\ng.edge(\"U\", \"X2\")\ng.edge(\"X5\", \"S\")\ng.edge(\"U\", \"Y\", style=\"dashed\")\ng.edge(\"U\", \"S\", style=\"dashed\")\ng.edge(\"U\", \"X3\")\ng.edge(\"X3\", \"S\")\ng.edge(\"Y\", \"X4\")\ng.edge(\"X4\", \"S\")\ng.edge(\"T\", \"X5\")\ng.edge(\"T\", \"Y\")\ng.edge(\"T\", \"S\", style=\"dashed\")\ng.node(\"S\", color=\"lightgrey\", style=\"filled\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\n\ng.edge(\"Y\", \"X\")\ng.edge(\"T\", \"X\")\ng.edge(\"T\", \"Y\")\n\ng;\n\n\n\n3.8.3 매개자 조건부 설정\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"T\", \"M\")\ng.edge(\"T\", \"Y\")\ng.edge(\"M\", \"Y\")\ng.node(\"M\", color=\"lightgrey\", style=\"filled\")\n\ng.edge(\"woman\", \"seniority\")\ng.edge(\"woman\", \"salary\")\ng.edge(\"seniority\", \"salary\")\ng.node(\"seniority\", color=\"lightgrey\", style=\"filled\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"T\", \"M\")\ng.edge(\"T\", \"Y\")\ng.edge(\"M\", \"Y\")\ng.edge(\"M\", \"X\")\ng.node(\"X\", color=\"lightgrey\", style=\"filled\")\n\ng",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
     "objectID": "notebook/Part1_CausalInference.html#요약-2",
     "href": "notebook/Part1_CausalInference.html#요약-2",
-    "title": "1장 - 인과추론 소개",
+    "title": "Part 1: 인과추론 기초",
     "section": "3.9 요약",
     "text": "3.9 요약\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\", \"ratio\": \"0.3\"})\ng.edge(\"U\", \"T\")\ng.edge(\"U\", \"Y\")\ng.edge(\"T\", \"Y\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"T\", \"M\")\ng.edge(\"M\", \"Y\")\ng.edge(\"T\", \"Y\")\ng.edge(\"T\", \"S\")\ng.edge(\"Y\", \"S\")\n\ng.node(\"M\", color=\"lightgrey\", style=\"filled\")\ng.node(\"S\", color=\"lightgrey\", style=\"filled\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"T\", \"In-Game Purchase\")\ng.edge(\"T\", \"In-Game Purchase &gt; 0\")\ng.edge(\"In-Game Purchase\", \"In-Game Purchase &gt; 0\")\n\ng.node(\"In-Game Purchase &gt; 0\", color=\"lightgrey\", style=\"filled\")\n\ng\n\n\n\n\n\n\n\n\n\ng = gr.Digraph(graph_attr={\"rankdir\": \"LR\"})\ng.edge(\"loan amount\", \"Default at yr=1\")\ng.edge(\"Default at yr=1\", \"Default at yr=2\")\ng.edge(\"Default at yr=2\", \"Default at yr=3\")\ng.edge(\"U\", \"Default at yr=1\")\ng.edge(\"U\", \"Default at yr=2\")\ng.edge(\"U\", \"Default at yr=3\")\n\ng.node(\"Default at yr=1\", color=\"lightgrey\", style=\"filled\")\ng.node(\"Default at yr=2\", color=\"darkgrey\", style=\"filled\")\n\ng",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1장 - 인과추론 소개</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Part 1: 인과추론 기초</span>"
     ]
   },
   {
