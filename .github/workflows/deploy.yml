@@ -2,7 +2,7 @@ name: Deploy Quarto Book
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, quarto-book]
   workflow_dispatch:
 
 jobs:
