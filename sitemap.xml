@@ -2,58 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/index.html</loc>
-    <lastmod>2026-03-03T06:31:08.707Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.756Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/01장-인과추론 소개.html</loc>
-    <lastmod>2026-03-03T06:31:08.708Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.757Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/02장-무작위 실험 및 기초 통계 리뷰.html</loc>
-    <lastmod>2026-03-03T06:31:08.710Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.759Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/03장-그래프 인과모델.html</loc>
-    <lastmod>2026-03-03T06:31:08.711Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.760Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/04장-유용한 선형회귀.html</loc>
-    <lastmod>2026-03-03T06:31:08.715Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.764Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/05장-성향점수.html</loc>
-    <lastmod>2026-03-03T06:31:08.721Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.771Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/06장-이질적 처치효과.html</loc>
-    <lastmod>2026-03-03T06:31:08.723Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.773Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/07장-메타러너.html</loc>
-    <lastmod>2026-03-03T06:31:08.728Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.778Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/08장-이중차분법.html</loc>
-    <lastmod>2026-03-03T06:31:08.733Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.782Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/09장-통제집단합성법.html</loc>
-    <lastmod>2026-03-03T06:31:08.737Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.786Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/10장-지역 실험과 스위치백 실험.html</loc>
-    <lastmod>2026-03-03T06:31:08.739Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.788Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/11장-불응과 도구변수.html</loc>
-    <lastmod>2026-03-03T06:31:08.739Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.789Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/98.시뮬레이션 데이터.html</loc>
-    <lastmod>2026-03-03T06:31:08.740Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.789Z</lastmod>
   </url>
   <url>
     <loc>https://partrita.github.io/causal-inference-in-python-code/notebook/99.부록.html</loc>
-    <lastmod>2026-03-03T06:31:08.743Z</lastmod>
+    <lastmod>2026-03-03T07:32:32.792Z</lastmod>
   </url>
 </urlset>
