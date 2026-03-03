@@ -139,4 +139,6 @@ dmypy.json
 
 build/*
 build_/*
-data/img/*
+data/img/*# pixi environments
+.pixi/*
+!.pixi/config.toml
