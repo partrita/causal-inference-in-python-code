@@ -176,7 +176,3 @@
 | 12.4 인과 예측 | 미국 경제학회 웹캐스트 | [2019 AEA Continuing Education Webcasts](https://www.aeaweb.org/conference/cont-ed/2019-webcasts) |
 | 12.5 도메인 적응 | Concept Drift | [Learning under Concept Drift: A Review](https://ieeexplore.ieee.org/document/8496795) |
 
-# 참고할 링크
-
-- https://github.com/CausalInferenceLab/causal-inference-with-causalML
-- https://github.com/CausalInferenceLab/causal-inference-lecture/tree/main/Lecture%20Notes
