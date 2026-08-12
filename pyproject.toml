@@ -21,7 +21,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "jupyterlab>=4.3.5",
+    "jupyterlab>=4.5.10",
 ]
 
 [tool.ruff.lint]
